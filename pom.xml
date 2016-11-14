@@ -19,7 +19,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<jackson.version>2.8.4</jackson.version>
 		<junit.version>4.12</junit.version>
-		<cpsuite.version>1.2.5</cpsuite.version>
+		<takari.cpsuite.version>1.2.7</takari.cpsuite.version>
 		<dropwizard.version>1.0.3</dropwizard.version>
 		<dropwizard.guice.version>1.0.0.2</dropwizard.guice.version>
 		<google.guice.version>4.1.0</google.guice.version>
@@ -138,6 +138,13 @@
 				<scope>test</scope>
 			</dependency>
 
+			<dependency>
+				<groupId>io.takari.junit</groupId>
+				<artifactId>takari-cpsuite</artifactId>
+				<version>${takari.cpsuite.version}</version>
+				<scope>compile</scope>
+			</dependency>
+		
 			<dependency>
 				<groupId>org.assertj</groupId>
 				<artifactId>assertj-core</artifactId>

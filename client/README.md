@@ -1,1 +1,1 @@
-The client project is aimed to be used by third party components. Hiding the communication with the api, here you can add facades whenever a third party component can't understand JSON and needs another communication format.
+The **client** project is aimed to be used by third party components. Hiding the communication with the api, here you can add facades whenever a third party component can't understand JSON and needs another communication format.

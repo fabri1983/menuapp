@@ -43,13 +43,13 @@ Technologies
 Building and setup of Eclipse projects
 --------------------------------------
 	cd menuapp
-	mvn clean install -Dmaven.test.skip=true -Plocal
+	mvn clean install -Plocal
 	mvn eclipse:eclipse -DdownloadSources=true -DdownloadJavadocs=true
-
+	
 Execution in local environment
 ------------------------------
 	cd menuapp
-	mvn clean install -Dmaven.test.skip=true -Plocal
+	mvn clean install -Plocal
 	cd api
 	java -jar target/api-1.0.0-SNAPSHOT.jar server target/server-config.yml
 	You can provide your own server-config.yml file.

@@ -1,0 +1,22 @@
+# Eclipse related files
+.project
+.classpath
+.settings
+.wtpmodules
+
+# project build life cycle and execution related files
+bin
+logs
+target
+*.log
+*.log.gz
+
+# Maven shade plugin
+dependency-reduced-pom.xml
+
+# IntelliJ Idea related files
+.idea
+/out/
+
+# misc
+*~

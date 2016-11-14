@@ -88,9 +88,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<scope>test</scope>
+			<groupId>io.takari.junit</groupId>
+			<artifactId>takari-cpsuite</artifactId>
 		</dependency>
 		
 		<dependency>
@@ -99,6 +98,12 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+		
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
@@ -127,6 +132,16 @@
 						</configuration>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.19.1</version>
+				<configuration>
+					<includes>
+                        <include>**/UnitTestsSuite.class</include>
+                    </includes>
+				</configuration>
 			</plugin>
 			<plugin>
 				<!-- This plugin provides the capability to package the artifact in an uber-jar, including its dependencies 
