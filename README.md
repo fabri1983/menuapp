@@ -52,7 +52,7 @@ Execution in local environment
 	mvn clean install -Plocal
 	cd api
 	java -jar target/api-1.0.0-SNAPSHOT.jar server target/server-config.yml
-	You can provide your own server-config.yml file.
+	Listening requests on port 8090. You can provide your own server-config.yml file.
 
 If you want to debug the code using Eclipse:
 
@@ -61,8 +61,8 @@ If you want to debug the code using Eclipse:
 	mvn exec:java -Dexec.args="server target/server-config.yml" -Plocal
 	Then open Eclipse -> Run -> Debug Configurations -> create a Remote Java Application listening to port 4000 and hit Debug.
 	
-Examples URLs
--------------
+Example URLs
+------------
 http://localhost:8090/test
 
 http://localhost:8090/user/1/menu
@@ -72,8 +72,8 @@ http://localhost:8090/user/1/menu/2
 The app loads a set of dummy menus, which are created at class `PreloadedMenuDao`. This class is managed as a bean, and is injected into the menu repository which is also injected into the menu service.
 The dependency injection is all setup in the api module. Take a look at `org.fabri1983.menuapp.api.provide` package.
 
-More examples URLs
-------------------
+More example URLs
+-----------------
 Note: add `Content-Type:application/json` and `Accept:application/json` in your REST Client plugin at header section.
 
 	POST http://localhost:8090/user/1/menu/group
@@ -121,13 +121,14 @@ Note: add `Content-Type:application/json` and `Accept:application/json` in your 
 	
 TODO
 ----
-* Define exceptions and handle them in Service layer to provide the client human readable messages.
+* Define exceptions and handle them in Service layer to provide upper layers human readable messages.
 
-* Unit test the many components.
+* Unit test the many resources, services, parsers, converters, etc.
 
 * Use of `Optional<T>` to hide null manipulation.
 
-* Available days should be an `Enum` type.
+* Available days should be an `Enum` type instead of hardcoded strings like "Friday", "Saturday", "Sunday".
 
 * Complete the use of maven profiles in order to provide a different `server-config.yml` per profile. Use resource filtering on it.
 
+* Revisit the list of `FIXMEs` and `TODOs`.
