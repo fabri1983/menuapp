@@ -1,0 +1,234 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.fabri1983.menuapp</groupId>
+	<artifactId>menuapp</artifactId>
+	<packaging>pom</packaging>
+	<name>Menu App</name>
+	<version>1.0.0-SNAPSHOT</version>
+	<url>https://github.com/fabri1983/menuapp</url>
+
+	<modules>
+		<module>api</module>
+		<module>core</module>
+		<module>client</module>
+		<module>protocol</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<jackson.version>2.8.4</jackson.version>
+		<junit.version>4.12</junit.version>
+		<cpsuite.version>1.2.5</cpsuite.version>
+		<dropwizard.version>1.0.3</dropwizard.version>
+		<dropwizard.guice.version>1.0.0.2</dropwizard.guice.version>
+		<google.guice.version>4.1.0</google.guice.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+		
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>1.1.7</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-core</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>2.6</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>3.5</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-collections4</artifactId>
+				<version>4.0</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>20.0</version>
+			</dependency>
+		
+			<dependency>
+				<groupId>com.hubspot.dropwizard</groupId>
+				<artifactId>dropwizard-guice</artifactId>
+				<version>${dropwizard.guice.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.google.inject</groupId>
+				<artifactId>guice</artifactId>
+				<version>${google.guice.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-core</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-auth</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-configuration</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-metrics</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-metrics-graphite</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-validation</artifactId>
+				<version>${dropwizard.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.dropwizard</groupId>
+				<artifactId>dropwizard-testing</artifactId>
+				<version>${dropwizard.version}</version>
+				<scope>test</scope>
+			</dependency>
+		
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>3.2.0</version>
+				<scope>test</scope>
+			</dependency>
+		
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>2.2.11</version>
+				<scope>test</scope>
+			</dependency>
+
+			<dependency>
+				<groupId>org.fabri1983.menuapp</groupId>
+				<artifactId>core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.fabri1983.menuapp</groupId>
+				<artifactId>client</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.fabri1983.menuapp</groupId>
+				<artifactId>protocol</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+		</dependencies>
+	</dependencyManagement>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>repo-snapshots</id>
+			<name>Repository for Snapshots</name>
+			<!-- dummy repo, doesn't exist -->
+			<url>http://repo.fabri1983.com/nexus/content/libs-snapshot-local</url>
+		</snapshotRepository>
+		<repository>
+			<id>repo-releases</id>
+			<name>Repository for Releases</name>
+			<!-- dummy repo, doesn't exist -->
+			<url>http://repo.fabri1983.com/nexus/content/libs-release-local</url>
+		</repository>
+	</distributionManagement>
+	
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+	</profiles>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<version>2.10</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.6.0</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<encoding>UTF-8</encoding>
+					<downloadSources>true</downloadSources>
+					<downloadJavadocs>true</downloadJavadocs>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

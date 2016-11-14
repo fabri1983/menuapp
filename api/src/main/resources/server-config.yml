@@ -1,0 +1,24 @@
+testMessage: "This is the test message defined in the server-config.yml file"
+
+server:
+  type: simple
+  applicationContextPath: /
+  adminContextPath: /admin
+  connector:
+    type: http
+    port: 8090
+
+logging:
+  level: INFO
+  appenders:
+    - type: file
+      threshold: ALL
+      currentLogFilename: ./logs/menuapp_api.log
+      archivedLogFilenamePattern: ./logs/menuapp_api-%d.log.gz
+      archivedFileCount: 5
+      timeZone: GMT-3
+    - type: console
+      threshold: ALL
+      timeZone: GMT-3
+  loggers:
+    org.fabri1983.menuapp: INFO
