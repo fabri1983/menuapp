@@ -3,6 +3,9 @@
 .classpath
 .settings
 .wtpmodules
+.metadata
+RemoteSystemsTempFiles
+Servers
 
 # project build life cycle and execution related files
 bin

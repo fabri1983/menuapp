@@ -131,4 +131,6 @@ TODO
 
 * Complete the use of maven profiles in order to provide a different `server-config.yml` per profile. Use resource filtering on it.
 
+* When a service needs several steps to execute, use chain of responsability with a chain builder or alike to improve readability.
+
 * Revisit the list of `FIXMEs` and `TODOs`.
