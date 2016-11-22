@@ -26,7 +26,7 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 	public void initialize(Bootstrap<MenuAppConfiguration> bootstrap) {
 		// create the bundle for dropwizard-guice integration
 		GuiceBundle<MenuAppConfiguration> guiceBundle = GuiceBundle.<MenuAppConfiguration>newBuilder()
-				// define some injected behavior in a Module class
+				// add yours module classes with your own injections
 				.addModule(new MenuAppProviderModule())
 				// the configuration class will be available via the injector obtained via guiceBundle.getInjector.
 				.setConfigClass(MenuAppConfiguration.class)

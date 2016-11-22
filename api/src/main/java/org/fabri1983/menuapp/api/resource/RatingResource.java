@@ -11,7 +11,7 @@ import javax.ws.rs.core.MediaType;
 import org.fabri1983.menuapp.api.provider.RatingServiceProvider;
 import org.fabri1983.menuapp.core.menu.Menu;
 import org.fabri1983.menuapp.core.service.RatingService;
-import org.fabri1983.menuapp.protocol.rating.RatingRequest;
+import org.fabri1983.menuapp.protocol.rating.RatingView;
 import org.fabri1983.menuapp.protocol.rating.RatingResponse;
 
 import com.codahale.metrics.annotation.Timed;
@@ -35,7 +35,7 @@ public class RatingResource {
 	public RatingResponse rate(
 			@PathParam("user_id") @NotNull Long userId,
 			@PathParam("menu_id") @NotNull Long menuId,
-			@Valid RatingRequest ratingRequest
+			@Valid RatingView ratingRequest
 	) {
 		Menu menuUpdated = ratingService.updateRating(menuId, ratingRequest.getRating());
 		

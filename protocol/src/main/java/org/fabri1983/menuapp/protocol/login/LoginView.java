@@ -3,26 +3,22 @@ package org.fabri1983.menuapp.protocol.login;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.fabri1983.menuapp.protocol.core.LocationPresentation;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class LoginRequest {
-
-	@NotEmpty
+public class LoginView {
+	
 	private String userName;
-	@NotEmpty
 	private String userPassHashed;
-	@NotNull
-	private LocationPresentation location;
+	private LocationView location;
 
 	@JsonCreator
-	public LoginRequest(
-			@JsonProperty("userName") String userName,
-			@JsonProperty("userPassHashed") String userPassHashed,
-			@JsonProperty("location") @Valid LocationPresentation location)
+	public LoginView(
+			@JsonProperty("userName") @NotEmpty String userName,
+			@JsonProperty("userPassHashed") @NotEmpty String userPassHashed,
+			@JsonProperty("location") @NotNull @Valid LocationView location)
 	{
 		this.location = location;
 	}
@@ -35,7 +31,7 @@ public class LoginRequest {
 		return userPassHashed;
 	}
 	
-	public LocationPresentation getLocation() {
+	public LocationView getLocation() {
 		return location;
 	}
 

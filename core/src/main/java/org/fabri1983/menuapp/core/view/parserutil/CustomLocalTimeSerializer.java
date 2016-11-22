@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.core.presentation.parserutil;
+package org.fabri1983.menuapp.core.view.parserutil;
 
 import java.io.IOException;
 import java.time.LocalTime;

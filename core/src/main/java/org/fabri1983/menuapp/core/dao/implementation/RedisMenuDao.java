@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.fabri1983.menuapp.core.dao.MenuDao;
-import org.fabri1983.menuapp.core.dao.converter.JsonRepresentationToMenuConverter;
+import org.fabri1983.menuapp.core.dao.converter.JsonPresentationToMenuConverter;
 import org.fabri1983.menuapp.core.dao.converter.MenuDaoPresentationConverter;
 import org.fabri1983.menuapp.core.dao.representation.JsonMenuPresentation;
 
@@ -35,6 +35,6 @@ public class RedisMenuDao implements MenuDao {
 	@Override
 	public MenuDaoPresentationConverter getConverter () {
 		// we store data in Redis in Json format
-		return new JsonRepresentationToMenuConverter();
+		return new JsonPresentationToMenuConverter();
 	}
 }

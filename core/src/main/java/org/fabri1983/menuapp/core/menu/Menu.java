@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 
 import org.fabri1983.menuapp.core.filtering.visitor.FilterVisitor;
-import org.fabri1983.menuapp.core.presentation.converter.MenuPresentationConverter;
+import org.fabri1983.menuapp.core.view.converter.MenuViewConverter;
 
 public interface Menu {
 
@@ -18,5 +18,5 @@ public interface Menu {
 	void updateRating(int rating);
 	
 	boolean applyFilter (FilterVisitor filterVisitor);
-	boolean acceptsPresentationConverter (MenuPresentationConverter converter);
+	boolean acceptsPresentationConverter (MenuViewConverter converter);
 }

@@ -18,14 +18,14 @@ import javax.ws.rs.core.MediaType;
 import org.fabri1983.menuapp.api.provider.MenuServiceProvider;
 import org.fabri1983.menuapp.core.filtering.MenuFilter;
 import org.fabri1983.menuapp.core.menu.Menu;
-import org.fabri1983.menuapp.core.presentation.MenuPresentation;
-import org.fabri1983.menuapp.core.presentation.converter.MenuPresentationConverterResolver;
 import org.fabri1983.menuapp.core.service.MenuService;
-import org.fabri1983.menuapp.protocol.core.MenuResponse;
+import org.fabri1983.menuapp.core.view.MenuView;
+import org.fabri1983.menuapp.core.view.converter.MenuViewConverterResolver;
 import org.fabri1983.menuapp.protocol.factory.MenuFilteringFactory;
 import org.fabri1983.menuapp.protocol.factory.MenuGroupingFactory;
-import org.fabri1983.menuapp.protocol.filtering.MenuFilteredRequest;
-import org.fabri1983.menuapp.protocol.grouping.MenuGroupRequest;
+import org.fabri1983.menuapp.protocol.filtering.MenuFilteredView;
+import org.fabri1983.menuapp.protocol.grouping.MenuGroupView;
+import org.fabri1983.menuapp.protocol.menu.MenuResponse;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
@@ -51,8 +51,8 @@ public class MenuResource {
 		Collection<Menu> allMenus = menuService.getAll();
 		
 		// FIXME only map a max amount of menus to avoid a big response
-		List<MenuPresentation> menusPresentation = allMenus.stream()
-				.map( menu -> MenuPresentationConverterResolver.convert(menu) )
+		List<MenuView> menusPresentation = allMenus.stream()
+				.map( menu -> MenuViewConverterResolver.convert(menu) )
 				.collect(Collectors.toList());
 		
 		return new MenuResponse(menusPresentation);
@@ -61,12 +61,12 @@ public class MenuResource {
 	@GET
 	@Timed
 	@Path("/{menu_id}")
-	public MenuPresentation get (
+	public MenuView get (
 			@PathParam("user_id") @NotNull Long userId,
 			@PathParam("menu_id") @NotNull Long menuId
 	) throws Exception {
 		Menu menu = menuService.getById(menuId);
-		MenuPresentation menuPresentation = MenuPresentationConverterResolver.convert(menu);
+		MenuView menuPresentation = MenuViewConverterResolver.convert(menu);
 		return menuPresentation;
 	}
 	
@@ -75,15 +75,15 @@ public class MenuResource {
 	@Path("/filter")
 	public MenuResponse filter (
 			@PathParam("user_id") @NotNull Long userId,
-			@Valid MenuFilteredRequest menuFilteredRequest
+			@Valid MenuFilteredView menuFilteredRequest
 	) {
 		MenuFilter filterChain = MenuFilteringFactory.createFrom(menuFilteredRequest);
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
 		int limitSize = menuFilteredRequest.getMaxResults();
-		List<MenuPresentation> menusPresentation = filteredMenus.stream()
+		List<MenuView> menusPresentation = filteredMenus.stream()
 				.limit(limitSize)
-				.map( menu -> MenuPresentationConverterResolver.convert(menu) )
+				.map( menu -> MenuViewConverterResolver.convert(menu) )
 				.collect(Collectors.toList());
 		
 		return new MenuResponse(menusPresentation);
@@ -94,15 +94,15 @@ public class MenuResource {
 	@Path("/group")
 	public MenuResponse group (
 			@PathParam("user_id") @NotNull Long userId,
-			@Valid MenuGroupRequest menuGroupRequest
+			@Valid MenuGroupView menuGroupRequest
 	) {
 		MenuFilter filterChain = MenuGroupingFactory.createFrom(menuGroupRequest);
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
 		int limitSize = menuGroupRequest.getMaxResults();
-		List<MenuPresentation> menusPresentation = filteredMenus.stream()
+		List<MenuView> menusPresentation = filteredMenus.stream()
 				.limit(limitSize)
-				.map( menu -> MenuPresentationConverterResolver.convert(menu) )
+				.map( menu -> MenuViewConverterResolver.convert(menu) )
 				.collect(Collectors.toList());
 		
 		return new MenuResponse(menusPresentation);
@@ -121,10 +121,10 @@ public class MenuResource {
 	@PUT
 	@Timed
 	@Path("/{menu_id}")
-	public MenuPresentation replace (
+	public MenuView replace (
 			@PathParam("user_id") @NotNull Long userId,
 			@PathParam("menu_id") @NotNull Long menuId,
-			@Valid MenuPresentation menuUpdated
+			@Valid MenuView menuUpdated
 	) {
 		// FIXME call core api for updating requested menu id
 		

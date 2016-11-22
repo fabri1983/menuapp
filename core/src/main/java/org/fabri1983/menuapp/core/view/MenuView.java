@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.core.presentation;
+package org.fabri1983.menuapp.core.view;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -10,8 +10,8 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.fabri1983.menuapp.core.menu.CurrencyType;
-import org.fabri1983.menuapp.core.presentation.parserutil.CustomLocalTimeDeserializer;
-import org.fabri1983.menuapp.core.presentation.parserutil.CustomLocalTimeSerializer;
+import org.fabri1983.menuapp.core.view.parserutil.CustomLocalTimeDeserializer;
+import org.fabri1983.menuapp.core.view.parserutil.CustomLocalTimeSerializer;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -22,7 +22,7 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class MenuPresentation {
+public class MenuView {
 
 	@JsonProperty
 	private Long id;
@@ -53,7 +53,7 @@ public class MenuPresentation {
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime availableDateTo;
 	
-	public MenuPresentation(Long id, String name, String description, String pictureUrl, BigDecimal price, CurrencyType currency, int rating, LocalTime hourFrom, 
+	public MenuView(Long id, String name, String description, String pictureUrl, BigDecimal price, CurrencyType currency, int rating, LocalTime hourFrom, 
 			LocalTime hourTo, List<String> availableDays, LocalDateTime availableDateFrom, LocalDateTime availableDateTo)
 	{	
 		this.id = id;

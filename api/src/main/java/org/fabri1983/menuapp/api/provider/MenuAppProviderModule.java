@@ -8,15 +8,15 @@ import com.google.inject.Provides;
 import com.google.inject.name.Named;
 
 public class MenuAppProviderModule implements Module {
-
+	
 	@Override
-	public void configure(Binder binder) {
-		// do manual binding here
+	public void configure (Binder binder) {
+		// add manual bindings here and configure them
 	}
 	
 	@Provides
 	@Named("testMessage")
-	public String provideMessage(MenuAppConfiguration configuration) {
+	public String provideMessage (MenuAppConfiguration configuration) {
 		return configuration.getTestMessage();
 	}
 

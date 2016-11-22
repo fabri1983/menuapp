@@ -8,17 +8,15 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class RatingRequest {
+public class RatingView {
 
-	@Min(1) @Max(5)
 	private int rating;
-	@NotEmpty
 	private String description;
 	
 	@JsonCreator
-	public RatingRequest(
-			@JsonProperty("rating") int rating, 
-			@JsonProperty("description") String description)
+	public RatingView(
+			@JsonProperty("rating") @Min(1) @Max(5) int rating, 
+			@JsonProperty("description") @NotEmpty String description)
 	{
 		this.rating = rating;
 		this.description = description;

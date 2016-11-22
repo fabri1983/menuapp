@@ -1,19 +1,20 @@
-package org.fabri1983.menuapp.core.presentation.converter;
+package org.fabri1983.menuapp.core.view.converter;
 
 import org.fabri1983.menuapp.core.menu.DefaultMenu;
 import org.fabri1983.menuapp.core.menu.Menu;
 import org.fabri1983.menuapp.core.menu.TimeConstraintMenu;
-import org.fabri1983.menuapp.core.presentation.MenuPresentation;
+import org.fabri1983.menuapp.core.view.MenuView;
 
-public class TimeConstraintMenuConverter implements MenuPresentationConverter {
+public class DefaultMenuConverter implements MenuViewConverter {
 
 	@Override
-	public MenuPresentation convert(Menu menu) {
+	public MenuView convert(Menu menu) {
 		// TODO investigate if is possible to use type inference using <T> since at the point
 		// this method is executed by the MenuPresentationConverterResolver the subtype of menu is known.
 		
-		TimeConstraintMenu sourceMenu = (TimeConstraintMenu) menu;
-		return new MenuPresentation(
+		DefaultMenu sourceMenu = (DefaultMenu) menu;
+		// FIXME ugly constructor with lots of null! Segregate better!
+		return new MenuView(
 				sourceMenu.getId(),
 				sourceMenu.getName(),
 				sourceMenu.getDescription(),
@@ -21,22 +22,22 @@ public class TimeConstraintMenuConverter implements MenuPresentationConverter {
 				sourceMenu.getPrice(),
 				sourceMenu.getCurrency(),
 				sourceMenu.getRating(),
-				sourceMenu.getHourFrom(),
-				sourceMenu.getHourTo(),
-				sourceMenu.getAvailableDays(),
-				sourceMenu.getAvailableDateFrom(),
-				sourceMenu.getAvailableDateTo()
+				null,
+				null,
+				null,
+				null,
+				null
 				);
 	}
 
 	@Override
 	public boolean acceptsMenu(DefaultMenu menu) {
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean acceptsMenu(TimeConstraintMenu menu) {
-		return true;
+		return false;
 	}
 
 }

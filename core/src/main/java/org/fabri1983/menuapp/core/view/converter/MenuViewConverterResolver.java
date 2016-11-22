@@ -1,11 +1,12 @@
-package org.fabri1983.menuapp.core.presentation.converter;
+package org.fabri1983.menuapp.core.view.converter;
 
 import org.fabri1983.menuapp.core.menu.Menu;
-import org.fabri1983.menuapp.core.presentation.MenuPresentation;
+import org.fabri1983.menuapp.core.view.MenuView;
 
-public class MenuPresentationConverterResolver {
+public class MenuViewConverterResolver {
 
-	public static MenuPresentation convert (final Menu menu) {
+	public static MenuView convert (final Menu menu) {
+		
 		// first try other menu type than the default one
 		TimeConstraintMenuConverter timedConverter = new TimeConstraintMenuConverter();
 		if (menu.acceptsPresentationConverter(timedConverter))

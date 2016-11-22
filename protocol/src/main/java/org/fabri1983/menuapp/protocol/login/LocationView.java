@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.protocol.core;
+package org.fabri1983.menuapp.protocol.login;
 
 import java.math.BigInteger;
 
@@ -7,17 +7,15 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class LocationPresentation {
-
-	@NotNull
+public class LocationView {
+	
 	private BigInteger latitude;
-	@NotNull
 	private BigInteger longitude;
 
 	@JsonCreator
-	public LocationPresentation(
-			@JsonProperty("latitude") BigInteger latitude, 
-			@JsonProperty("longitude") BigInteger longitude) {
+	public LocationView(
+			@JsonProperty("latitude") @NotNull BigInteger latitude, 
+			@JsonProperty("longitude") @NotNull BigInteger longitude) {
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}

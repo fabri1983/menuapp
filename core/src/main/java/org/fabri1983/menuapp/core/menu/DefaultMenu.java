@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.net.URL;
 
 import org.fabri1983.menuapp.core.filtering.visitor.FilterVisitor;
-import org.fabri1983.menuapp.core.presentation.converter.MenuPresentationConverter;
+import org.fabri1983.menuapp.core.view.converter.MenuViewConverter;
 
 public class DefaultMenu implements Menu {
 
@@ -74,7 +74,7 @@ public class DefaultMenu implements Menu {
 	}
 	
 	@Override
-	public boolean acceptsPresentationConverter (MenuPresentationConverter converter) {
+	public boolean acceptsPresentationConverter (MenuViewConverter converter) {
 		return converter.acceptsMenu(this);
 	}
 }

@@ -4,28 +4,26 @@ import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import org.fabri1983.menuapp.protocol.core.MenuFiltersPresentation;
+import org.fabri1983.menuapp.protocol.menu.MenuFiltersView;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class MenuFilteredRequest {
+public class MenuFilteredView {
 
-	@NotNull
-	private MenuFiltersPresentation filterData;
-	@Min(1)
+	private MenuFiltersView filterData;
 	private int maxResults;
 
 	@JsonCreator
-	public MenuFilteredRequest(
-			@JsonProperty("filterData") @Valid MenuFiltersPresentation filterData,
-			@JsonProperty("maxResults") int maxResults)
+	public MenuFilteredView(
+			@JsonProperty("filterData") @NotNull @Valid MenuFiltersView filterData,
+			@JsonProperty("maxResults") @Min(1) int maxResults)
 	{
 		this.filterData = filterData;
 		this.maxResults = maxResults;
 	}
 
-	public MenuFiltersPresentation getFilterData() {
+	public MenuFiltersView getFilterData() {
 		return filterData;
 	}
 

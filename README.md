@@ -76,6 +76,16 @@ More example URLs
 -----------------
 Note: add `Content-Type:application/json` and `Accept:application/json` in your REST Client plugin at header section.
 
+	POST http://localhost:8090/user/login
+    {
+      "userName": "johnz",
+      "userPassHashed": "$123AARtiy56DDdcsK98d9=",
+      "location": {
+        "latitude": 15546568450,
+        "longitude": 85345243570
+      }
+    }
+	
 	POST http://localhost:8090/user/1/menu/group
     {
       "maxResults": 10,

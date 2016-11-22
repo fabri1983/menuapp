@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.protocol.core;
+package org.fabri1983.menuapp.protocol.menu;
 
 import java.math.BigDecimal;
 
@@ -11,20 +11,18 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.dropwizard.validation.OneOf;
 
-public class MenuGroupingPresentation {
+public class MenuGroupingView {
 
-	@Min(0)
 	private BigDecimal priceFrom;
-	@Min(0)
 	private BigDecimal priceTo;
-	@OneOf(value = {"DEFAULT_USD", "USD", "ARG_PESO", "YEN", "REAL"}, ignoreCase = false, message = "currency type is not valid")
 	private CurrencyType currency;
 
 	@JsonCreator
-	public MenuGroupingPresentation(
-			@JsonProperty("priceFrom") BigDecimal priceFrom,
-			@JsonProperty("priceTo") BigDecimal priceTo,
-			@JsonProperty("currency") CurrencyType currency)
+	public MenuGroupingView(
+			@JsonProperty("priceFrom") @Min(0) BigDecimal priceFrom,
+			@JsonProperty("priceTo") @Min(0) BigDecimal priceTo,
+			@JsonProperty("currency") @OneOf(value = {"DEFAULT_USD", "USD", "ARG_PESO", "YEN", "REAL"}, ignoreCase = false, message = "currency type is not valid")
+			CurrencyType currency)
 	{	
 		this.priceFrom = priceFrom;
 		this.priceTo = priceTo;

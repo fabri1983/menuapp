@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.protocol.core;
+package org.fabri1983.menuapp.protocol.menu;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -8,8 +8,8 @@ import java.util.List;
 import javax.validation.constraints.Min;
 
 import org.fabri1983.menuapp.core.menu.CurrencyType;
-import org.fabri1983.menuapp.core.presentation.parserutil.CustomLocalTimeDeserializer;
-import org.fabri1983.menuapp.core.presentation.parserutil.CustomLocalTimeSerializer;
+import org.fabri1983.menuapp.core.view.parserutil.CustomLocalTimeDeserializer;
+import org.fabri1983.menuapp.core.view.parserutil.CustomLocalTimeSerializer;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,11 +20,9 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 import io.dropwizard.validation.OneOf;
 
-public class MenuFiltersPresentation {
+public class MenuFiltersView {
 
-	@Min(0)
 	private BigDecimal maxPrice;
-	@OneOf(value = {"DEFAULT_USD", "USD", "ARG_PESO", "YEN", "REAL"}, ignoreCase = false, message = "currency type is not valid")
 	private CurrencyType currency;
 	private LocalTime hourFrom;
 	private LocalTime hourTo;
@@ -33,9 +31,10 @@ public class MenuFiltersPresentation {
 	private LocalDateTime availableDateTo;
 
 	@JsonCreator
-	public MenuFiltersPresentation(
-			@JsonProperty("minPrice") BigDecimal maxPrice,
-			@JsonProperty("currency") CurrencyType currency,
+	public MenuFiltersView(
+			@JsonProperty("maxPrice") @Min(0) BigDecimal maxPrice,
+			@JsonProperty("currency") @OneOf(value = {"DEFAULT_USD", "USD", "ARG_PESO", "YEN", "REAL"}, ignoreCase = false, message = "currency type is not valid")
+			CurrencyType currency,
 			@JsonSerialize(using = CustomLocalTimeSerializer.class)
 			@JsonDeserialize(using = CustomLocalTimeDeserializer.class)
 			@JsonProperty("hourFrom") LocalTime hourFrom,

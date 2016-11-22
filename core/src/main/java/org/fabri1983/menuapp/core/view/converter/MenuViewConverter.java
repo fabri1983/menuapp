@@ -1,13 +1,13 @@
-package org.fabri1983.menuapp.core.presentation.converter;
+package org.fabri1983.menuapp.core.view.converter;
 
 import org.fabri1983.menuapp.core.menu.DefaultMenu;
 import org.fabri1983.menuapp.core.menu.Menu;
 import org.fabri1983.menuapp.core.menu.TimeConstraintMenu;
-import org.fabri1983.menuapp.core.presentation.MenuPresentation;
+import org.fabri1983.menuapp.core.view.MenuView;
 
-public interface MenuPresentationConverter {
+public interface MenuViewConverter {
 
-	MenuPresentation convert (Menu menu);
+	MenuView convert (Menu menu);
 	
 	boolean acceptsMenu (DefaultMenu menu);
 	

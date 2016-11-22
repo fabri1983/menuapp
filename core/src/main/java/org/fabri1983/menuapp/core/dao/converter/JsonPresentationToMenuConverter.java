@@ -11,9 +11,9 @@ import org.fabri1983.menuapp.core.menu.TimeConstraintMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class JsonRepresentationToMenuConverter implements MenuDaoPresentationConverter {
+public class JsonPresentationToMenuConverter implements MenuDaoPresentationConverter {
 
-	private static final Logger logger = LoggerFactory.getLogger(JsonRepresentationToMenuConverter.class);
+	private static final Logger logger = LoggerFactory.getLogger(JsonPresentationToMenuConverter.class);
 	
 	@Override
 	public Menu convert(JsonMenuPresentation menuRepresentation) {
