@@ -1,4 +1,6 @@
+#-----------------------
 # Eclipse related files
+#-----------------------
 .project
 .classpath
 .settings
@@ -7,7 +9,9 @@
 RemoteSystemsTempFiles
 Servers
 
+#------------------------------------------------------
 # project build life cycle and execution related files
+#------------------------------------------------------
 bin
 logs
 target
@@ -17,9 +21,14 @@ target
 # Maven shade plugin
 dependency-reduced-pom.xml
 
+#-----------------------------
 # IntelliJ Idea related files
+#-----------------------------
 .idea
 /out/
 
+#------
 # misc
+#------
 *~
+*.iml

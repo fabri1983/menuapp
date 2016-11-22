@@ -9,10 +9,10 @@
 	<url>https://github.com/fabri1983/menuapp</url>
 
 	<modules>
-		<module>api</module>
 		<module>core</module>
-		<module>client</module>
 		<module>protocol</module>
+		<module>api</module>
+		<module>client</module>
 	</modules>
 
 	<properties>
