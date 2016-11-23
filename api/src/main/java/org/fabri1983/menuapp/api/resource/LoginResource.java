@@ -9,8 +9,8 @@ import javax.ws.rs.core.Response;
 
 import org.fabri1983.menuapp.api.provider.LoginServiceProvider;
 import org.fabri1983.menuapp.core.service.LoginService;
-import org.fabri1983.menuapp.protocol.login.LoginView;
 import org.fabri1983.menuapp.protocol.login.LoginResponse;
+import org.fabri1983.menuapp.protocol.login.LoginView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
@@ -30,14 +30,18 @@ public class LoginResource {
 	
 	@POST
 	@Timed
-	public Response login ( 
+	public Response login (
 			@Valid LoginView loginRequest
 	) {
 		loginService.loginUser(loginRequest.getUserName(), loginRequest.getUserPassHashed());
-	
+
 		// TODO store user location with an UserService or similar service
 		
-		LoginResponse response = new LoginResponse(loginRequest.getUserName(), loginRequest.getLocation(), "Logged In!");
-		return Response.status(Response.Status.ACCEPTED).entity(response).build();
+		// TODO use a Token Generator service
+		String token = "h0t6dSh8gR5mBpMF3EWWJospF6usI8RLGWIOGCe5Z2HtKu32BBviWrt9wbnO21JICFXKYddYotB79ckrCVRv2z71PFlavOkeDD2JyiueYupdx87DwVpCox58KkQ2kwPb";
+		
+		LoginResponse response = LoginResponse.create(loginRequest, token);
+		
+		return Response.status(Response.Status.OK).entity(response).build();
 	}
 }

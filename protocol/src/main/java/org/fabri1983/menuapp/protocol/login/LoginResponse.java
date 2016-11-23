@@ -9,23 +9,27 @@ public class LoginResponse {
 	@JsonProperty
 	private LocationView location;
 	@JsonProperty
-	private String message;
+	private String token;
 	
-	public LoginResponse(String userName, LocationView location, String message) {
+	public LoginResponse(String userName, LocationView location, String token) {
 		this.userName = userName;
 		this.location = location;
-		this.message = message;
+		this.token = token;
+	}
+	
+	public static LoginResponse create(LoginView loginRequest, String token) {
+		return new LoginResponse(loginRequest.getUserName(), loginRequest.getLocation(), token);
 	}
 
-	public String getUserName() {
+	public String getUserName () {
 		return userName;
 	}
 
-	public LocationView getLocation() {
+	public LocationView getLocation () {
 		return location;
 	}
 	
-	public String getMessage() {
-		return message;
+	public String getToken () {
+		return token;
 	}
 }

@@ -11,11 +11,15 @@ public class MenuResponse {
 	@JsonProperty
 	private List<MenuView> menus;
 
-	public MenuResponse(List<MenuView> menus) {
+	public MenuResponse (List<MenuView> menus) {
 		this.menus = menus;
 	}
 
-	public List<MenuView> getMenus() {
+	public static MenuResponse create (List<MenuView> menus) {
+		return new MenuResponse(menus);
+	}
+	
+	public List<MenuView> getMenus () {
 		return menus;
 	}
 

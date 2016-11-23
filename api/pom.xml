@@ -32,8 +32,8 @@
 		</dependency>
 
 		<dependency>
-            <groupId>com.hubspot.dropwizard</groupId>
-            <artifactId>dropwizard-guice</artifactId>
+            <groupId>ru.vyarus</groupId>
+            <artifactId>dropwizard-guicey</artifactId>
         </dependency>
 		
 		<dependency>

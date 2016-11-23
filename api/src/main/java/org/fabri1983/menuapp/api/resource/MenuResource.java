@@ -14,6 +14,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.fabri1983.menuapp.api.provider.MenuServiceProvider;
 import org.fabri1983.menuapp.core.filtering.MenuFilter;
@@ -45,17 +46,18 @@ public class MenuResource {
 	
 	@GET
 	@Timed
-	public MenuResponse getAll (
+	public Response getAll (
 			@PathParam("user_id") @NotNull Long userId
 	) {
 		Collection<Menu> allMenus = menuService.getAll();
 		
 		// FIXME only map a max amount of menus to avoid a big response
-		List<MenuView> menusPresentation = allMenus.stream()
+		List<MenuView> menuViews = allMenus.stream()
 				.map( menu -> MenuViewConverterResolver.convert(menu) )
 				.collect(Collectors.toList());
 		
-		return new MenuResponse(menusPresentation);
+		MenuResponse menuResponse = MenuResponse.create(menuViews);
+		return Response.status(Response.Status.OK).entity(menuResponse).build();
 	}
 	
 	@GET

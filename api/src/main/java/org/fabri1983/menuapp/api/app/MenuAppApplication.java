@@ -7,11 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.inject.Stage;
-import com.hubspot.dropwizard.guice.GuiceBundle;
 
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import ru.vyarus.dropwizard.guice.GuiceBundle;
 
 public class MenuAppApplication extends Application<MenuAppConfiguration> {
 
@@ -25,11 +25,9 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 	@Override
 	public void initialize(Bootstrap<MenuAppConfiguration> bootstrap) {
 		// create the bundle for dropwizard-guice integration
-		GuiceBundle<MenuAppConfiguration> guiceBundle = GuiceBundle.<MenuAppConfiguration>newBuilder()
+		GuiceBundle<MenuAppConfiguration> guiceBundle = GuiceBundle.<MenuAppConfiguration>builder()
 				// add yours module classes with your own injections
-				.addModule(new MenuAppProviderModule())
-				// the configuration class will be available via the injector obtained via guiceBundle.getInjector.
-				.setConfigClass(MenuAppConfiguration.class)
+				.modules(new MenuAppProviderModule())
 				// this ensures that bean creation in that package is set up automatically.
 				.enableAutoConfig(scanningPackage)
 				// force eager singletons creation

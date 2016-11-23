@@ -35,9 +35,9 @@ The Repository layer uses DAO components to interact with the underlying persist
 Technologies
 ------------
 	Java 8
-	Dropwizard v1.0.3
+	Dropwizard v1.0.5
 	Guice v4.1.0
-	Dropwizard-Guice v1.0.0.2
+	Dropwizard-Guicey v4.0.1
 	Maven v3.3.9
 	
 Building and setup of Eclipse projects
@@ -129,9 +129,13 @@ Note: add `Content-Type:application/json` and `Accept:application/json` in your 
 	  "description": "The description of the rating isn't stored yet"
 	}
 	
-TODO
-----
-* Define exceptions and handle them in Service layer to provide upper layers human readable messages.
+TODO list
+---------
+* Investigate the use of Transactions (UnitOfWork) with Dropwizard.
+
+* Modify again the use of validation annotations.
+
+* Define exceptions and handle them in Service layer to provide upper layers human readable messages. Then according the type of exception use the correct HTTP return code.
 
 * Unit test the many resources, services, parsers, converters, etc.
 
@@ -141,6 +145,8 @@ TODO
 
 * Complete the use of maven profiles in order to provide a different `server-config.yml` per profile. Use resource filtering on it.
 
-* When a service needs several steps to execute, use chain of responsability with a chain builder or alike to improve readability.
+* When a service needs several steps to execute, use `Chain of Responsability` with a chain builder or alike to improve readability.
+
+* For currency conversion use `Strategy` pattern, so you can provide an algorithm for any currency conversion.
 
 * Revisit the list of `FIXMEs` and `TODOs`.
