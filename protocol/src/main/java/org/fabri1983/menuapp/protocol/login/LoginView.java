@@ -10,16 +10,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LoginView {
 	
+	@NotEmpty
 	private String userName;
+	@NotEmpty
 	private String userPassHashed;
+	@NotNull @Valid
 	private LocationView location;
 
 	@JsonCreator
 	public LoginView(
-			@JsonProperty("userName") @NotEmpty String userName,
-			@JsonProperty("userPassHashed") @NotEmpty String userPassHashed,
-			@JsonProperty("location") @NotNull @Valid LocationView location)
+			@JsonProperty("userName") String userName,
+			@JsonProperty("userPassHashed") String userPassHashed,
+			@JsonProperty("location") LocationView location)
 	{
+		this.userName = userName;
+		this.userPassHashed = userPassHashed;
 		this.location = location;
 	}
 

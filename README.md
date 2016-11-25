@@ -57,6 +57,8 @@ Execution in local environment
 If you want to debug the code using Eclipse:
 
 	make sure your MAVEN_OPTS has -Xmx1g -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n
+	cd menuapp
+	mvn clean install -Plocal
 	cd api
 	mvn exec:java -Dexec.args="server target/server-config.yml" -Plocal
 	Then open Eclipse -> Run -> Debug Configurations -> create a Remote Java Application listening to port 4000 and hit Debug.
@@ -79,7 +81,7 @@ Note: add `Content-Type:application/json` and `Accept:application/json` in your 
 	POST http://localhost:8090/user/login
     {
       "userName": "johnz",
-      "userPassHashed": "$123AARtiy56DDdcsK98d9=",
+      "userPassHashed": "123AARtiy56DDdcsK98d9gi",
       "location": {
         "latitude": 15546568450,
         "longitude": 85345243570

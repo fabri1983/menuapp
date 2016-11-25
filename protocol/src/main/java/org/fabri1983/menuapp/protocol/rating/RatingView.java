@@ -10,13 +10,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class RatingView {
 
+	@Min(1) @Max(5)
 	private int rating;
+	@NotEmpty
 	private String description;
 	
 	@JsonCreator
 	public RatingView(
-			@JsonProperty("rating") @Min(1) @Max(5) int rating, 
-			@JsonProperty("description") @NotEmpty String description)
+			@JsonProperty("rating") int rating, 
+			@JsonProperty("description") String description)
 	{
 		this.rating = rating;
 		this.description = description;

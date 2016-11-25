@@ -7,12 +7,13 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.fabri1983.menuapp.api.provider.RatingServiceProvider;
 import org.fabri1983.menuapp.core.menu.Menu;
 import org.fabri1983.menuapp.core.service.RatingService;
-import org.fabri1983.menuapp.protocol.rating.RatingView;
 import org.fabri1983.menuapp.protocol.rating.RatingResponse;
+import org.fabri1983.menuapp.protocol.rating.RatingView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
@@ -32,13 +33,14 @@ public class RatingResource {
 	
 	@POST
 	@Timed
-	public RatingResponse rate(
-			@PathParam("user_id") @NotNull Long userId,
-			@PathParam("menu_id") @NotNull Long menuId,
-			@Valid RatingView ratingRequest
-	) {
-		Menu menuUpdated = ratingService.updateRating(menuId, ratingRequest.getRating());
+	public Response rate(
+			@PathParam("menu_id") long menuId,
+			@NotNull @Valid RatingView ratingView)
+	{
+		Menu menuUpdated = ratingService.updateRating(menuId, ratingView.getRating());
 		
-		return new RatingResponse(menuUpdated.getId(), menuUpdated.getRating());
+		RatingResponse ratingResponse = RatingResponse.create(menuUpdated);
+		
+		return Response.status(Response.Status.OK).entity(ratingResponse).build();
 	}
 }

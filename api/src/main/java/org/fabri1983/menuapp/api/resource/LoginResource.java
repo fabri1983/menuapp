@@ -1,6 +1,7 @@
 package org.fabri1983.menuapp.api.resource;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -31,16 +32,16 @@ public class LoginResource {
 	@POST
 	@Timed
 	public Response login (
-			@Valid LoginView loginRequest
-	) {
-		loginService.loginUser(loginRequest.getUserName(), loginRequest.getUserPassHashed());
+			@NotNull @Valid LoginView loginView)
+	{
+		loginService.loginUser(loginView.getUserName(), loginView.getUserPassHashed());
 
 		// TODO store user location with an UserService or similar service
 		
 		// TODO use a Token Generator service
 		String token = "h0t6dSh8gR5mBpMF3EWWJospF6usI8RLGWIOGCe5Z2HtKu32BBviWrt9wbnO21JICFXKYddYotB79ckrCVRv2z71PFlavOkeDD2JyiueYupdx87DwVpCox58KkQ2kwPb";
 		
-		LoginResponse response = LoginResponse.create(loginRequest, token);
+		LoginResponse response = LoginResponse.create(loginView, token);
 		
 		return Response.status(Response.Status.OK).entity(response).build();
 	}

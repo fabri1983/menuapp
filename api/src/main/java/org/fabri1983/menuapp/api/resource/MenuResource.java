@@ -46,9 +46,8 @@ public class MenuResource {
 	
 	@GET
 	@Timed
-	public Response getAll (
-			@PathParam("user_id") @NotNull Long userId
-	) {
+	public Response getAll ()
+	{
 		Collection<Menu> allMenus = menuService.getAll();
 		
 		// FIXME only map a max amount of menus to avoid a big response
@@ -64,9 +63,8 @@ public class MenuResource {
 	@Timed
 	@Path("/{menu_id}")
 	public MenuView get (
-			@PathParam("user_id") @NotNull Long userId,
-			@PathParam("menu_id") @NotNull Long menuId
-	) throws Exception {
+			@PathParam("menu_id") long menuId) throws Exception 
+	{
 		Menu menu = menuService.getById(menuId);
 		MenuView menuPresentation = MenuViewConverterResolver.convert(menu);
 		return menuPresentation;
@@ -76,13 +74,12 @@ public class MenuResource {
 	@Timed
 	@Path("/filter")
 	public MenuResponse filter (
-			@PathParam("user_id") @NotNull Long userId,
-			@Valid MenuFilteredView menuFilteredRequest
-	) {
-		MenuFilter filterChain = MenuFilteringFactory.createFrom(menuFilteredRequest);
+			@NotNull @Valid MenuFilteredView menuFilteredView)
+	{
+		MenuFilter filterChain = MenuFilteringFactory.createFrom(menuFilteredView);
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
-		int limitSize = menuFilteredRequest.getMaxResults();
+		int limitSize = menuFilteredView.getMaxResults();
 		List<MenuView> menusPresentation = filteredMenus.stream()
 				.limit(limitSize)
 				.map( menu -> MenuViewConverterResolver.convert(menu) )
@@ -95,13 +92,12 @@ public class MenuResource {
 	@Timed
 	@Path("/group")
 	public MenuResponse group (
-			@PathParam("user_id") @NotNull Long userId,
-			@Valid MenuGroupView menuGroupRequest
-	) {
-		MenuFilter filterChain = MenuGroupingFactory.createFrom(menuGroupRequest);
+			@NotNull @Valid MenuGroupView menuGroupView)
+	{
+		MenuFilter filterChain = MenuGroupingFactory.createFrom(menuGroupView);
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
-		int limitSize = menuGroupRequest.getMaxResults();
+		int limitSize = menuGroupView.getMaxResults();
 		List<MenuView> menusPresentation = filteredMenus.stream()
 				.limit(limitSize)
 				.map( menu -> MenuViewConverterResolver.convert(menu) )
@@ -114,9 +110,8 @@ public class MenuResource {
 	@Timed
 	@Path("/{menu_id}")
 	public void delete (
-			@PathParam("user_id") @NotNull Long userId,
-			@PathParam("menu_id") @NotNull Long menuId
-	) {
+			@PathParam("menu_id") long menuId)
+	{
 		menuService.delete(menuId);
 	}
 	
@@ -124,10 +119,9 @@ public class MenuResource {
 	@Timed
 	@Path("/{menu_id}")
 	public MenuView replace (
-			@PathParam("user_id") @NotNull Long userId,
-			@PathParam("menu_id") @NotNull Long menuId,
-			@Valid MenuView menuUpdated
-	) {
+			@PathParam("menu_id") long menuId,
+			@NotNull @Valid MenuView menuUpdated)
+	{
 		// FIXME call core api for updating requested menu id
 		
 		return null;

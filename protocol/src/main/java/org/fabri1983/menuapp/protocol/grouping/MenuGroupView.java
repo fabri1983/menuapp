@@ -1,6 +1,7 @@
 package org.fabri1983.menuapp.protocol.grouping;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -11,13 +12,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class MenuGroupView {
 
+	@NotNull @Valid
 	private MenuGroupingView groupData;
+	@Min(1) @Max(50)
 	private int maxResults;
 
 	@JsonCreator
 	public MenuGroupView(
-			@JsonProperty("groupData") @NotNull @Valid MenuGroupingView groupData,
-			@JsonProperty("maxResults") @Min(1) int maxResults)
+			@JsonProperty("groupData") MenuGroupingView groupData,
+			@JsonProperty("maxResults") int maxResults)
 	{
 		this.groupData = groupData;
 		this.maxResults = maxResults;

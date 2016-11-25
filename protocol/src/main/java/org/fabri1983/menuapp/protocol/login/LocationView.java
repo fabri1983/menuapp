@@ -9,13 +9,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LocationView {
 	
+	@NotNull
 	private BigInteger latitude;
+	@NotNull
 	private BigInteger longitude;
 
 	@JsonCreator
 	public LocationView(
-			@JsonProperty("latitude") @NotNull BigInteger latitude, 
-			@JsonProperty("longitude") @NotNull BigInteger longitude) {
+			@JsonProperty("latitude") BigInteger latitude, 
+			@JsonProperty("longitude") BigInteger longitude)
+	{
 		this.latitude = latitude;
 		this.longitude = longitude;
 	}
