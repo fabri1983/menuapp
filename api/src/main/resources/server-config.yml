@@ -1,4 +1,7 @@
 testMessage: "This is the test message defined in the server-config.yml file"
+importantProperty1: "hashing depth"
+importantProperty2: "secret pass suffix"
+maxAllowedResults: 50
 
 server:
   type: simple

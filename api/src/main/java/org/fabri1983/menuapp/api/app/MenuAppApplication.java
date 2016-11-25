@@ -6,8 +6,6 @@ import org.fabri1983.menuapp.api.provider.MenuAppProviderModule;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.inject.Stage;
-
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -15,7 +13,7 @@ import ru.vyarus.dropwizard.guice.GuiceBundle;
 
 public class MenuAppApplication extends Application<MenuAppConfiguration> {
 
-	private static final Logger logger = LoggerFactory.getLogger(MenuAppApplication.class);
+	private Logger logger;
 	private static String scanningPackage = "org.fabri1983.menuapp.api";
 	
 	public static void main(String[] args) throws Exception {
@@ -24,14 +22,16 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 
 	@Override
 	public void initialize(Bootstrap<MenuAppConfiguration> bootstrap) {
+		logger = LoggerFactory.getLogger(this.getClass());
+		
 		// create the bundle for dropwizard-guice integration
 		GuiceBundle<MenuAppConfiguration> guiceBundle = GuiceBundle.<MenuAppConfiguration>builder()
 				// add yours module classes with your own injections
 				.modules(new MenuAppProviderModule())
 				// this ensures that bean creation in that package is set up automatically.
 				.enableAutoConfig(scanningPackage)
-				// force eager singletons creation
-				.build(Stage.PRODUCTION);
+				// force eager singletons creation (by default is Stage.PRODUCTION)
+				.build();
 		bootstrap.addBundle(guiceBundle);
 	}
 

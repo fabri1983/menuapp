@@ -5,28 +5,27 @@ import org.fabri1983.menuapp.core.menu.Menu;
 import org.fabri1983.menuapp.core.menu.TimeConstraintMenu;
 import org.fabri1983.menuapp.core.view.MenuView;
 
+/**
+ * State less hence thread safe converter. Access it using {@link TimeConstraintMenuConverter#get()}.
+ */
 public class TimeConstraintMenuConverter implements MenuViewConverter {
 
+	private static TimeConstraintMenuConverter instance = new TimeConstraintMenuConverter();
+	
+	private TimeConstraintMenuConverter () {
+	}
+	
+	public static MenuViewConverter get () {
+		return instance;
+	}
+	
 	@Override
 	public MenuView convert(Menu menu) {
-		// TODO investigate if is possible to use type inference using <T> since at the point
-		// this method is executed by the MenuPresentationConverterResolver the subtype of menu is known.
+		// TODO investigate if is possible to use type inference using <T> since at the very moment
+		// this method is executed by the MenuPresentationConverterResolver the subtype of menu is already known.
 		
 		TimeConstraintMenu sourceMenu = (TimeConstraintMenu) menu;
-		return new MenuView(
-				sourceMenu.getId(),
-				sourceMenu.getName(),
-				sourceMenu.getDescription(),
-				sourceMenu.getPictureUrl().toString(),
-				sourceMenu.getPrice(),
-				sourceMenu.getCurrency(),
-				sourceMenu.getRating(),
-				sourceMenu.getHourFrom(),
-				sourceMenu.getHourTo(),
-				sourceMenu.getAvailableDays(),
-				sourceMenu.getAvailableDateFrom(),
-				sourceMenu.getAvailableDateTo()
-				);
+		return MenuView.from(sourceMenu);
 	}
 
 	@Override

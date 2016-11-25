@@ -13,8 +13,13 @@ import org.slf4j.LoggerFactory;
 
 public class JsonPresentationToMenuConverter implements MenuDaoPresentationConverter {
 
-	private static final Logger logger = LoggerFactory.getLogger(JsonPresentationToMenuConverter.class);
+	private Logger logger;
 	
+	public JsonPresentationToMenuConverter() {
+		super();
+		logger = LoggerFactory.getLogger(this.getClass());
+	}
+
 	@Override
 	public Menu convert(JsonMenuPresentation menuRepresentation) {
 		if (isTimeConstraintMenu(menuRepresentation))

@@ -16,6 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.fabri1983.menuapp.api.config.MenuAppConfiguration;
 import org.fabri1983.menuapp.api.provider.MenuServiceProvider;
 import org.fabri1983.menuapp.core.filtering.MenuFilter;
 import org.fabri1983.menuapp.core.menu.Menu;
@@ -38,10 +39,12 @@ import com.google.inject.servlet.RequestScoped;
 public class MenuResource {
 
 	private MenuService menuService;
-
+	private int maxAllowedResults;
+	
 	@Inject
-	public MenuResource (MenuServiceProvider menuServiceProvider) {
+	public MenuResource (MenuServiceProvider menuServiceProvider, MenuAppConfiguration configuration) {
 		this.menuService = menuServiceProvider.getImplementation();
+		this.maxAllowedResults = configuration.getMaxAllowedResults();
 	}
 	
 	@GET
@@ -50,8 +53,8 @@ public class MenuResource {
 	{
 		Collection<Menu> allMenus = menuService.getAll();
 		
-		// FIXME only map a max amount of menus to avoid a big response
 		List<MenuView> menuViews = allMenus.stream()
+				.limit(maxAllowedResults)
 				.map( menu -> MenuViewConverterResolver.convert(menu) )
 				.collect(Collectors.toList());
 		
@@ -62,30 +65,32 @@ public class MenuResource {
 	@GET
 	@Timed
 	@Path("/{menu_id}")
-	public MenuView get (
+	public Response get (
 			@PathParam("menu_id") long menuId) throws Exception 
 	{
 		Menu menu = menuService.getById(menuId);
 		MenuView menuPresentation = MenuViewConverterResolver.convert(menu);
-		return menuPresentation;
+		return Response.status(Response.Status.OK).entity(menuPresentation).build();
 	}
 	
 	@POST
 	@Timed
 	@Path("/filter")
-	public MenuResponse filter (
+	public Response filter (
 			@NotNull @Valid MenuFilteredView menuFilteredView)
 	{
 		MenuFilter filterChain = MenuFilteringFactory.createFrom(menuFilteredView);
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
-		int limitSize = menuFilteredView.getMaxResults();
-		List<MenuView> menusPresentation = filteredMenus.stream()
+		int limitSize = Math.min(menuFilteredView.getMaxResults(), maxAllowedResults);
+		
+		List<MenuView> menusView = filteredMenus.stream()
 				.limit(limitSize)
 				.map( menu -> MenuViewConverterResolver.convert(menu) )
 				.collect(Collectors.toList());
 		
-		return new MenuResponse(menusPresentation);
+		MenuResponse menuResponse = MenuResponse.create(menusView);
+		return Response.status(Response.Status.OK).entity(menuResponse).build();
 	}
 	
 	@POST
@@ -97,7 +102,8 @@ public class MenuResource {
 		MenuFilter filterChain = MenuGroupingFactory.createFrom(menuGroupView);
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
-		int limitSize = menuGroupView.getMaxResults();
+		int limitSize = Math.min(menuGroupView.getMaxResults(), maxAllowedResults);
+		
 		List<MenuView> menusPresentation = filteredMenus.stream()
 				.limit(limitSize)
 				.map( menu -> MenuViewConverterResolver.convert(menu) )
@@ -118,12 +124,12 @@ public class MenuResource {
 	@PUT
 	@Timed
 	@Path("/{menu_id}")
-	public MenuView replace (
+	public Response replace (
 			@PathParam("menu_id") long menuId,
 			@NotNull @Valid MenuView menuUpdated)
 	{
 		// FIXME call core api for updating requested menu id
 		
-		return null;
+		return Response.status(Response.Status.OK).build();
 	}
 }

@@ -108,7 +108,7 @@ public class TimeConstraintMenu implements Menu {
 	}
 	
 	@Override
-	public boolean acceptsPresentationConverter (MenuViewConverter converter) {
+	public boolean acceptsViewConverter (MenuViewConverter converter) {
 		return converter.acceptsMenu(this);
 	}
 }

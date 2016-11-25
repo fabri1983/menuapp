@@ -8,13 +8,11 @@ public class MenuViewConverterResolver {
 	public static MenuView convert (final Menu menu) {
 		
 		// first try other menu type than the default one
-		TimeConstraintMenuConverter timedConverter = new TimeConstraintMenuConverter();
-		if (menu.acceptsPresentationConverter(timedConverter))
-			return timedConverter.convert(menu);
+		if (menu.acceptsViewConverter(TimeConstraintMenuConverter.get()))
+			return TimeConstraintMenuConverter.get().convert(menu);
 		
 		// fall back to the default menu
-		DefaultMenuConverter defaultConverter = new DefaultMenuConverter();
-		return defaultConverter.convert(menu);
+		return DefaultMenuConverter.get().convert(menu);
 	}
 
 }
