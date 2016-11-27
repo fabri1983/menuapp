@@ -8,7 +8,7 @@ The chosen arquitecture is a N-Tier layout from JavaEE apps: **Presentation** - 
 	
 On **Presentation** tier we have the **protocol** module which defines the data layout the api delivers to any client, and the **api** module which defines the exposed resources for client communication.
 
-On **Business** tier we have the **core** module which defines the domain components and the interactions between them and twith the **ORM** tier.
+On **Business** tier we have the **core** module which defines the domain components and the interactions between them and with the **ORM** tier.
 
 On **ORM** tier we also have the **core** module which additionally defines the repositories and daos, which in essence is the mapping between domain components and persisted entities.
 
@@ -23,7 +23,7 @@ Built using Maven shade plugin to generate an uber jar which facilitates the dis
 - The **protocol** project provides the mapping between the requests and responses with those components the api can understand.
 The mapping is via representational elements so we avoid messing up the business components with annotations and/or conversion logic. 
 Here you define your custom parsers and what data you expect to receive/send for every REST call.
-Also you can put any validation you want whether when receiving a request or when generating a response. Currently the project uses `org.hibernate.validator.*` and `javax.validation.*`.
+Also you can put any validation you want whether at receiving a request or at generating a response. Currently the project uses `org.hibernate.validator.*`, `javax.validation.*`, and custom annotated validations.
 
 - The **core** project exposes the Service layer, and handles the communication downwards to the persistence layer of data via a Repository layer.
 The Service layer only interacts with the many repositories in order to create, read, update, and delete data (CRUD). It contains stateless services which are managed by the DI api (Guice).
@@ -35,15 +35,15 @@ The Repository layer uses DAO components to interact with the underlying persist
 Technologies
 ------------
 - Java 8
-- Dropwizard v1.0.5
-- Guice v4.1.0
-- Dropwizard-Guicey v4.0.1
-- Maven v3.3.9
+- Dropwizard 1.0.5
+- Guice 4.1.0
+- Dropwizard-Guicey 4.0.1
+- Maven 3.3.9
 	
 Building and setup of Eclipse projects
 --------------------------------------
-You can compile using next maven profiles: `local` (default), `test`, `stage`, `prod`.
-Each of them presents different configurations according the target environment you want deploy to.
+You can compile using next maven profiles: `local` (default), `test`, `stage`, or `prod`.
+Each of them presents different configurations according the target environment you want to deploy at.
 Pay attention that `prod` profile leaves the filtered resource as it without replacing the place holders, so you must provide your own config file. See next section.
 ```sh
 cd menuapp
@@ -61,21 +61,21 @@ cd api
 java -jar target/api-1.0.0-SNAPSHOT.jar server -
 ```
 Listening requests on port 8090.
-You can provide your own server-config.yml file next to server argument. Eg:
+You can provide your own `server-config.yml` file next to server argument. Eg:
 ```sh
 java -jar target/api-1.0.0-SNAPSHOT.jar server server-config-prod.yml
 ```
 
-#### If you want to debug the code using Eclipse:
+#### Debug the code using Eclipse:
 
-Make sure your MAVEN_OPTS has -Xmx512m -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n
+Make sure your `MAVEN_OPTS` contains `-Xmx512m -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n`
 ```sh
 cd menuapp
 mvn clean install
 cd api
 mvn exec:java -Dexec.args="server -"
 ```
-Then open Eclipse -> Run -> Debug Configurations -> create a Remote Java Application listening to port 4000 and hit Debug.
+Then open Eclipse and go to Run -> Debug Configurations -> create a Remote Java Application listening to port 4000 and hit Debug.
 	
 Example URLs
 ------------
@@ -93,6 +93,7 @@ The dependency injection is all setup in the api module. Take a look at `org.fab
 More example URLs
 -----------------
 Using POST method.
+
 Note: add `Content-Type:application/json` and `Accept:application/json` in your REST Client plugin at header section.
 
 	POST http://localhost:8090/user/login
@@ -156,9 +157,7 @@ TODO list
 
 * Use of `Optional<T>` to hide null manipulation.
 
-* Complete the use of maven profiles in order to provide a different `server-config.yml` per profile. Use resource filtering on it.
-
-* When a service needs several steps to execute, use `Chain of Responsibility` with a chain builder or alike to improve readability.
+* When a service needs several execution steps, use `Chain of Responsibility` with a chain builder or alike to improve readability.
 
 * For currency conversion use `Strategy` pattern, so I can provide an algorithm for any currency conversion.
 
