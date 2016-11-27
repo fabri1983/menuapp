@@ -53,7 +53,8 @@ mvn clean package
 java -jar target/CouchbaseMock-1.4.3.jar -h localhost -p 8091 -b default::couchbase
 ```
 Above command starts the Couchbase Test Server with default bucket, no password, and couchbase as bucket type.
-Test everything is OK connecting to http://localhost:8091/pools/default/buckets.
+Test everything is OK connecting to [http://localhost:8091/pools/default/buckets](http://localhost:8091/pools/default/buckets).
+
 For command line options use:
 ```sh
 java -jar target/CouchbaseMock-1.4.3.jar -?
@@ -118,13 +119,13 @@ Example URLs
 ------------
 Just using GET method.
 
-http://localhost:8080/buildinfo
+[http://localhost:8080/buildinfo](http://localhost:8080/buildinfo)
 
-http://localhost:8080/profile
+[http://localhost:8080/profile](http://localhost:8080/profile)
 
-http://localhost:8080/user/1/menu
+[http://localhost:8080/user/1/menu](http://localhost:8080/user/1/menu)
 
-http://localhost:8080/user/1/menu/2
+[http://localhost:8080/user/1/menu/2](http://localhost:8080/user/1/menu/2)
 
 The app loads a set of dummy menus, which are created at class `PreloadedMenuDao`. This class is managed as a bean, and is injected into the menu repository which is also injected into the menu service.
 The dependency injection is all setup in the api module. Take a look at `org.fabri1983.menuapp.api.provide` package.
