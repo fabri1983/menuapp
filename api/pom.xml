@@ -140,6 +140,11 @@
 			<artifactId>commons-lang</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>io.smartmachine</groupId>
+			<artifactId>dropwizard-couchbase</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

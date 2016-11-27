@@ -39,9 +39,28 @@ Technologies
 - Guice 4.1.0
 - Dropwizard-Guicey 4.0.1
 - Maven 3.3.9
-	
-Building and setup of Eclipse projects
---------------------------------------
+- CouchbaseMock test server
+- Dropwizard-Couchbase 0.2.3
+
+Building CouchbaseMock Test Server
+----------------------------------
+This project comes with the CouchbaseMock Test Server which serves as a simple Couchbase DB.
+See the project at [CouchbaseMock](https://github.com/couchbase/CouchbaseMock) for more details.
+You must first generate the package and then execute the server:
+```sh
+cd CouchbaseMock-master
+mvn clean package
+java -jar target/CouchbaseMock-1.4.3.jar -h localhost -p 8091 -b default::couchbase
+```
+Above command starts the Couchbase Test Server with default bucket, no password, and couchbase as bucket type.
+Test everything is OK connecting to http://localhost:8091/pools/default/buckets.
+For command line options use:
+```sh
+java -jar target/CouchbaseMock-1.4.3.jar -?
+```
+
+Building app and setup of Eclipse projects
+------------------------------------------
 You can compile using next maven profiles: `local` (default), `test`, `stage`, or `prod`.
 Each of them presents different configurations according the target environment you want to deploy at.
 Pay attention that `prod` profile truncates the filtered resource so it fails fast. You must provide your own production ready config file. See next section.
@@ -53,14 +72,15 @@ mvn eclipse:eclipse -DdownloadSources=true -DdownloadJavadocs=true
 
 Execution in any environment
 ----------------------------
-Remember you can use maven profiles adding `-P<profile.name>`. By default maven takes the `local` profile
+You need to first start the CouchbaseMock test server. See above.
+Remember you can use maven profiles adding `-P<profile.name>`. By default maven takes the `local` profile.
 ```sh
 cd menuapp
 mvn clean install
 cd api
 java -jar target/api-1.0.0-SNAPSHOT.jar server -
 ```
-Listening requests on port 8090 as per profiles `local` (default), `test`, or `stage`.
+Listening requests on port 8080 as per profiles `local` (default), `test`, or `stage`.
 
 #### Production environment
 
@@ -87,7 +107,7 @@ Build info for Continuous Integration
 -------------------------------------
 By default when compiling any project there is a maven plugin named `buildnumber-maven-plugin` which gets revision number, current branch, build time, and use that info on filtering resources phase.
 Currently only the *api* projects use the build info provided by the plugin.
-So you can call http://localhost:8090/buildinfo and be responded with revision id and branch name information of the last change made in the project, as well as the build time.
+So you can call http://localhost:8080/buildinfo and be responded with revision id and branch name information of the last change made in the project, as well as the build time.
 During development, some settings of this plugin are disabled in order to speed up compilation. Nevertheless you can completely turn it off using `-Dmaven.buildNumber.skip=true`
 Conversely, when using a CI software use the next command in order to always retrieve latest code and avoid compilation if local changes has been made:
 ```sh
@@ -98,13 +118,13 @@ Example URLs
 ------------
 Just using GET method.
 
-http://localhost:8090/buildinfo
+http://localhost:8080/buildinfo
 
-http://localhost:8090/profile
+http://localhost:8080/profile
 
-http://localhost:8090/user/1/menu
+http://localhost:8080/user/1/menu
 
-http://localhost:8090/user/1/menu/2
+http://localhost:8080/user/1/menu/2
 
 The app loads a set of dummy menus, which are created at class `PreloadedMenuDao`. This class is managed as a bean, and is injected into the menu repository which is also injected into the menu service.
 The dependency injection is all setup in the api module. Take a look at `org.fabri1983.menuapp.api.provide` package.
@@ -115,7 +135,7 @@ Using POST method.
 
 Note: add `Content-Type:application/json` and `Accept:application/json,text` in your REST Client plugin at header section.
 
-	POST http://localhost:8090/user/login
+	POST http://localhost:8080/user/login
     {
       "userName": "johnz",
       "userPassHashed": "123AARtiy56DDdcsK98d9gi",
@@ -125,7 +145,7 @@ Note: add `Content-Type:application/json` and `Accept:application/json,text` in 
       }
     }
 	
-	POST http://localhost:8090/user/1/menu/group
+	POST http://localhost:8080/user/1/menu/group
     {
       "maxResults": 10,
       "groupData": {
@@ -135,7 +155,7 @@ Note: add `Content-Type:application/json` and `Accept:application/json,text` in 
       }
     }
 	
-	POST http://localhost:8090/user/1/menu/filter
+	POST http://localhost:8080/user/1/menu/filter
     {
       "maxResults": 10,
       "filterData": {
@@ -144,7 +164,7 @@ Note: add `Content-Type:application/json` and `Accept:application/json,text` in 
       }
     }
 	
-	POST http://localhost:8090/user/1/menu/filter
+	POST http://localhost:8080/user/1/menu/filter
     {
       "maxResults": 10,
       "filterData": {
@@ -162,7 +182,7 @@ Note: add `Content-Type:application/json` and `Accept:application/json,text` in 
       }
     }
 	
-	POST http://localhost:8090/user/1/menu/1/rate
+	POST http://localhost:8080/user/1/menu/1/rate
 	{
 	  "rating": 1,
 	  "description": "The description of the rating isn't stored yet"

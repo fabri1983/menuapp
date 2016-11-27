@@ -30,6 +30,7 @@
 		<logback.classic.version>1.1.7</logback.classic.version>
 		<assertj.core.version>3.2.0</assertj.core.version>
 		<mockito.core.version>2.2.11</mockito.core.version>
+		<dropwizard.couchbase.version>0.2.3</dropwizard.couchbase.version>
 	</properties>
 
 	<dependencyManagement>
@@ -95,6 +96,12 @@
 				<version>${google.guice.version}</version>
 			</dependency>
 
+			<dependency>
+				<groupId>io.smartmachine</groupId>
+				<artifactId>dropwizard-couchbase</artifactId>
+				<version>${dropwizard.couchbase.version}</version>
+			</dependency>
+	
 			<dependency>
 				<groupId>io.dropwizard</groupId>
 				<artifactId>dropwizard-core</artifactId>

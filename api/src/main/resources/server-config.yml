@@ -13,6 +13,12 @@ server:
     type: http
     port: ${http.port}
 
+couchbaseClientFactory:
+  bucket: default
+  hosts:
+    - http://localhost:8091/pools
+  password: ""
+
 logging:
   level: INFO
   appenders:

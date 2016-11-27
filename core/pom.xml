@@ -35,6 +35,11 @@
 			<artifactId>commons-collections4</artifactId>
 		</dependency>
 		
+		<dependency>
+			<groupId>io.smartmachine</groupId>
+			<artifactId>dropwizard-couchbase</artifactId>
+		</dependency>
+		
 	</dependencies>
 
 	<build>

@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.smartmachine.couchbase.CouchbaseBundle;
+import io.smartmachine.couchbase.CouchbaseClientFactory;
 import ru.vyarus.dropwizard.guice.GuiceBundle;
 
 public class MenuAppApplication extends Application<MenuAppConfiguration> {
@@ -36,6 +38,14 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 				// force eager singletons creation (by default is Stage.PRODUCTION)
 				.build();
 		bootstrap.addBundle(guiceBundle);
+		
+		// couchbase bundle
+		bootstrap.addBundle(new CouchbaseBundle<MenuAppConfiguration>() {
+			@Override
+			public CouchbaseClientFactory getCouchbaseClientFactory(MenuAppConfiguration configuration) {
+				return configuration.getCouchbaseClientFactory();
+			}
+		});
 	}
 
 	@Override
@@ -60,4 +70,8 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 		//		... etc
 	}
 
+	@Override
+    public String getName() {
+        return "MenuAppApplication-server";
+    }
 }

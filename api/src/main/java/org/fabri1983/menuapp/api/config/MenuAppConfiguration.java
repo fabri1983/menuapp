@@ -1,12 +1,15 @@
 package org.fabri1983.menuapp.api.config;
 
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import io.dropwizard.Configuration;
+import io.smartmachine.couchbase.CouchbaseClientFactory;
 
 public class MenuAppConfiguration extends Configuration {
 
@@ -20,7 +23,9 @@ public class MenuAppConfiguration extends Configuration {
 	private String importantProperty2;
 	@Min(1)
 	private int maxAllowedResults;
-	
+	@Valid @NotNull
+	private CouchbaseClientFactory couchbaseClientFactory;
+    
 	public String getBuildInfo () {
 		return buildInfo;
 	}
@@ -39,6 +44,10 @@ public class MenuAppConfiguration extends Configuration {
 	
 	public int getMaxAllowedResults () {
 		return maxAllowedResults;
+	}
+	
+	public CouchbaseClientFactory getCouchbaseClientFactory() {
+		return couchbaseClientFactory;
 	}
 	
 	@Override
