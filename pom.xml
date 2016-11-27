@@ -23,6 +23,13 @@
 		<dropwizard.version>1.0.5</dropwizard.version>
 		<dropwizard.guicey.version>4.0.1</dropwizard.guicey.version>
 		<google.guice.version>4.1.0</google.guice.version>
+		<commons.lang.version>2.6</commons.lang.version>
+		<commons.lang3.version>3.5</commons.lang3.version>
+		<commons.collections4.version>4.0</commons.collections4.version>
+		<google.guava.version>20.0</google.guava.version>
+		<logback.classic.version>1.1.7</logback.classic.version>
+		<assertj.core.version>3.2.0</assertj.core.version>
+		<mockito.core.version>2.2.11</mockito.core.version>
 	</properties>
 
 	<dependencyManagement>
@@ -31,7 +38,7 @@
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
-				<version>1.1.7</version>
+				<version>${logback.classic.version}</version>
 			</dependency>
 
 			<dependency>
@@ -55,25 +62,25 @@
 			<dependency>
 				<groupId>commons-lang</groupId>
 				<artifactId>commons-lang</artifactId>
-				<version>2.6</version>
+				<version>${commons.lang.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
-				<version>3.5</version>
+				<version>${commons.lang3.version}</version>
 			</dependency>
 
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-collections4</artifactId>
-				<version>4.0</version>
+				<version>${commons.collections4.version}</version>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
-				<version>20.0</version>
+				<version>${google.guava.version}</version>
 			</dependency>
 		
 			<dependency>
@@ -148,33 +155,15 @@
 			<dependency>
 				<groupId>org.assertj</groupId>
 				<artifactId>assertj-core</artifactId>
-				<version>3.2.0</version>
+				<version>${assertj.core.version}</version>
 				<scope>test</scope>
 			</dependency>
 		
 			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-core</artifactId>
-				<version>2.2.11</version>
+				<version>${mockito.core.version}</version>
 				<scope>test</scope>
-			</dependency>
-
-			<dependency>
-				<groupId>org.fabri1983.menuapp</groupId>
-				<artifactId>core</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.fabri1983.menuapp</groupId>
-				<artifactId>client</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>org.fabri1983.menuapp</groupId>
-				<artifactId>protocol</artifactId>
-				<version>${project.version}</version>
 			</dependency>
 
 		</dependencies>
@@ -194,15 +183,6 @@
 			<url>http://repo.fabri1983.com/nexus/content/libs-release-local</url>
 		</repository>
 	</distributionManagement>
-	
-	<profiles>
-		<profile>
-			<id>local</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-		</profile>
-	</profiles>
 
 	<build>
 		<plugins>

@@ -1,7 +1,7 @@
-testMessage: "This is the test message defined in the server-config.yml file"
-importantProperty1: "hashing depth"
-importantProperty2: "secret pass suffix"
-maxAllowedResults: 50
+testMessage: ${testMessage}
+importantProperty1: ${importantProperty1}
+importantProperty2: ${importantProperty2}
+maxAllowedResults: ${maxAllowedResults}
 
 server:
   type: simple
@@ -9,17 +9,17 @@ server:
   adminContextPath: /admin
   connector:
     type: http
-    port: 8090
+    port: ${http.port}
 
 logging:
   level: INFO
   appenders:
     - type: file
       threshold: ALL
+      timeZone: GMT-3
       currentLogFilename: ./logs/menuapp_api.log
       archivedLogFilenamePattern: ./logs/menuapp_api-%d.log.gz
       archivedFileCount: 5
-      timeZone: GMT-3
     - type: console
       threshold: ALL
       timeZone: GMT-3

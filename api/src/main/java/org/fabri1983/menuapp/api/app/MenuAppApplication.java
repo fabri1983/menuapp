@@ -14,7 +14,6 @@ import ru.vyarus.dropwizard.guice.GuiceBundle;
 public class MenuAppApplication extends Application<MenuAppConfiguration> {
 
 	private Logger logger;
-	private static String scanningPackage = "org.fabri1983.menuapp.api";
 	
 	public static void main(String[] args) throws Exception {
 		new MenuAppApplication().run(args);
@@ -24,12 +23,15 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 	public void initialize(Bootstrap<MenuAppConfiguration> bootstrap) {
 		logger = LoggerFactory.getLogger(this.getClass());
 		
-		// create the bundle for dropwizard-guice integration
+		// we have our custom configuration provider
+		bootstrap.setConfigurationSourceProvider(new CustomConfigurationSourceProvider());
+
+		// create the bundle for dropwizard guice integration
 		GuiceBundle<MenuAppConfiguration> guiceBundle = GuiceBundle.<MenuAppConfiguration>builder()
 				// add yours module classes with your own injections
 				.modules(new MenuAppProviderModule())
 				// this ensures that bean creation in that package is set up automatically.
-				.enableAutoConfig(scanningPackage)
+				.enableAutoConfig("org.fabri1983.menuapp.api")
 				// force eager singletons creation (by default is Stage.PRODUCTION)
 				.build();
 		bootstrap.addBundle(guiceBundle);
@@ -37,7 +39,7 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 
 	@Override
 	public void run (MenuAppConfiguration configuration, Environment environment) throws Exception {
-		logger.info("Starting Menu App application using configuration {}", configuration);
+		logger.info("Starting Menu App application");
 		registerHealthChecks(environment);
 		registerResources(environment);
 		logger.info("Menu App application started");
@@ -45,7 +47,7 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 
 	private void registerHealthChecks (Environment environment) {
 		environment.healthChecks().register("dummy healthcheck", new DummyHealthCheck());
-		// if you to defined the health check as a bean then grab it this way  
+		// if you defined the health check as a bean then add it this way  
 //		environment.lifecycle().manage(guiceBundle.getInjector().getInstance(DummyHealthCheck.class));
 	}
 	

@@ -87,7 +87,7 @@ public class MenuFiltersView {
 		return availableDateTo;
 	}
 
-	public boolean hasPriceFilter() {
+	public boolean hasMaxPriceFilter() {
 		return maxPrice != null;
 	}
 

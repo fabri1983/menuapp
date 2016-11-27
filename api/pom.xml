@@ -17,6 +17,36 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<env.props.file>server-config-local.properties</env.props.file>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<env.props.file>server-config-test.properties</env.props.file>
+			</properties>
+		</profile>
+		<profile>
+			<id>stage</id>
+			<properties>
+				<env.props.file>server-config-stage.properties</env.props.file>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<env.props.file>server-config-prod.properties</env.props.file>
+			</properties>
+		</profile>
+	</profiles>
+	
 	<dependencies>
 	
 		<dependency>
@@ -113,6 +143,7 @@
 	</dependencies>
 
 	<build>
+		
 		<pluginManagement>
 			<plugins>
 				<plugin>
@@ -145,27 +176,25 @@
 			</plugins>
 		</pluginManagement>
 		
+		<resources>
+			<resource>
+				<filtering>true</filtering>
+				<directory>${basedir}/src/main/resources</directory> <!-- from resources dir -->
+				<includes>
+					<include>server-config.yml</include> <!-- we only need this file -->
+				</includes>
+				<excludes>
+					<exclude>profiles/*</exclude>
+				</excludes>
+				<targetPath></targetPath> <!-- to jar root -->
+			</resource>
+		</resources>
+		<filters>
+			<filter>${basedir}/src/main/resources/profiles/${env.props.file}</filter>
+		</filters>
+		
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
-				<executions>
-					<execution>
-						<id>copy</id>
-						<phase>compile</phase>
-						<goals>
-							<goal>run</goal>
-						</goals>
-						<configuration>
-							<tasks>
-								<echo>Copying server-config.yml to target/</echo>
-								<copy file="src/main/resources/server-config.yml" tofile="${basedir}/target/server-config.yml" />
-							</tasks>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>

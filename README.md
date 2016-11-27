@@ -34,37 +34,53 @@ The Repository layer uses DAO components to interact with the underlying persist
 
 Technologies
 ------------
-	Java 8
-	Dropwizard v1.0.5
-	Guice v4.1.0
-	Dropwizard-Guicey v4.0.1
-	Maven v3.3.9
+- Java 8
+- Dropwizard v1.0.5
+- Guice v4.1.0
+- Dropwizard-Guicey v4.0.1
+- Maven v3.3.9
 	
 Building and setup of Eclipse projects
 --------------------------------------
-	cd menuapp
-	mvn clean install -Plocal
-	mvn eclipse:eclipse -DdownloadSources=true -DdownloadJavadocs=true
-	
+You can compile using next maven profiles: `local` (default), `test`, `stage`, `prod`.
+Each of them presents different configurations according the target environment you want deploy to.
+Pay attention that `prod` profile leaves the filtered resource as it without replacing the place holders, so you must provide your own config file. See next section.
+```sh
+cd menuapp
+mvn clean install
+mvn eclipse:eclipse -DdownloadSources=true -DdownloadJavadocs=true
+```
+
 Execution in local environment
 ------------------------------
-	cd menuapp
-	mvn clean install -Plocal
-	cd api
-	java -jar target/api-1.0.0-SNAPSHOT.jar server target/server-config.yml
-	Listening requests on port 8090. You can provide your own server-config.yml file.
 
-If you want to debug the code using Eclipse:
+```sh
+cd menuapp
+mvn clean install
+cd api
+java -jar target/api-1.0.0-SNAPSHOT.jar server -
+```
+Listening requests on port 8090.
+You can provide your own server-config.yml file next to server argument. Eg:
+```sh
+java -jar target/api-1.0.0-SNAPSHOT.jar server server-config-prod.yml
+```
 
-	make sure your MAVEN_OPTS has -Xmx1g -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n
-	cd menuapp
-	mvn clean install -Plocal
-	cd api
-	mvn exec:java -Dexec.args="server target/server-config.yml" -Plocal
-	Then open Eclipse -> Run -> Debug Configurations -> create a Remote Java Application listening to port 4000 and hit Debug.
+#### If you want to debug the code using Eclipse:
+
+Make sure your MAVEN_OPTS has -Xmx512m -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n
+```sh
+cd menuapp
+mvn clean install
+cd api
+mvn exec:java -Dexec.args="server -"
+```
+Then open Eclipse -> Run -> Debug Configurations -> create a Remote Java Application listening to port 4000 and hit Debug.
 	
 Example URLs
 ------------
+Just using GET method.
+
 http://localhost:8090/test
 
 http://localhost:8090/user/1/menu
@@ -76,6 +92,7 @@ The dependency injection is all setup in the api module. Take a look at `org.fab
 
 More example URLs
 -----------------
+Using POST method.
 Note: add `Content-Type:application/json` and `Accept:application/json` in your REST Client plugin at header section.
 
 	POST http://localhost:8090/user/login
@@ -135,20 +152,16 @@ TODO list
 ---------
 * Investigate the use of Transactions (UnitOfWork) with Dropwizard.
 
-* Modify again the use of validation annotations.
-
 * Define exceptions and handle them in Service layer to provide upper layers human readable messages. Then according the type of exception use the correct HTTP return code.
-
-* Unit test the many resources, services, parsers, converters, etc.
 
 * Use of `Optional<T>` to hide null manipulation.
 
-* Available days should be an `Enum` type instead of hardcoded strings like "Friday", "Saturday", "Sunday".
-
 * Complete the use of maven profiles in order to provide a different `server-config.yml` per profile. Use resource filtering on it.
 
-* When a service needs several steps to execute, use `Chain of Responsability` with a chain builder or alike to improve readability.
+* When a service needs several steps to execute, use `Chain of Responsibility` with a chain builder or alike to improve readability.
 
-* For currency conversion use `Strategy` pattern, so you can provide an algorithm for any currency conversion.
+* For currency conversion use `Strategy` pattern, so I can provide an algorithm for any currency conversion.
+
+* Unit test the many resources, services, parsers, converters, etc.
 
 * Revisit the list of `FIXMEs` and `TODOs`.

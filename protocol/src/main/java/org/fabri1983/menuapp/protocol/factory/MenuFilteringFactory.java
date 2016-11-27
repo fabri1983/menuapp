@@ -22,7 +22,7 @@ public class MenuFilteringFactory {
 		ChainedMenuFilterBuilder filterChainBuilder = ChainedMenuFilterBuilder.newOne();
 		MenuFiltersView filterData = menuFilteredRequest.getFilterData();
 		
-		if (filterData.hasPriceFilter())
+		if (filterData.hasMaxPriceFilter())
 			addPriceFiltering(filterChainBuilder, filterData);
 		if (filterData.hasAvailableHoursFilter())
 			addHoursFiltering(filterChainBuilder, filterData);
