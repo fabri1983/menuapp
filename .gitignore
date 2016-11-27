@@ -27,9 +27,9 @@ dependency-reduced-pom.xml
 #-----------------------------
 .idea
 /out/
+*.iml
 
 #------
 # misc
 #------
 *~
-*.iml

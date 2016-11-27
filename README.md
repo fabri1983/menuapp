@@ -170,6 +170,12 @@ Note: add `Content-Type:application/json` and `Accept:application/json,text` in 
 	
 TODO list
 ---------
+* Possible duplication of resources injection. Next message appears twice in console: io.dropwizard.server.SimpleServerFactory: Registering jersey handler with root path prefix
+
+* Investigate maven shade plugin output for collisions on dependencies.
+
+* Use of maven scope `provided`.
+
 * Investigate the use of Transactions (UnitOfWork) with Dropwizard.
 
 * Define exceptions and handle them in Service layer to provide upper layers human readable messages. Then according the type of exception use the correct HTTP return code.
@@ -180,6 +186,6 @@ TODO list
 
 * For currency conversion use `Strategy` pattern, so I can provide an algorithm for any currency conversion.
 
-* Unit test the many resources, services, parsers, converters, etc.
+* Unit test out the many resources, services, parsers, converters, etc.
 
 * Revisit the list of `FIXMEs` and `TODOs`.
