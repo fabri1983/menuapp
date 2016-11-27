@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.api.app;
+package org.fabri1983.menuapp.api.config;
 
 import java.io.IOException;
 import java.io.InputStream;

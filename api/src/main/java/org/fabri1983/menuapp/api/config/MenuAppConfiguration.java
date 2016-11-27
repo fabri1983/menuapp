@@ -11,7 +11,9 @@ import io.dropwizard.Configuration;
 public class MenuAppConfiguration extends Configuration {
 
 	@NotEmpty
-	private String testMessage;
+	private String buildInfo;
+	@NotEmpty
+	private String profile;
 	@NotEmpty
 	private String importantProperty1;
 	@NotEmpty
@@ -19,19 +21,23 @@ public class MenuAppConfiguration extends Configuration {
 	@Min(1)
 	private int maxAllowedResults;
 	
-	public String getTestMessage() {
-		return testMessage;
+	public String getBuildInfo () {
+		return buildInfo;
 	}
 	
-	public String getImportantProperty1() {
+	public String getProfile () {
+		return profile;
+	}
+	
+	public String getImportantProperty1 () {
 		return importantProperty1;
 	}
 	
-	public String getImportantProperty2() {
+	public String getImportantProperty2 () {
 		return importantProperty2;
 	}
 	
-	public int getMaxAllowedResults() {
+	public int getMaxAllowedResults () {
 		return maxAllowedResults;
 	}
 	

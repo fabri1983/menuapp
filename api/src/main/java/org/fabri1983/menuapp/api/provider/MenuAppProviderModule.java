@@ -15,9 +15,14 @@ public class MenuAppProviderModule implements Module {
 	}
 	
 	@Provides
-	@Named("testMessage")
-	public String provideMessage (MenuAppConfiguration configuration) {
-		return configuration.getTestMessage();
+	@Named("profile")
+	public String provideTestMessage (MenuAppConfiguration configuration) {
+		return configuration.getProfile();
 	}
 
+	@Provides
+	@Named("buildInfo")
+	public String provideBuildInfo (MenuAppConfiguration configuration) {
+		return configuration.getBuildInfo();
+	}
 }

@@ -184,6 +184,12 @@
 		</repository>
 	</distributionManagement>
 
+	<scm>
+		<developerConnection>scm:git:ssh://git@github.com/fabri1983/menuapp.git</developerConnection>
+		<connection>scm:git:https://github.com/fabri1983/menuapp.git</connection>
+		<url>https://github.com/fabri1983/menuapp</url>
+	</scm>
+
 	<build>
 		<plugins>
 			<plugin>
@@ -215,6 +221,50 @@
 						</goals>
 					</execution>
 				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>buildnumber-maven-plugin</artifactId>
+				<version>1.4</version>
+				<executions>
+					<execution>
+						<id>generate-timestamp</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+						<configuration>
+							<format>{0,date,yyyy-MM-dd HH:mm:ss Z}</format>
+							<items>
+								<item>timestamp</item>
+							</items>
+							<timezone>GMT-3</timezone>
+							<buildNumberPropertyName>buildDateTime</buildNumberPropertyName>
+							<!-- If set to true, will get the scm revision once for all modules of a multi-module project instead of fetching once for each module -->
+							<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
+						</configuration>
+					</execution>
+					<execution>
+						<id>generate-buildnumber</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>create</goal>
+						</goals>
+						<configuration>
+							<revisionOnScmFailure>UNKNOWN</revisionOnScmFailure>
+							<useLastCommittedRevision>true</useLastCommittedRevision>
+							<buildNumberPropertyName>buildRevision</buildNumberPropertyName>
+						</configuration>
+					</execution>
+				</executions>
+				<configuration>
+					<skip>false</skip> <!-- use -Dmaven.buildNumber.skip=... -->
+					<!-- Check to see if you have locally modified files, and will fail if there are any -->
+					<doCheck>false</doCheck> <!-- use -Dmaven.buildNumber.doCheck=... -->
+					<!-- Update your local repository. This is done because local revision might not be the same locally as the last one on some remote server. 
+					You should probably deal with these changes before creating a build in any case -->
+					<doUpdate>false</doUpdate> <!-- use -Dmaven.buildNumber.doUpdate=... -->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

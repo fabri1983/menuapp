@@ -1,5 +1,6 @@
 package org.fabri1983.menuapp.api.app;
 
+import org.fabri1983.menuapp.api.config.CustomConfigurationSourceProvider;
 import org.fabri1983.menuapp.api.config.MenuAppConfiguration;
 import org.fabri1983.menuapp.api.health.DummyHealthCheck;
 import org.fabri1983.menuapp.api.provider.MenuAppProviderModule;

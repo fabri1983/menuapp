@@ -44,29 +44,35 @@ Building and setup of Eclipse projects
 --------------------------------------
 You can compile using next maven profiles: `local` (default), `test`, `stage`, or `prod`.
 Each of them presents different configurations according the target environment you want to deploy at.
-Pay attention that `prod` profile leaves the filtered resource as it without replacing the place holders, so you must provide your own config file. See next section.
+Pay attention that `prod` profile truncates the filtered resource so it fails fast. You must provide your own production ready config file. See next section.
 ```sh
 cd menuapp
 mvn clean install
 mvn eclipse:eclipse -DdownloadSources=true -DdownloadJavadocs=true
 ```
 
-Execution in local environment
-------------------------------
-
+Execution in any environment
+----------------------------
+Remember you can use maven profiles adding `-P<profile.name>`. By default maven takes the `local` profile
 ```sh
 cd menuapp
 mvn clean install
 cd api
 java -jar target/api-1.0.0-SNAPSHOT.jar server -
 ```
-Listening requests on port 8090.
-You can provide your own `server-config.yml` file next to server argument. Eg:
+Listening requests on port 8090 as per profiles `local` (default), `test`, or `stage`.
+
+#### Production environment
+
+For production environment you must build with `-Pprod` profile and then provide your own production ready `server-config.yml` file. For example:
 ```sh
-java -jar target/api-1.0.0-SNAPSHOT.jar server server-config-prod.yml
+cd menuapp
+mvn clean install -Pprod
+cd api
+java -jar target/api-1.0.0-SNAPSHOT.jar server /etc/server-config-prod.yml
 ```
 
-#### Debug the code using Eclipse:
+#### Debug using Eclipse:
 
 Make sure your `MAVEN_OPTS` contains `-Xmx512m -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n`
 ```sh
@@ -76,12 +82,25 @@ cd api
 mvn exec:java -Dexec.args="server -"
 ```
 Then open Eclipse and go to Run -> Debug Configurations -> create a Remote Java Application listening to port 4000 and hit Debug.
-	
+
+Build info for Continuous Integration
+-------------------------------------
+By default when compiling any project there is a maven plugin named `buildnumber-maven-plugin` which gets revision number, current branch, build time, and use that info on filtering resources phase.
+Currently only the *api* projects use the build info provided by the plugin.
+So you can call http://localhost:8090/buildinfo and be responded with revision id and branch name information of the last change made in the project, as well as the build time.
+During development, some settings of this plugin are disabled in order to speed up compilation. Nevertheless you can completely turn it off using `-Dmaven.buildNumber.skip=true`
+Conversely, when using a CI software use the next command in order to always retrieve latest code and avoid compilation if local changes has been made:
+```sh
+mvn clean install -Dmaven.buildNumber.doCheck=true -Dmaven.buildNumber.doUpdate=true
+```
+
 Example URLs
 ------------
 Just using GET method.
 
-http://localhost:8090/test
+http://localhost:8090/buildinfo
+
+http://localhost:8090/profile
 
 http://localhost:8090/user/1/menu
 
@@ -94,7 +113,7 @@ More example URLs
 -----------------
 Using POST method.
 
-Note: add `Content-Type:application/json` and `Accept:application/json` in your REST Client plugin at header section.
+Note: add `Content-Type:application/json` and `Accept:application/json,text` in your REST Client plugin at header section.
 
 	POST http://localhost:8090/user/login
     {

@@ -1,4 +1,6 @@
-testMessage: ${testMessage}
+buildInfo: "${buildRevision} ${scmBranch} Build at ${buildDateTime}"
+profile: ${profile}
+
 importantProperty1: ${importantProperty1}
 importantProperty2: ${importantProperty2}
 maxAllowedResults: ${maxAllowedResults}
@@ -17,8 +19,8 @@ logging:
     - type: file
       threshold: ALL
       timeZone: GMT-3
-      currentLogFilename: ./logs/menuapp_api.log
-      archivedLogFilenamePattern: ./logs/menuapp_api-%d.log.gz
+      currentLogFilename: ./logs/menuapp_dw.log
+      archivedLogFilenamePattern: ./logs/menuapp_dw-%d.log.gz
       archivedFileCount: 5
     - type: console
       threshold: ALL
