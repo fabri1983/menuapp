@@ -1,5 +1,7 @@
 # Menu App (REST webapp using Dropwizard and Guice)
 
+## Introduction
+
 **Menu App** is a backend system which aims to provide a basic menu component to be consumed by any client using **REST** (or any other communication protocol).
 It's a prototype of a micro service web app using the **Dropwizard** framework and **Guice** for DI. And also it's a template for a better separation of concerns for a web app.
 
@@ -74,6 +76,9 @@ mvn eclipse:eclipse -DdownloadSources=true -DdownloadJavadocs=true
 Execution in any environment
 ----------------------------
 You need to first start the CouchbaseMock test server. See above.
+
+#### Quickstart
+
 Remember you can use maven profiles adding `-P<profile.name>`. By default maven takes the `local` profile.
 ```sh
 cd menuapp
