@@ -185,6 +185,9 @@
 			<resource>
 				<filtering>true</filtering>
 				<directory>${basedir}/src/main/resources</directory> <!-- from resources dir -->
+				<includes>
+					<include>server-config.yml</include> <!-- we only need this file -->
+				</includes>
 				<excludes>
 					<exclude>profiles/*</exclude>
 				</excludes>
