@@ -1,4 +1,4 @@
-# Menu App (REST webapp using Dropwizard and Guice)
+# Menu App - REST webapp using Dropwizard and Guice
 
 ![Build Status](https://travis-ci.org/fabri1983/menuapp.svg?branch=master)
 &nbsp;&nbsp;&nbsp;&nbsp;
@@ -42,18 +42,19 @@ The Repository layer uses DAO components to interact with the underlying persist
 
 Technologies
 ------------
-- Java 8
-- Dropwizard 1.0.5
-- Guice 4.1.0
-- Dropwizard-Guicey 4.0.1
-- Maven 3.3.9
-- CouchbaseMock test server
-- Dropwizard-Couchbase 0.2.3
+- [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+- [Dropwizard 1.0.5](http://www.dropwizard.io/)
+- [Guice 4.1.0](https://github.com/google/guice)
+- [Dropwizard-Guicey 4.0.1](https://github.com/xvik/dropwizard-guicey)
+- [Maven 3.3.9](https://maven.apache.org/)
+- [CouchbaseMock test server](https://github.com/couchbase/CouchbaseMock)
+- [Dropwizard-Couchbase 0.2.3](https://github.com/smartmachine/dropwizard-couchbase)
 
 Building CouchbaseMock Test Server
 ----------------------------------
 This project comes with the CouchbaseMock Test Server which serves as a simple Couchbase DB.
 See the project at [CouchbaseMock](https://github.com/couchbase/CouchbaseMock) for more details.
+
 You must first generate the package and then execute the server:
 ```sh
 cd CouchbaseMock-master
@@ -65,7 +66,7 @@ Test everything is OK connecting to [http://localhost:8091/pools/default/buckets
 
 For command line options use:
 ```sh
-java -jar target/CouchbaseMock-1.4.3.jar -?
+java -jar target/CouchbaseMock-1.4.3.jar -? or --help
 ```
 
 Building app and setup of Eclipse projects
