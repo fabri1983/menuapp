@@ -27,6 +27,6 @@ ratings:
   - "**.rb"
 exclude_paths:
   - CouchbaseMock-master/
-  - **/target/
+  - "**/target/"
   - .git/
 
