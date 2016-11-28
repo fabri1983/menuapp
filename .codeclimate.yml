@@ -1,0 +1,32 @@
+---
+engines:
+  checkstyle:
+    enabled: true
+    channel: "beta"
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+      - javascript
+      - python
+      - php
+  eslint:
+    enabled: true
+  fixme:
+    enabled: true
+ratings:
+  paths:
+  - "**.java"
+  - "**.inc"
+  - "**.js"
+  - "**.jsx"
+  - "**.module"
+  - "**.php"
+  - "**.py"
+  - "**.rb"
+exclude_paths:
+  - CouchbaseMock-master/
+  - **/target/
+  - .git/
+

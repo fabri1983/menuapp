@@ -272,7 +272,6 @@
 					</execution>
 				</executions>
 				<configuration>
-					<skip>false</skip> <!-- use -Dmaven.buildNumber.skip=... -->
 					<!-- Check to see if you have locally modified files, and will fail if there are any -->
 					<doCheck>false</doCheck> <!-- use -Dmaven.buildNumber.doCheck=... -->
 					<!-- Update your local repository. This is done because local revision might not be the same locally as the last one on some remote server. 
