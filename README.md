@@ -1,5 +1,9 @@
 # Menu App (REST webapp using Dropwizard and Guice)
 
+![Build Status](https://travis-ci.org/fabri1983/menuapp.svg?branch=master)
+&nbsp;&nbsp;&nbsp;&nbsp;
+[![Coverage Status](https://coveralls.io/repos/github/fabri1983/menuapp/badge.svg)](https://coveralls.io/github/fabri1983/menuapp?branch=master)
+
 ## Introduction
 
 **Menu App** is a backend system which aims to provide a basic menu component to be consumed by any client using **REST** (or any other communication protocol).
