@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import org.apache.commons.collections4.CollectionUtils;
 import org.fabri1983.menuapp.core.dao.MenuDao;
 import org.fabri1983.menuapp.core.dao.converter.MenuDaoPresentationConverter;
-import org.fabri1983.menuapp.core.menu.Menu;
+import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.core.repository.MenuRepository;
 
 public class InMemoryMenuRepository implements MenuRepository {

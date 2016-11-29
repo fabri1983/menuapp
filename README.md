@@ -38,7 +38,8 @@ The Service layer only interacts with the many repositories in order to create, 
 The Repository layer aims to separate the entities the business understands and the different ways they are persisted.
 The Repository layer uses DAO components to interact with the underlying persistence backend.
 
-- The **client** project is aimed to be used by third party components. Hiding the communication with the api, here you can add facades whenever a third party component can't understand JSON and needs another communication format.
+- The **client** project is aimed to be used by third party components. It communicates with the core system without dealing with a presentation layer. 
+It interacts directly with the business layer avoiding performance penalty due to conversion between presentational objects to business entities.
 
 Technologies
 ------------

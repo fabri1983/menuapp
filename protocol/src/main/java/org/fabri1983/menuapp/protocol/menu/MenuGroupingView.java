@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import org.fabri1983.menuapp.core.menu.CurrencyType;
+import org.fabri1983.menuapp.core.entity.menu.CurrencyType;
 import org.fabri1983.menuapp.protocol.validation.StringEnumeration;
 
 import com.fasterxml.jackson.annotation.JsonCreator;

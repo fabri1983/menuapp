@@ -18,16 +18,16 @@ import javax.ws.rs.core.Response;
 
 import org.fabri1983.menuapp.api.config.MenuAppConfiguration;
 import org.fabri1983.menuapp.api.provider.MenuServiceProvider;
-import org.fabri1983.menuapp.core.filtering.MenuFilter;
-import org.fabri1983.menuapp.core.menu.Menu;
+import org.fabri1983.menuapp.core.entity.menu.Menu;
+import org.fabri1983.menuapp.core.filtering.menu.strategy.MenuFilterStrategy;
 import org.fabri1983.menuapp.core.service.MenuService;
-import org.fabri1983.menuapp.core.view.MenuView;
-import org.fabri1983.menuapp.core.view.converter.MenuViewConverterResolver;
+import org.fabri1983.menuapp.protocol.converter.MenuViewConverterResolver;
 import org.fabri1983.menuapp.protocol.factory.MenuFilteringFactory;
 import org.fabri1983.menuapp.protocol.factory.MenuGroupingFactory;
 import org.fabri1983.menuapp.protocol.filtering.MenuFilteredView;
 import org.fabri1983.menuapp.protocol.grouping.MenuGroupView;
 import org.fabri1983.menuapp.protocol.menu.MenuResponse;
+import org.fabri1983.menuapp.protocol.menu.MenuView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
@@ -79,7 +79,7 @@ public class MenuResource {
 	public Response filter (
 			@NotNull @Valid MenuFilteredView menuFilteredView)
 	{
-		MenuFilter filterChain = MenuFilteringFactory.createFrom(menuFilteredView);
+		MenuFilterStrategy filterChain = MenuFilteringFactory.createFrom(menuFilteredView);
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
 		int limitSize = Math.min(menuFilteredView.getMaxResults(), maxAllowedResults);
@@ -99,7 +99,7 @@ public class MenuResource {
 	public MenuResponse group (
 			@NotNull @Valid MenuGroupView menuGroupView)
 	{
-		MenuFilter filterChain = MenuGroupingFactory.createFrom(menuGroupView);
+		MenuFilterStrategy filterChain = MenuGroupingFactory.createFrom(menuGroupView);
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
 		int limitSize = Math.min(menuGroupView.getMaxResults(), maxAllowedResults);

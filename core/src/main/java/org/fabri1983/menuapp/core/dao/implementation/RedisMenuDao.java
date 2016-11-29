@@ -6,7 +6,7 @@ import java.util.Collections;
 import org.fabri1983.menuapp.core.dao.MenuDao;
 import org.fabri1983.menuapp.core.dao.converter.JsonPresentationToMenuConverter;
 import org.fabri1983.menuapp.core.dao.converter.MenuDaoPresentationConverter;
-import org.fabri1983.menuapp.core.dao.representation.JsonMenuPresentation;
+import org.fabri1983.menuapp.core.dao.presentation.JsonMenuPresentation;
 
 /**
  * Menu entities are stored and retrieved from a Redis DB.

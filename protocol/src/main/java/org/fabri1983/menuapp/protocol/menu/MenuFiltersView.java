@@ -8,9 +8,9 @@ import java.util.List;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import org.fabri1983.menuapp.core.menu.CurrencyType;
-import org.fabri1983.menuapp.core.view.parserutil.CustomLocalTimeDeserializer;
-import org.fabri1983.menuapp.core.view.parserutil.CustomLocalTimeSerializer;
+import org.fabri1983.menuapp.core.entity.menu.CurrencyType;
+import org.fabri1983.menuapp.protocol.parserutil.CustomLocalTimeDeserializer;
+import org.fabri1983.menuapp.protocol.parserutil.CustomLocalTimeSerializer;
 import org.fabri1983.menuapp.protocol.validation.StringEnumeration;
 
 import com.fasterxml.jackson.annotation.JsonCreator;

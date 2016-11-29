@@ -1,6 +1,6 @@
 package org.fabri1983.menuapp.protocol.rating;
 
-import org.fabri1983.menuapp.core.menu.Menu;
+import org.fabri1983.menuapp.core.entity.menu.Menu;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

@@ -11,8 +11,8 @@ import java.util.Map;
 import org.fabri1983.menuapp.core.dao.MenuDao;
 import org.fabri1983.menuapp.core.dao.converter.JsonPresentationToMenuConverter;
 import org.fabri1983.menuapp.core.dao.converter.MenuDaoPresentationConverter;
-import org.fabri1983.menuapp.core.dao.representation.JsonMenuPresentation;
-import org.fabri1983.menuapp.core.menu.CurrencyType;
+import org.fabri1983.menuapp.core.dao.presentation.JsonMenuPresentation;
+import org.fabri1983.menuapp.core.entity.menu.CurrencyType;
 
 public class PreloadedMenuDao implements MenuDao {
 

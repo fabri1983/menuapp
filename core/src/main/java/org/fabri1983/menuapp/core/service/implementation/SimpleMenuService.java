@@ -3,8 +3,8 @@ package org.fabri1983.menuapp.core.service.implementation;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-import org.fabri1983.menuapp.core.filtering.MenuFilter;
-import org.fabri1983.menuapp.core.menu.Menu;
+import org.fabri1983.menuapp.core.entity.menu.Menu;
+import org.fabri1983.menuapp.core.filtering.menu.strategy.MenuFilterStrategy;
 import org.fabri1983.menuapp.core.repository.MenuRepository;
 import org.fabri1983.menuapp.core.service.MenuService;
 
@@ -53,7 +53,7 @@ public class SimpleMenuService implements MenuService {
 	}
 
 	@Override
-	public Collection<Menu> getAllFiltered(final MenuFilter filter) {
+	public Collection<Menu> getAllFiltered(final MenuFilterStrategy filter) {
 		// FIXME This is not performance friendly. The filtering should be done in the ORM layer.
 		// However, if your repository/dao components as using a cache then your are on good track.
 		Collection<Menu> allMenus = repository.getAll();

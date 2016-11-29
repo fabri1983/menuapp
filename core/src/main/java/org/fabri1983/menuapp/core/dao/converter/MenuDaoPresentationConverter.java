@@ -1,7 +1,7 @@
 package org.fabri1983.menuapp.core.dao.converter;
 
-import org.fabri1983.menuapp.core.dao.representation.JsonMenuPresentation;
-import org.fabri1983.menuapp.core.menu.Menu;
+import org.fabri1983.menuapp.core.dao.presentation.JsonMenuPresentation;
+import org.fabri1983.menuapp.core.entity.menu.Menu;
 
 public interface MenuDaoPresentationConverter {
 

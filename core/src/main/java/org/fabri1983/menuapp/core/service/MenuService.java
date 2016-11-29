@@ -2,8 +2,8 @@ package org.fabri1983.menuapp.core.service;
 
 import java.util.Collection;
 
-import org.fabri1983.menuapp.core.filtering.MenuFilter;
-import org.fabri1983.menuapp.core.menu.Menu;
+import org.fabri1983.menuapp.core.entity.menu.Menu;
+import org.fabri1983.menuapp.core.filtering.menu.strategy.MenuFilterStrategy;
 
 public interface MenuService {
 
@@ -19,5 +19,5 @@ public interface MenuService {
 	
 	Menu update(Menu modifiedMenu);
 
-	Collection<Menu> getAllFiltered(MenuFilter filter);
+	Collection<Menu> getAllFiltered(MenuFilterStrategy filter);
 }

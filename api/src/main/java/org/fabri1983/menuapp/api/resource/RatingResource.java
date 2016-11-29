@@ -10,7 +10,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.fabri1983.menuapp.api.provider.RatingServiceProvider;
-import org.fabri1983.menuapp.core.menu.Menu;
+import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.core.service.RatingService;
 import org.fabri1983.menuapp.protocol.rating.RatingResponse;
 import org.fabri1983.menuapp.protocol.rating.RatingView;

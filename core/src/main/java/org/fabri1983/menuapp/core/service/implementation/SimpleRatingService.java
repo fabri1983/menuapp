@@ -1,6 +1,6 @@
 package org.fabri1983.menuapp.core.service.implementation;
 
-import org.fabri1983.menuapp.core.menu.Menu;
+import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.core.repository.MenuRepository;
 import org.fabri1983.menuapp.core.service.RatingService;
 

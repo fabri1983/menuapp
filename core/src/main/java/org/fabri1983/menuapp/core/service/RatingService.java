@@ -1,6 +1,6 @@
 package org.fabri1983.menuapp.core.service;
 
-import org.fabri1983.menuapp.core.menu.Menu;
+import org.fabri1983.menuapp.core.entity.menu.Menu;
 
 public interface RatingService {
 

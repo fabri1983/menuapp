@@ -2,7 +2,7 @@ package org.fabri1983.menuapp.core.repository;
 
 import java.util.Collection;
 
-import org.fabri1983.menuapp.core.menu.Menu;
+import org.fabri1983.menuapp.core.entity.menu.Menu;
 
 public interface MenuRepository {
 

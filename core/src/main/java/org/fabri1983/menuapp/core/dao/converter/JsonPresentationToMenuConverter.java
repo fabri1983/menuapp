@@ -3,11 +3,11 @@ package org.fabri1983.menuapp.core.dao.converter;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-import org.fabri1983.menuapp.core.dao.representation.JsonMenuPresentation;
-import org.fabri1983.menuapp.core.menu.CurrencyType;
-import org.fabri1983.menuapp.core.menu.DefaultMenu;
-import org.fabri1983.menuapp.core.menu.Menu;
-import org.fabri1983.menuapp.core.menu.TimeConstraintMenu;
+import org.fabri1983.menuapp.core.dao.presentation.JsonMenuPresentation;
+import org.fabri1983.menuapp.core.entity.menu.CurrencyType;
+import org.fabri1983.menuapp.core.entity.menu.DefaultMenu;
+import org.fabri1983.menuapp.core.entity.menu.Menu;
+import org.fabri1983.menuapp.core.entity.menu.TimeConstraintMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
