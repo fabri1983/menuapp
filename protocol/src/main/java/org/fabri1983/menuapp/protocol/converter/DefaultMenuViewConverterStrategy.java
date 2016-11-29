@@ -1,7 +1,7 @@
 package org.fabri1983.menuapp.protocol.converter;
 
-import org.fabri1983.menuapp.core.converter.menu.DefaultMenuConverterStrategy;
-import org.fabri1983.menuapp.core.converter.menu.MenuConverterStrategy;
+import org.fabri1983.menuapp.core.converter.menu.DefaultMenuTypeConverterRequester;
+import org.fabri1983.menuapp.core.converter.menu.MenuTypeConverterRequester;
 import org.fabri1983.menuapp.core.entity.menu.DefaultMenu;
 import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.protocol.menu.MenuView;
@@ -13,10 +13,10 @@ public class DefaultMenuViewConverterStrategy implements MenuViewConverterStrate
 
 	private static DefaultMenuViewConverterStrategy instance = new DefaultMenuViewConverterStrategy();
 	
-	private MenuConverterStrategy converterStrategy;
+	private MenuTypeConverterRequester converterStrategy;
 	
 	private DefaultMenuViewConverterStrategy () {
-		converterStrategy = new DefaultMenuConverterStrategy();
+		converterStrategy = new DefaultMenuTypeConverterRequester();
 	}
 	
 	public static MenuViewConverterStrategy get () {
@@ -33,7 +33,7 @@ public class DefaultMenuViewConverterStrategy implements MenuViewConverterStrate
 	}
 
 	@Override
-	public MenuConverterStrategy getStrategy () {
+	public MenuTypeConverterRequester getStrategy () {
 		return converterStrategy;
 	}
 

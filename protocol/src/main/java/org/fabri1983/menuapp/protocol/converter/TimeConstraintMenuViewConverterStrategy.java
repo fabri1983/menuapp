@@ -1,7 +1,7 @@
 package org.fabri1983.menuapp.protocol.converter;
 
-import org.fabri1983.menuapp.core.converter.menu.MenuConverterStrategy;
-import org.fabri1983.menuapp.core.converter.menu.TimeConstraintMenuConverterStrategy;
+import org.fabri1983.menuapp.core.converter.menu.MenuTypeConverterRequester;
+import org.fabri1983.menuapp.core.converter.menu.TimeConstraintMenuTypeConverterRequester;
 import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.core.entity.menu.TimeConstraintMenu;
 import org.fabri1983.menuapp.protocol.menu.MenuView;
@@ -13,10 +13,10 @@ public class TimeConstraintMenuViewConverterStrategy implements MenuViewConverte
 
 	private static TimeConstraintMenuViewConverterStrategy instance = new TimeConstraintMenuViewConverterStrategy();
 	
-	private MenuConverterStrategy converterStrategy;
+	private MenuTypeConverterRequester converterStrategy;
 	
 	private TimeConstraintMenuViewConverterStrategy () {
-		converterStrategy = new TimeConstraintMenuConverterStrategy();
+		converterStrategy = new TimeConstraintMenuTypeConverterRequester();
 	}
 	
 	public static MenuViewConverterStrategy get () {
@@ -33,7 +33,7 @@ public class TimeConstraintMenuViewConverterStrategy implements MenuViewConverte
 	}
 
 	@Override
-	public MenuConverterStrategy getStrategy () {
+	public MenuTypeConverterRequester getStrategy () {
 		return converterStrategy;
 	}
 
