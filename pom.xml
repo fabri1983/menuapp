@@ -40,102 +40,119 @@
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.classic.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-annotations</artifactId>
 				<version>${jackson.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-core</artifactId>
 				<version>${jackson.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-databind</artifactId>
 				<version>${jackson.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
 				<groupId>commons-lang</groupId>
 				<artifactId>commons-lang</artifactId>
 				<version>${commons.lang.version}</version>
+				<optional>true</optional>
 			</dependency>
 			
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-lang3</artifactId>
 				<version>${commons.lang3.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
 				<groupId>org.apache.commons</groupId>
 				<artifactId>commons-collections4</artifactId>
 				<version>${commons.collections4.version}</version>
+				<optional>true</optional>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.google.guava</groupId>
 				<artifactId>guava</artifactId>
 				<version>${google.guava.version}</version>
+				<optional>true</optional>
 			</dependency>
 		
 			<dependency>
 				<groupId>ru.vyarus</groupId>
 				<artifactId>dropwizard-guicey</artifactId>
 				<version>${dropwizard.guicey.version}</version>
+				<optional>true</optional>
 			</dependency>
 			
 			<dependency>
 				<groupId>com.google.inject</groupId>
 				<artifactId>guice</artifactId>
 				<version>${google.guice.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
 				<groupId>io.smartmachine</groupId>
 				<artifactId>dropwizard-couchbase</artifactId>
 				<version>${dropwizard.couchbase.version}</version>
+				<optional>true</optional>
 			</dependency>
 	
 			<dependency>
 				<groupId>io.dropwizard</groupId>
 				<artifactId>dropwizard-core</artifactId>
 				<version>${dropwizard.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
 				<groupId>io.dropwizard</groupId>
 				<artifactId>dropwizard-auth</artifactId>
 				<version>${dropwizard.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
 				<groupId>io.dropwizard</groupId>
 				<artifactId>dropwizard-configuration</artifactId>
 				<version>${dropwizard.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
 				<groupId>io.dropwizard</groupId>
 				<artifactId>dropwizard-metrics</artifactId>
 				<version>${dropwizard.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
 				<groupId>io.dropwizard</groupId>
 				<artifactId>dropwizard-metrics-graphite</artifactId>
 				<version>${dropwizard.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
 				<groupId>io.dropwizard</groupId>
 				<artifactId>dropwizard-validation</artifactId>
 				<version>${dropwizard.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
@@ -143,6 +160,7 @@
 				<artifactId>dropwizard-testing</artifactId>
 				<version>${dropwizard.version}</version>
 				<scope>test</scope>
+				<optional>true</optional>
 			</dependency>
 		
 			<dependency>
@@ -150,13 +168,15 @@
 				<artifactId>junit</artifactId>
 				<version>${junit.version}</version>
 				<scope>test</scope>
+				<optional>true</optional>
 			</dependency>
 
 			<dependency>
 				<groupId>io.takari.junit</groupId>
 				<artifactId>takari-cpsuite</artifactId>
 				<version>${takari.cpsuite.version}</version>
-				<scope>compile</scope>
+				<scope>test</scope>
+				<optional>true</optional>
 			</dependency>
 		
 			<dependency>
@@ -164,6 +184,7 @@
 				<artifactId>assertj-core</artifactId>
 				<version>${assertj.core.version}</version>
 				<scope>test</scope>
+				<optional>true</optional>
 			</dependency>
 		
 			<dependency>
@@ -171,6 +192,7 @@
 				<artifactId>mockito-core</artifactId>
 				<version>${mockito.core.version}</version>
 				<scope>test</scope>
+				<optional>true</optional>
 			</dependency>
 
 		</dependencies>
