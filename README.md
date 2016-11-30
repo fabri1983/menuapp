@@ -75,7 +75,8 @@ Building app and setup of Eclipse projects
 You can compile using next maven profiles: `local` (default), `test`, `stage`, or `prod`.
 Each of them presents different configurations according the target environment you want to deploy at.
 Pay attention that `prod` profile truncates the filtered resource so it fails fast. You must provide your own production ready config file. See next section.
-Note: if you don't have git.exe in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`
+
+Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`
 ```sh
 cd menuapp
 mvn clean install
@@ -96,7 +97,8 @@ cd api
 java -jar target/api-1.0.0-SNAPSHOT.jar server -
 ```
 Listening requests on port 8080 as per profiles `local` (default), `test`, or `stage`.
-Note: last argument `-` is expected for a custom implementation of `ConfigurationSourceProvider` I developed. This way the app initializes with a `server-config.yml` file located at the jar root.
+
+Note: last argument `-` is expected by the custom implementation of `ConfigurationSourceProvider` I developed. This way the app initializes with a `server-config.yml` file located at the jar root.
 
 #### Production environment
 
