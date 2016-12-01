@@ -5,6 +5,8 @@
 [![Coverage Status](https://coveralls.io/repos/github/fabri1983/menuapp/badge.svg)](https://coveralls.io/github/fabri1983/menuapp?branch=master)
 &nbsp;&nbsp;&nbsp;&nbsp;
 [![Code Climate](https://codeclimate.com/github/fabri1983/menuapp/badges/gpa.svg)](https://codeclimate.com/github/fabri1983/menuapp)
+&nbsp;&nbsp;&nbsp;&nbsp;
+[![Libraries.io for GitHub](https://img.shields.io/librariesio/github/fabri1983/menuapp.svg)](https://libraries.io/github/fabri1983/menuapp)
 
 ## Introduction
 
