@@ -144,7 +144,29 @@
 			<groupId>io.smartmachine</groupId>
 			<artifactId>dropwizard-couchbase</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>org.openjdk.jmh</groupId>
+			<artifactId>jmh-core</artifactId>
+			<version>1.17.1</version>
+			<scope>test</scope>
+			<optional>true</optional>
+		</dependency>
 		
+		<dependency>
+			<groupId>org.openjdk.jmh</groupId>
+			<artifactId>jmh-generator-annprocess</artifactId>
+			<version>1.17.1</version>
+			<scope>test</scope>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
+			<groupId>pl.wavesoftware</groupId>
+			<artifactId>jmh-junit-utilities</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -191,7 +213,7 @@
 				<excludes>
 					<exclude>profiles/*</exclude>
 				</excludes>
-				<targetPath></targetPath> <!-- to jar root -->
+				<targetPath></targetPath> <!-- leave empty o relocate at jar root -->
 			</resource>
 		</resources>
 		<filters>
@@ -206,6 +228,7 @@
 				<configuration>
 					<includes>
                         <include>**/UnitTestsSuite.class</include>
+                        <include>${benchmark.suite}</include> <!-- use -Dbenchmark.suite="**/BenchmarkTestsSuite.class" -->
                     </includes>
 				</configuration>
 			</plugin>
