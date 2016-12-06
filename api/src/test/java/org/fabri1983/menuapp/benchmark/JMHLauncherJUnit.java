@@ -17,17 +17,17 @@ import org.openjdk.jmh.runner.options.VerboseMode;
 
 public class JMHLauncherJUnit {
 	
-	protected void launchBenchmark (String targetClass) throws RunnerException {
+	public static void launchBenchmark (String targetClass) throws RunnerException {
 		
         Options opt = new OptionsBuilder()
-                .include(targetClass) // Specify which benchmarks to run.
+                .include(targetClass+".*") // Specify which benchmarks to run.
                 .mode(Mode.AverageTime)
                 .timeUnit(TimeUnit.MICROSECONDS)
                 .warmupTime(TimeValue.milliseconds(250))
                 .warmupIterations(2)
                 .measurementTime(TimeValue.milliseconds(250))
                 .measurementIterations(2)
-                .threads(4)
+                .threads(1)
                 .verbosity(VerboseMode.NORMAL)
                 .forks(1) // how many VMs to spawn.
                 .shouldFailOnError(true)

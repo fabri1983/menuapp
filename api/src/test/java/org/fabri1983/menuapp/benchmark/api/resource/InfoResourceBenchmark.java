@@ -12,10 +12,12 @@ public class InfoResourceBenchmark extends JMHLauncherJUnit {
 	@BeforeClass
 	public static void setup () {
 		// use JMHLauncherJUnit.BenchmarkState to add lambdas action which weel be executed according the @Setup level.
+		System.out.println(" ######################## ----------> setup() ");
 	}
 	
 	@Test
 	public void launchBenchmark () throws RunnerException {
+		System.out.println(" ######################## ----------> launchBenchmark() ");
 		launchBenchmark(this.getClass().getName());
 	}
 	
