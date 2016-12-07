@@ -22,6 +22,7 @@
 		<takari.cpsuite.version>1.2.7</takari.cpsuite.version>
 		<dropwizard.version>1.0.5</dropwizard.version>
 		<dropwizard.guicey.version>4.0.1</dropwizard.guicey.version>
+		<dropwizard.couchbase.version>0.2.3</dropwizard.couchbase.version>
 		<google.guice.version>4.1.0</google.guice.version>
 		<commons.lang.version>2.6</commons.lang.version>
 		<commons.lang3.version>3.5</commons.lang3.version>
@@ -30,7 +31,7 @@
 		<logback.classic.version>1.1.7</logback.classic.version>
 		<assertj.core.version>3.2.0</assertj.core.version>
 		<mockito.core.version>2.2.11</mockito.core.version>
-		<dropwizard.couchbase.version>0.2.3</dropwizard.couchbase.version>
+		<jacoco.version>0.7.7.201606060606</jacoco.version>
 	</properties>
 
 	<dependencyManagement>
@@ -195,6 +196,30 @@
 				<optional>true</optional>
 			</dependency>
 
+			<dependency>
+				<groupId>org.openjdk.jmh</groupId>
+				<artifactId>jmh-core</artifactId>
+				<version>1.17.1</version>
+				<scope>test</scope>
+				<optional>true</optional>
+			</dependency>
+			
+			<dependency>
+				<groupId>org.openjdk.jmh</groupId>
+				<artifactId>jmh-generator-annprocess</artifactId>
+				<version>1.17.1</version>
+				<scope>test</scope>
+				<optional>true</optional>
+			</dependency>
+
+			<dependency>
+				<groupId>pl.wavesoftware</groupId>
+				<artifactId>jmh-junit-utilities</artifactId>
+				<version>1.0.0</version>
+				<scope>test</scope>
+				<optional>true</optional>
+			</dependency>
+		
 		</dependencies>
 	</dependencyManagement>
 
@@ -315,7 +340,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.7.7.201606060606</version>
+				<version>${jacoco.version}</version>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>

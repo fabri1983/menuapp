@@ -65,7 +65,7 @@
             <groupId>ru.vyarus</groupId>
             <artifactId>dropwizard-guicey</artifactId>
         </dependency>
-		
+
 		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
@@ -102,106 +102,43 @@
 		</dependency>
 
 		<dependency>
-			<groupId>io.dropwizard</groupId>
-			<artifactId>dropwizard-testing</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 		</dependency>
-			
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
 
-		<dependency>
-			<groupId>io.takari.junit</groupId>
-			<artifactId>takari-cpsuite</artifactId>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.assertj</groupId>
-			<artifactId>assertj-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<scope>test</scope>
-		</dependency>
-		
 		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>io.smartmachine</groupId>
-			<artifactId>dropwizard-couchbase</artifactId>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>org.openjdk.jmh</groupId>
-			<artifactId>jmh-core</artifactId>
-			<version>1.17.1</version>
-			<scope>test</scope>
-			<optional>true</optional>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.openjdk.jmh</groupId>
-			<artifactId>jmh-generator-annprocess</artifactId>
-			<version>1.17.1</version>
-			<scope>test</scope>
-			<optional>true</optional>
+			<groupId>io.dropwizard</groupId>
+			<artifactId>dropwizard-testing</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>pl.wavesoftware</groupId>
-			<artifactId>jmh-junit-utilities</artifactId>
-			<version>1.0.0</version>
+			<groupId>io.takari.junit</groupId>
+			<artifactId>takari-cpsuite</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
 		</dependency>
 
 	</dependencies>
 
 	<build>
-		
-		<pluginManagement>
-			<plugins>
-				<plugin>
-					<groupId>org.eclipse.m2e</groupId>
-					<artifactId>lifecycle-mapping</artifactId>
-					<version>1.0.0</version>
-					<configuration>
-						<lifecycleMappingMetadata>
-							<pluginExecutions>
-								<pluginExecution>
-									<pluginExecutionFilter>
-										<groupId>org.apache.maven.plugins</groupId>
-										<artifactId>maven-antrun-plugin</artifactId>
-										<versionRange>[1.8,)</versionRange>
-										<goals>
-											<goal>run</goal>
-										</goals>
-									</pluginExecutionFilter>
-									<action>
-										<execute>
-											<runOnIncremental>false</runOnIncremental>
-										</execute>
-										<ignore />
-									</action>
-								</pluginExecution>
-							</pluginExecutions>
-						</lifecycleMappingMetadata>
-					</configuration>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 		
 		<resources>
 			<resource>
@@ -228,7 +165,6 @@
 				<configuration>
 					<includes>
                         <include>**/UnitTestsSuite.class</include>
-                        <include>${benchmark.suite}</include> <!-- use -Dbenchmark.suite="**/BenchmarkTestsSuite.class" -->
                     </includes>
 				</configuration>
 			</plugin>
