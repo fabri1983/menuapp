@@ -3,7 +3,7 @@ package org.fabri1983.menuapp.api.app;
 import org.fabri1983.menuapp.api.config.CustomConfigurationSourceProvider;
 import org.fabri1983.menuapp.api.config.MenuAppConfiguration;
 import org.fabri1983.menuapp.api.health.DummyHealthCheck;
-import org.fabri1983.menuapp.api.provider.MenuAppProviderModule;
+import org.fabri1983.menuapp.api.provider.MenuAppProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,7 +32,7 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 		// create the bundle for dropwizard guice integration
 		GuiceBundle<MenuAppConfiguration> guiceBundle = GuiceBundle.<MenuAppConfiguration>builder()
 				// add yours module classes with your own injections
-				.modules(new MenuAppProviderModule())
+				.modules(new MenuAppProvider())
 				// this ensures that bean creation in that package is set up automatically.
 				.enableAutoConfig("org.fabri1983.menuapp.api")
 				// force eager singletons creation (by default is Stage.PRODUCTION)

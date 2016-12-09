@@ -19,30 +19,34 @@
 
 	<profiles>
 		<profile>
-			<id>local</id>
+			<id>dev</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
 			<properties>
-				<env.props.file>server-config-local.properties</env.props.file>
+				<server.config.props>profiles/server-config-dev.properties</server.config.props>
+				<overrider.props>overrider/local.overrider.properties</overrider.props>
 			</properties>
 		</profile>
 		<profile>
 			<id>test</id>
 			<properties>
-				<env.props.file>server-config-test.properties</env.props.file>
+				<server.config.props>profiles/server-config-test.properties</server.config.props>
+				<overrider.props>overrider/empty.overrider.properties</overrider.props>
 			</properties>
 		</profile>
 		<profile>
 			<id>stage</id>
 			<properties>
-				<env.props.file>server-config-stage.properties</env.props.file>
+				<server.config.props>profiles/server-config-stage.properties</server.config.props>
+				<overrider.props>overrider/empty.overrider.properties</overrider.props>
 			</properties>
 		</profile>
 		<profile>
 			<id>prod</id>
 			<properties>
-				<env.props.file>server-config-prod.properties</env.props.file>
+				<server.config.props>profiles/server-config-prod.properties</server.config.props>
+				<overrider.props>overrider/empty.overrider.properties</overrider.props>
 			</properties>
 		</profile>
 	</profiles>
@@ -67,48 +71,13 @@
         </dependency>
 
 		<dependency>
-			<groupId>com.google.inject</groupId>
-			<artifactId>guice</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.dropwizard</groupId>
-			<artifactId>dropwizard-core</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.dropwizard</groupId>
-			<artifactId>dropwizard-auth</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.dropwizard</groupId>
-			<artifactId>dropwizard-configuration</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.dropwizard</groupId>
-			<artifactId>dropwizard-metrics</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.dropwizard</groupId>
-			<artifactId>dropwizard-metrics-graphite</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.dropwizard</groupId>
-			<artifactId>dropwizard-validation</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-
-		<dependency>
 			<groupId>commons-lang</groupId>
 			<artifactId>commons-lang</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>io.smartmachine</groupId>
+			<artifactId>dropwizard-couchbase</artifactId>
 		</dependency>
 
 		<dependency>
@@ -143,18 +112,19 @@
 		<resources>
 			<resource>
 				<filtering>true</filtering>
-				<directory>${basedir}/src/main/resources</directory> <!-- from resources dir -->
+				<directory>src/main/resources</directory>
 				<includes>
-					<include>server-config.yml</include> <!-- we only need this file -->
+					<include>server-config.yml</include> <!-- we only filter this file -->
 				</includes>
 				<excludes>
 					<exclude>profiles/*</exclude>
 				</excludes>
-				<targetPath></targetPath> <!-- leave empty o relocate at jar root -->
+				<targetPath></targetPath> <!-- leave empty so filtered files go at jar root -->
 			</resource>
 		</resources>
 		<filters>
-			<filter>${basedir}/src/main/resources/profiles/${env.props.file}</filter>
+			<filter>src/main/resources/${server.config.props}</filter>
+			<filter>src/main/resources/${overrider.props}</filter>
 		</filters>
 		
 		<plugins>

@@ -1,4 +1,4 @@
-buildInfo: "${buildRevision} ${scmBranch} Build at ${buildDateTime}"
+buildInfo: "${buildRevision} ${scmBranch}. Build at ${buildDateTime}"
 profile: ${profile}
 
 importantProperty1: ${importantProperty1}

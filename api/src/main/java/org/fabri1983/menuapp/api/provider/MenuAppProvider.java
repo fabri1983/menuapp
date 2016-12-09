@@ -7,7 +7,7 @@ import com.google.inject.Module;
 import com.google.inject.Provides;
 import com.google.inject.name.Named;
 
-public class MenuAppProviderModule implements Module {
+public class MenuAppProvider implements Module {
 	
 	@Override
 	public void configure (Binder binder) {

@@ -19,7 +19,9 @@ target
 *.log
 *.log.gz
 
+#--------------------
 # Maven shade plugin
+#--------------------
 dependency-reduced-pom.xml
 
 #-----------------------------
@@ -33,3 +35,6 @@ dependency-reduced-pom.xml
 # misc
 #------
 *~
+.DS_Store
+.gradle
+local.overrider.properties

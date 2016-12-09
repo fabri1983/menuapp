@@ -17,18 +17,20 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jackson.version>2.8.4</jackson.version>
-		<junit.version>4.12</junit.version>
-		<takari.cpsuite.version>1.2.7</takari.cpsuite.version>
 		<dropwizard.version>1.0.5</dropwizard.version>
 		<dropwizard.guicey.version>4.0.1</dropwizard.guicey.version>
 		<dropwizard.couchbase.version>0.2.3</dropwizard.couchbase.version>
-		<google.guice.version>4.1.0</google.guice.version>
+		<jackson.version>2.8.4</jackson.version> <!-- see dependency hierarchy to know who is using other version -->
 		<commons.lang.version>2.6</commons.lang.version>
 		<commons.lang3.version>3.5</commons.lang3.version>
 		<commons.collections4.version>4.0</commons.collections4.version>
-		<google.guava.version>20.0</google.guava.version>
-		<logback.classic.version>1.1.7</logback.classic.version>
+		<google.guice.version>4.1.0</google.guice.version> <!-- see dependency hierarchy to know who is using other version -->
+		<google.guava.version>20.0</google.guava.version> <!-- see dependency hierarchy to know who is using other version -->
+		<logback.classic.version>1.1.7</logback.classic.version> <!-- see dependency hierarchy to know who is using other version -->
+		<javax.validation.version>1.1.0.Final</javax.validation.version> <!-- see dependency hierarchy to know who is using other version -->
+		<hibernate.validator.version>5.3.3.Final</hibernate.validator.version> <!-- see dependency hierarchy to know who is using other version -->
+		<junit.version>4.12</junit.version>
+		<takari.cpsuite.version>1.2.7</takari.cpsuite.version>
 		<assertj.core.version>3.2.0</assertj.core.version>
 		<mockito.core.version>2.2.11</mockito.core.version>
 		<jacoco.version>0.7.7.201606060606</jacoco.version>
@@ -45,6 +47,20 @@
 			</dependency>
 
 			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${javax.validation.version}</version>
+				<optional>true</optional>
+			</dependency>
+
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate.validator.version}</version>
+				<optional>true</optional>
+			</dependency>
+
+			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
 				<artifactId>jackson-annotations</artifactId>
 				<version>${jackson.version}</version>
@@ -53,14 +69,14 @@
 
 			<dependency>
 				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-core</artifactId>
+				<artifactId>jackson-databind</artifactId>
 				<version>${jackson.version}</version>
 				<optional>true</optional>
 			</dependency>
 
 			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
+				<groupId>com.fasterxml.jackson.datatype</groupId>
+				<artifactId>jackson-datatype-jsr310</artifactId>
 				<version>${jackson.version}</version>
 				<optional>true</optional>
 			</dependency>
@@ -92,19 +108,31 @@
 				<version>${google.guava.version}</version>
 				<optional>true</optional>
 			</dependency>
-		
-			<dependency>
-				<groupId>ru.vyarus</groupId>
-				<artifactId>dropwizard-guicey</artifactId>
-				<version>${dropwizard.guicey.version}</version>
-				<optional>true</optional>
-			</dependency>
-			
+
 			<dependency>
 				<groupId>com.google.inject</groupId>
 				<artifactId>guice</artifactId>
 				<version>${google.guice.version}</version>
 				<optional>true</optional>
+			</dependency>
+
+			<dependency>
+				<groupId>ru.vyarus</groupId>
+				<artifactId>dropwizard-guicey</artifactId>
+				<version>${dropwizard.guicey.version}</version>
+				<optional>true</optional>
+				<exclusions>
+					<!-- dropwizard-guicey contains javax.inject version 1, while dropwizard-core and dropwizard-test use version 2.5.0-b05 -->
+					<exclusion>
+						<groupId>javax.inject</groupId>
+						<artifactId>javax.inject</artifactId>
+					</exclusion>
+					<!-- dropwizard-guicey contains aopalliance version 1, while guice-bridge (comes with dropwizard-guicey too) and dropwizard-test use version 2.5.0-b05 -->
+					<exclusion>
+						<groupId>aopalliance</groupId>
+						<artifactId>aopalliance</artifactId>
+					</exclusion>
+				</exclusions>
 			</dependency>
 
 			<dependency>
@@ -222,7 +250,7 @@
 		
 		</dependencies>
 	</dependencyManagement>
-
+ 
 	<distributionManagement>
 		<snapshotRepository>
 			<id>repo-snapshots</id>

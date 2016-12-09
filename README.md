@@ -22,6 +22,7 @@ On **Business** tier we have the **core** module which defines the domain compon
 
 On **ORM** tier we also have the **core** module which additionally defines the repositories and daos, which in essence is the mapping between domain components and persisted entities.
 
+
 Modules
 -------
 
@@ -43,20 +44,35 @@ The Repository layer uses DAO components to interact with the underlying persist
 - The **client** project is aimed to be used by third party components. It communicates with the core system without dealing with a presentation layer. 
 It interacts directly with the business layer avoiding performance penalty due to conversion between presentational objects to business entities.
 
+
 Technologies
 ------------
 - [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 - [Dropwizard 1.0.5](http://www.dropwizard.io/)
-- [Guice 4.1.0](https://github.com/google/guice)
-- [Dropwizard-Guicey 4.0.1](https://github.com/xvik/dropwizard-guicey)
-- [Maven 3.3.9](https://maven.apache.org/)
-- [CouchbaseMock test server](https://github.com/couchbase/CouchbaseMock)
+- [Dropwizard-Guicey 4.0.1](https://github.com/xvik/dropwizard-guicey) which come with [Guice 4.1.0](https://github.com/google/guice)
 - [Dropwizard-Couchbase 0.2.3](https://github.com/smartmachine/dropwizard-couchbase)
+- [CouchbaseMock test server](https://github.com/couchbase/CouchbaseMock)
+- [Maven 3.3.9](https://maven.apache.org/)
 
-Building CouchbaseMock Test Server
-----------------------------------
+
+Build the application and setup the Eclipse projects
+----------------------------------------------------
+You can compile using next maven profiles: `dev` (default), `test`, `stage`, or `prod`.
+Each of them presents different configurations according the target environment you are going to generate/deploy to.
+Pay attention that `prod` profile truncates the filtered resource so it fails fast on execution. You must provide your own production ready config file. See next section.
+
+Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`.
+```sh
+cd menuapp
+mvn clean install
+mvn eclipse:eclipse -DdownloadSources=true -DdownloadJavadocs=true
+```
+
+
+Build and run CouchbaseMock Test Server
+---------------------------------------
 This project comes with the CouchbaseMock Test Server which serves as a simple Couchbase DB.
-See the project at [CouchbaseMock](https://github.com/couchbase/CouchbaseMock) for more details.
+See the project at [CouchbaseMock](https://github.com/couchbase/CouchbaseMock) for further details.
 
 You must first generate the package and then execute the server:
 ```sh
@@ -72,39 +88,30 @@ For command line options use:
 java -jar target/CouchbaseMock-1.4.3.jar -? or --help
 ```
 
-Building app and setup of Eclipse projects
-------------------------------------------
-You can compile using next maven profiles: `local` (default), `test`, `stage`, or `prod`.
-Each of them presents different configurations according the target environment you want to deploy at.
-Pay attention that `prod` profile truncates the filtered resource so it fails fast. You must provide your own production ready config file. See next section.
-
-Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`
-```sh
-cd menuapp
-mvn clean install
-mvn eclipse:eclipse -DdownloadSources=true -DdownloadJavadocs=true
-```
 
 Execution in any environment
 ----------------------------
-You need to first start the CouchbaseMock test server. See above.
+#### Run Couchbase
+You need first to start the CouchbaseMock test server. See above.
 
-#### Quickstart
+#### Execution
 
-Remember you can use maven profiles adding `-P<profile.name>`. By default maven takes the `local` profile.
+Remember you can use maven profiles adding `-P<profile.name>`. The default one is `dev` profile.
+Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`.
 ```sh
 cd menuapp
 mvn clean install
 cd api
 java -jar target/api-1.0.0-SNAPSHOT.jar server -
 ```
-Listening requests on port 8080 as per profiles `local` (default), `test`, or `stage`.
+Listening requests on port 8080 as defined by profiles `dev` (default), `test`, or `stage`.
 
 Note: last argument `-` is expected by the custom implementation of `ConfigurationSourceProvider` I developed. This way the app initializes with a `server-config.yml` file located at the jar root.
 
 #### Production environment
 
 For production environment you must build with `-Pprod` profile and then provide your own production ready `server-config.yml` file. For example:
+Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`.
 ```sh
 cd menuapp
 mvn clean install -Pprod
@@ -114,7 +121,8 @@ java -jar target/api-1.0.0-SNAPSHOT.jar server /etc/server-config-prod.yml
 
 #### Debug using Eclipse:
 
-Make sure your `MAVEN_OPTS` contains `-Xmx512m -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n`
+Make sure your `MAVEN_OPTS` contains `-Xmx512m -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n`.
+Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`.
 ```sh
 cd menuapp
 mvn clean install
@@ -122,6 +130,7 @@ cd api
 mvn exec:java -Dexec.args="server -"
 ```
 Then open Eclipse and go to Run -> Debug Configurations -> create a Remote Java Application listening to port 4000 and hit Debug.
+
 
 Build info for Continuous Integration
 -------------------------------------
@@ -134,9 +143,8 @@ Conversely, when using a CI software use the next command in order to always ret
 mvn clean install -Dmaven.buildNumber.doCheck=true -Dmaven.buildNumber.doUpdate=true
 ```
 
-Example URLs
-------------
-Just using GET method.
+Example URLs using GET method
+-----------------------------
 
 [http://localhost:8080/buildinfo](http://localhost:8080/buildinfo)
 
@@ -149,10 +157,9 @@ Just using GET method.
 The app loads a set of dummy menus, which are created at class `PreloadedMenuDao`. This class is managed as a bean, and is injected into the menu repository which is also injected into the menu service.
 The dependency injection is all setup in the api module. Take a look at `org.fabri1983.menuapp.api.provide` package.
 
-More example URLs
------------------
-Using POST method.
 
+Example URLs using POST method
+------------------------------
 Note: add `Content-Type:application/json` and `Accept:application/json,text` in your REST Client plugin at header section.
 
 	POST http://localhost:8080/user/login
@@ -207,12 +214,11 @@ Note: add `Content-Type:application/json` and `Accept:application/json,text` in 
 	  "rating": 1,
 	  "description": "The description of the rating isn't stored yet"
 	}
-	
+
+
 TODO list
 ---------
-* Possible duplication of resources injection. Next message appears twice in console: io.dropwizard.server.SimpleServerFactory: Registering jersey handler with root path prefix
-
-* Investigate maven shade plugin output for collisions on dependencies.
+* Analyze possible duplication of resources injection. Next message appears twice in console: io.dropwizard.server.SimpleServerFactory: Registering jersey handler with root path prefix
 
 * Investigate the use of Transactions (UnitOfWork) with Dropwizard.
 
@@ -222,8 +228,8 @@ TODO list
 
 * When a service needs several execution steps, use `Chain of Responsibility` with a chain builder or alike to improve readability.
 
-* For currency conversion use `Strategy` pattern, so I can provide an algorithm for any currency conversion.
+* For currency conversion use `Strategy` pattern, so I can provide an algorithm for any currency conversion. The conversion method uses Visitor pattern.
 
-* Unit test out the many resources, services, parsers, converters, etc.
+* Unit test the services, parsers, converters, etc. Test the use of Guice's dependency injection.
 
 * Revisit the list of `FIXMEs` and `TODOs`.
