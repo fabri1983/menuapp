@@ -29,7 +29,7 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
-			<optional>true</optional>
+			<optional>false</optional> <!-- if set to true then it seems is not added in the final jar by the uber-shade plugin on api project-->
 		</dependency>
 
 		<dependency>
