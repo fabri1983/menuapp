@@ -240,4 +240,6 @@ TODO list
 
 * Unit test the services, parsers, converters, etc. Test the use of Guice's dependency injection.
 
+* Move Test utils to parent pom and generate a test-jar.
+
 * Revisit the list of `FIXMEs` and `TODOs`.

@@ -1,9 +1,11 @@
-buildInfo: "${buildRevision} ${scmBranch}. Build at ${buildDateTime}"
-profile: ${profile}
+buildInfoConfig:
+  buildInfo: "${buildRevision} ${scmBranch}. Build at ${buildDateTime}"
+  buildProfile: ${buildProfile}
 
-importantProperty1: ${importantProperty1}
-importantProperty2: ${importantProperty2}
-maxAllowedResults: ${maxAllowedResults}
+menuQueryConfig:
+  defaultCurrency: ${defaultCurrency}
+  pageLimit: ${pageLimit}
+  maxAllowedResults: ${maxAllowedResults}
 
 server:
   type: simple

@@ -6,34 +6,34 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.fabri1983.menuapp.api.config.hasfeature.HasBuildInfoFeature;
+import org.fabri1983.menuapp.api.config.hasfeature.impl.BuildInfoConfig;
+
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 
 @Path("")
 @Produces(MediaType.TEXT_PLAIN)
 public class InfoResource {
 
-	private String buildInfo;
-	private String profile;
+	private BuildInfoConfig buildInfoConfig;
 	
 	@Inject
-	public InfoResource (@Named("buildInfo") String buildInfo, @Named("profile") String profile) {
-		this.buildInfo = buildInfo;
-		this.profile = profile;
+	public InfoResource (HasBuildInfoFeature hasBuildInfoFeature) {
+		this.buildInfoConfig = hasBuildInfoFeature.getBuildInfoConfig();
 	}
 
 	@GET
     @Timed
     @Path("/buildinfo")
 	public Response getBuildInfo () {
-		return Response.status(Response.Status.OK).entity(buildInfo).build();
+		return Response.status(Response.Status.OK).entity(buildInfoConfig.getBuildInfo()).build();
 	}
 	
 	@GET
     @Timed
     @Path("/profile")
-	public Response getProfile () {
-		return Response.status(Response.Status.OK).entity(profile).build();
+	public Response getBuildProfile () {
+		return Response.status(Response.Status.OK).entity(buildInfoConfig.getBuildProfile()).build();
 	}
 }

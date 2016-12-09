@@ -16,7 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.fabri1983.menuapp.api.config.MenuAppConfiguration;
+import org.fabri1983.menuapp.api.config.hasfeature.HasMenuQueryFeature;
 import org.fabri1983.menuapp.api.provider.MenuServiceProvider;
 import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.core.filtering.menu.strategy.MenuFilterStrategy;
@@ -40,9 +40,9 @@ public class MenuResource {
 	private int maxAllowedResults;
 	
 	@Inject
-	public MenuResource (MenuServiceProvider menuServiceProvider, MenuAppConfiguration configuration) {
+	public MenuResource (MenuServiceProvider menuServiceProvider, HasMenuQueryFeature hasMenuQueryFeature) {
 		this.menuService = menuServiceProvider.getImplementation();
-		this.maxAllowedResults = configuration.getMaxAllowedResults();
+		this.maxAllowedResults = hasMenuQueryFeature.getMenuQueryConfig().getMaxAllowedResults();
 	}
 	
 	@GET

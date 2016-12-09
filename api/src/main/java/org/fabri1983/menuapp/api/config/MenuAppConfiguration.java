@@ -1,51 +1,37 @@
 package org.fabri1983.menuapp.api.config;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
-import org.hibernate.validator.constraints.NotEmpty;
+import org.fabri1983.menuapp.api.config.hasfeature.HasBuildInfoFeature;
+import org.fabri1983.menuapp.api.config.hasfeature.HasMenuQueryFeature;
+import org.fabri1983.menuapp.api.config.hasfeature.impl.BuildInfoConfig;
+import org.fabri1983.menuapp.api.config.hasfeature.impl.MenuQueryConfig;
 
 import io.dropwizard.Configuration;
 import io.smartmachine.couchbase.CouchbaseClientFactory;
 
-public class MenuAppConfiguration extends Configuration {
+public class MenuAppConfiguration extends Configuration implements HasBuildInfoFeature, HasMenuQueryFeature {
 
-	@NotEmpty
-	private String buildInfo;
-	@NotEmpty
-	private String profile;
-	@NotEmpty
-	private String importantProperty1;
-	@NotEmpty
-	private String importantProperty2;
-	@Min(1)
-	private int maxAllowedResults;
+	@Valid @NotNull
+	private BuildInfoConfig buildInfoConfig;
+	@Valid @NotNull
+	private MenuQueryConfig menuQueryConfig;	
 	@Valid @NotNull
 	private CouchbaseClientFactory couchbaseClientFactory;
-    
-	public String getBuildInfo () {
-		return buildInfo;
+	
+	@Override
+	public BuildInfoConfig getBuildInfoConfig () {
+		return buildInfoConfig;
 	}
 	
-	public String getProfile () {
-		return profile;
+	@Override
+	public MenuQueryConfig getMenuQueryConfig () {
+		return menuQueryConfig;
 	}
-	
-	public String getImportantProperty1 () {
-		return importantProperty1;
-	}
-	
-	public String getImportantProperty2 () {
-		return importantProperty2;
-	}
-	
-	public int getMaxAllowedResults () {
-		return maxAllowedResults;
-	}
-	
+
 	public CouchbaseClientFactory getCouchbaseClientFactory() {
 		return couchbaseClientFactory;
 	}
