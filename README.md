@@ -1,6 +1,6 @@
 # Menu App - REST webapp using Dropwizard and Guice
 
-![Build Status][https://travis-ci.org/fabri1983/menuapp.svg?branch=master](https://travis-ci.org/fabri1983/menuapp?branch=master)
+[![Build Status](https://travis-ci.org/fabri1983/menuapp.svg?branch=master)](https://travis-ci.org/fabri1983/menuapp?branch=master)
 &nbsp;&nbsp;&nbsp;&nbsp;
 [![Coverage Status](https://coveralls.io/repos/github/fabri1983/menuapp/badge.svg)](https://coveralls.io/github/fabri1983/menuapp?branch=master)
 &nbsp;&nbsp;&nbsp;&nbsp;
