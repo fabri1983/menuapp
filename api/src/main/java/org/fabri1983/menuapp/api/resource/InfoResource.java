@@ -9,11 +9,9 @@ import javax.ws.rs.core.Response;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
-import com.google.inject.servlet.RequestScoped;
 
 @Path("")
 @Produces(MediaType.TEXT_PLAIN)
-@RequestScoped
 public class InfoResource {
 
 	private String buildInfo;

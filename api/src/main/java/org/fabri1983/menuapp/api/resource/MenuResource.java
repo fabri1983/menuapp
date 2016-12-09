@@ -31,11 +31,9 @@ import org.fabri1983.menuapp.protocol.menu.MenuView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
-import com.google.inject.servlet.RequestScoped;
 
 @Path("user/{user_id}/menu")
 @Produces(MediaType.APPLICATION_JSON)
-@RequestScoped
 public class MenuResource {
 
 	private MenuService menuService;

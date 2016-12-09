@@ -15,11 +15,9 @@ import org.fabri1983.menuapp.protocol.login.LoginView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
-import com.google.inject.servlet.RequestScoped;
 
 @Path("user/login")
 @Produces(MediaType.APPLICATION_JSON)
-@RequestScoped
 public class LoginResource {
 
 	private LoginService loginService;

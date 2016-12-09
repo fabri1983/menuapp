@@ -17,11 +17,9 @@ import org.fabri1983.menuapp.protocol.rating.RatingView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
-import com.google.inject.servlet.RequestScoped;
 
 @Path("user/{user_id}/menu/{menu_id}/rate")
 @Produces(MediaType.APPLICATION_JSON)
-@RequestScoped
 public class RatingResource {
 
 	private RatingService ratingService;

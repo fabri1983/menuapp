@@ -69,6 +69,14 @@ mvn eclipse:eclipse -DdownloadSources=true -DdownloadJavadocs=true
 ```
 
 
+Overriding properties
+---------------------
+On `validate` phase there is an ant task which checks if a file named `local.overrider.properties` exists. It is created the first time you compile the project using maven.
+The file `local.overrider.properties` is very handy in a sense that it allows you to add overriding properties to those already defined in other properties files. 
+Only works with the `dev` profile, leaving unchanged the properties from profiles `test`, `stage`, and `prod`.
+This file is not committed into CVS, it's already marked as ignored.
+
+
 Build and run CouchbaseMock Test Server
 ---------------------------------------
 This project comes with the CouchbaseMock Test Server which serves as a simple Couchbase DB.

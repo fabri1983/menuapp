@@ -14,11 +14,11 @@ branches:
 install:
   - java -version
   - /usr/local/maven/bin/mvn --version
-  - sudo /usr/local/maven/bin/mvn --batch-mode clean install -Ptest -Dmaven.buildNumber.skip=true
+  - sudo /usr/local/maven/bin/mvn --batch-mode clean install -DskipTests=true -Dmaven.buildNumber.skip=true
 
 # overrides travis 'script' step
 script:
-  - sudo /usr/local/maven/bin/mvn --batch-mode clean package -Ptest -Dmaven.buildNumber.skip=true
+  - sudo /usr/local/maven/bin/mvn --batch-mode clean package -Dmaven.buildNumber.skip=true
 
 after_success:
   # using environment variable $repo_token set in travis web site

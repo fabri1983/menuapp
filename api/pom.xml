@@ -130,6 +130,52 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<executions>
+					<execution>
+						<phase>validate</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target name="Ant Task. Create file if not exist">
+								<property name="ffile" value="src/main/resources/${overrider.props}" />
+								<ac:if xmlns:ac="antlib:net.sf.antcontrib">
+									<available file="${ffile}" />
+									<then>
+										<echo>File exist. Nothing to do.</echo>
+									</then>
+									<else>
+										<echo file="${ffile}" append="false" message="# This file is used by the last &lt;filter&gt; so it overrides every property using those you define in this file.${line.separator}" />
+										<echo>File created.</echo>
+									</else>
+								</ac:if>
+							</target>
+						</configuration>
+					</execution>
+				</executions>
+				<dependencies>
+					<dependency>
+						<groupId>ant-contrib</groupId>
+						<artifactId>ant-contrib</artifactId>
+						<version>1.0b3</version>
+					    <exclusions>
+						<exclusion>
+							<groupId>ant</groupId>
+							<artifactId>ant</artifactId>
+						</exclusion>
+					    </exclusions>
+					  </dependency>
+					  <dependency>
+					    <groupId>org.apache.ant</groupId>
+					    <artifactId>ant-nodeps</artifactId>
+					    <version>1.8.1</version>
+					  </dependency>
+				</dependencies>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.19.1</version>
 				<configuration>
@@ -145,7 +191,7 @@
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>2.4.3</version>
 				<configuration>
-					<createDependencyReducedPom>true</createDependencyReducedPom>
+					<createDependencyReducedPom>false</createDependencyReducedPom>
 					<filters>
 						<filter>
 							<artifact>*:*</artifact>
