@@ -103,7 +103,6 @@ Execution in any environment
 You need first to start the CouchbaseMock test server. See above.
 
 #### Execution
-
 Remember you can use maven profiles adding `-P<profile.name>`. The default one is `dev` profile.
 Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`.
 ```sh
@@ -117,7 +116,6 @@ Listening requests on port 8080 as defined by profiles `dev` (default), `test`, 
 Note: last argument `-` is expected by the custom implementation of `ConfigurationSourceProvider` I developed. This way the app initializes with a `server-config.yml` file located at the jar root.
 
 #### Production environment
-
 For production environment you must build with `-Pprod` profile and then provide your own production ready `server-config.yml` file. For example:
 Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`.
 ```sh
@@ -127,17 +125,20 @@ cd api
 java -jar target/api-1.0.0-SNAPSHOT.jar server /etc/server-config-prod.yml
 ```
 
-#### Debug using Eclipse:
 
-Make sure your `MAVEN_OPTS` contains `-Xmx512m -Xrunjdwp:transport=dt_socket,address=4000,server=y,suspend=n`.
+Debug using Eclipse
+-------------------
+#### Run Couchbase
+You need first to start the CouchbaseMock test server. See above.
+
+#### Debug
+First compile the `api` project so `target` folder is created with the filtered resources. This is important since dropwizard expects a config file.
 Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`.
 ```sh
-cd menuapp
-mvn clean install
 cd api
-mvn exec:java -Dexec.args="server -"
+mvn clean compile
 ```
-Then open Eclipse and go to Run -> Debug Configurations -> create a Remote Java Application listening to port 4000 and hit Debug.
+Then open Eclipse and open the class `MenuAppApplication.java`. Go to Run -> Debug Configurations -> create a Java Application and in Arguments tab add `server -`. Finally hit Apply and then Debug.
 
 
 Build info for Continuous Integration
@@ -150,6 +151,7 @@ Conversely, when using a CI software use the next command in order to always ret
 ```sh
 mvn clean install -Dmaven.buildNumber.doCheck=true -Dmaven.buildNumber.doUpdate=true
 ```
+
 
 Example URLs using GET method
 -----------------------------
@@ -222,6 +224,70 @@ Note: add `Content-Type:application/json` and `Accept:application/json,text` in 
 	  "rating": 1,
 	  "description": "The description of the rating isn't stored yet"
 	}
+
+
+Segregate configurations
+------------------------
+Dropwizard expects one configuration file as program argument. MenuApp uses its own `server-config.yml` shipped within the generated jar if you pass argument `-`, or your own config file passing its location instead.
+
+This means that all configuration is declared in one file (may be small/med/big depending the size of the app) hence all kind of settings is exposed throughout the application. See [MenuAppConfiguration](api/src/main/java/org/fabri1983/menuapp/api/config/MenuAppConfiguration.java)
+
+So if you want to limit the visibility of those settings per resource/service/repository or any component then [dropwizard-guicey](https://github.com/xvik/dropwizard-guicey) gives you the pattern **Has Feature**.
+In which the `MenuAppConfiguration` class implements interfaces such as HasBuildInfoFeature and HasMenuQueryFeature, and guicey integration handles the binding with the injection points on those components using `@Inject`.
+This way the components only see the settings they matter, nothing more.
+
+Example:
+```java
+    GuiceBundle.builder()
+        .bundConfigurationInterfactes()
+        ...
+
+    public interface HasBuildInfoFeature {
+        BuildInfoConfig getBuildInfoConfig ();
+    }
+        
+    public class MenuAppConfiguration extends Configuration implements HasBuildInfoFeature, HasMenuQueryFeature {
+
+		@Valid @NotNull
+		private BuildInfoConfig buildInfoConfig;
+		...
+		
+		@Override
+		public BuildInfoConfig getBuildInfoConfig () {
+			return buildInfoConfig;
+		}
+		...
+	}
+	
+	public class BuildInfoConfig {
+
+		@NotEmpty
+		private String buildInfo;
+		@NotEmpty
+		private String buildProfile;
+		
+		public String getBuildInfo () {
+			return buildInfo;
+		}
+		
+		public String getBuildProfile () {
+			return buildProfile;
+		}
+	}
+	
+	@Path("")
+	@Produces(MediaType.TEXT_PLAIN)
+	public class InfoResource {
+
+		private BuildInfoConfig buildInfoConfig;
+		
+		@Inject
+		public InfoResource (HasBuildInfoFeature hasBuildInfoFeature) {
+			this.buildInfoConfig = hasBuildInfoFeature.getBuildInfoConfig();
+		}
+        ...
+    }
+```
 
 
 TODO list
