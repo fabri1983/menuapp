@@ -49,7 +49,7 @@ Technologies
 ------------
 - [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 - [Dropwizard 1.0.5](http://www.dropwizard.io/)
-- [Dropwizard-Guicey 4.0.1](https://github.com/xvik/dropwizard-guicey) which come with [Guice 4.1.0](https://github.com/google/guice)
+- [Dropwizard-Guicey 4.0.1](https://github.com/xvik/dropwizard-guicey) which comes with [Guice 4.1.0](https://github.com/google/guice)
 - [Dropwizard-Couchbase 0.2.3](https://github.com/smartmachine/dropwizard-couchbase)
 - [CouchbaseMock test server](https://github.com/couchbase/CouchbaseMock)
 - [Maven 3.3.9](https://maven.apache.org/)
