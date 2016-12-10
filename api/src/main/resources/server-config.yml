@@ -8,12 +8,27 @@ menuQueryConfig:
   maxAllowedResults: ${maxAllowedResults}
 
 server:
-  type: simple
+  type: default
   applicationContextPath: /
   adminContextPath: /admin
-  connector:
-    type: http
-    port: ${http.port}
+  applicationConnectors:
+    - type: http
+      port: ${http.port}
+#    - type: https
+#      port: 8443
+#      keyStorePath: example.keystore
+#      keyStorePassword: example
+#      validateCerts: false
+#      validatePeers: false
+  adminConnectors:
+    - type: http
+      port: 8081
+#    - type: https
+#      port: 8444
+#      keyStorePath: example.keystore
+#      keyStorePassword: example
+#      validateCerts: false
+#      validatePeers: false
 
 couchbaseClientFactory:
   bucket: default
@@ -28,10 +43,12 @@ logging:
       threshold: ALL
       timeZone: GMT-3
       currentLogFilename: ./logs/menuapp_dw.log
-      archivedLogFilenamePattern: ./logs/menuapp_dw-%d.log.gz
+      archivedLogFilenamePattern: ./logs/menuapp_dw-%d-%i.log.gz
       archivedFileCount: 5
+      maxFileSize: 1MB
     - type: console
       threshold: ALL
       timeZone: GMT-3
+      target: stdout
   loggers:
     org.fabri1983.menuapp: INFO

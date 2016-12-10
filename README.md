@@ -138,7 +138,7 @@ Note: if you don't have git in your %PATH% (or $PATH) environment variable then 
 cd api
 mvn clean compile
 ```
-Then open Eclipse and open the class `MenuAppApplication.java`. Go to Run -> Debug Configurations -> create a Java Application and in Arguments tab add `server -`. Finally hit Apply and then Debug.
+Then open Eclipse and open the class `MenuAppApplication.java`. Go to Run -> Debug Configurations -> create a Java Application and in Arguments tab add `server target/server-config.yml`. Finally hit Apply and then Debug.
 
 
 Build info for Continuous Integration
@@ -241,13 +241,15 @@ Example:
     GuiceBundle.builder()
         .bundConfigurationInterfactes()
         ...
-
+```
+```java
     public interface HasBuildInfoFeature {
         BuildInfoConfig getBuildInfoConfig ();
     }
-        
-    public class MenuAppConfiguration extends Configuration implements HasBuildInfoFeature, HasMenuQueryFeature {
-
+```
+```java
+    public class MenuAppConfiguration extends Configuration 
+									implements HasBuildInfoFeature, HasMenuQueryFeature {
 		@Valid @NotNull
 		private BuildInfoConfig buildInfoConfig;
 		...
@@ -258,7 +260,8 @@ Example:
 		}
 		...
 	}
-	
+```
+```java
 	public class BuildInfoConfig {
 
 		@NotEmpty
@@ -274,7 +277,8 @@ Example:
 			return buildProfile;
 		}
 	}
-	
+```
+```java
 	@Path("")
 	@Produces(MediaType.TEXT_PLAIN)
 	public class InfoResource {
