@@ -1,6 +1,5 @@
 package org.fabri1983.menuapp.api.provider;
 
-import org.fabri1983.menuapp.api.config.MenuAppConfiguration;
 import org.fabri1983.menuapp.core.service.MenuService;
 import org.fabri1983.menuapp.core.service.implementation.SimpleMenuService;
 
@@ -13,7 +12,7 @@ public class MenuServiceProvider {
 	private MenuService implementation;
 	
 	@Inject
-	public MenuServiceProvider(MenuRepositoryProvider menuRepositoryProvider, MenuAppConfiguration configuration) {
+	public MenuServiceProvider(MenuRepositoryProvider menuRepositoryProvider) {
 		this.implementation = new SimpleMenuService(menuRepositoryProvider.getImplementation());
 	}
 

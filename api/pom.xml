@@ -16,40 +16,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<properties>
-				<server.config.props>profiles/server-config-dev.properties</server.config.props>
-				<overrider.props>overrider/local.overrider.properties</overrider.props>
-			</properties>
-		</profile>
-		<profile>
-			<id>test</id>
-			<properties>
-				<server.config.props>profiles/server-config-test.properties</server.config.props>
-				<overrider.props>overrider/empty.overrider.properties</overrider.props>
-			</properties>
-		</profile>
-		<profile>
-			<id>stage</id>
-			<properties>
-				<server.config.props>profiles/server-config-stage.properties</server.config.props>
-				<overrider.props>overrider/empty.overrider.properties</overrider.props>
-			</properties>
-		</profile>
-		<profile>
-			<id>prod</id>
-			<properties>
-				<server.config.props>profiles/server-config-prod.properties</server.config.props>
-				<overrider.props>overrider/empty.overrider.properties</overrider.props>
-			</properties>
-		</profile>
-	</profiles>
 	
 	<dependencies>
 	
@@ -107,19 +73,59 @@
 
 	</dependencies>
 
+	<profiles>
+		<profile>
+			<id>dev</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<properties>
+				<server.config.props>filters/profiles/server-config-dev.properties</server.config.props>
+				<overrider.props>filters/overrider/local.overrider.properties</overrider.props>
+			</properties>
+		</profile>
+		<profile>
+			<id>test</id>
+			<properties>
+				<server.config.props>filters/profiles/server-config-test.properties</server.config.props>
+				<overrider.props>filters/overrider/empty.overrider.properties</overrider.props>
+			</properties>
+		</profile>
+		<profile>
+			<id>stage</id>
+			<properties>
+				<server.config.props>filters/profiles/server-config-stage.properties</server.config.props>
+				<overrider.props>filters/overrider/empty.overrider.properties</overrider.props>
+			</properties>
+		</profile>
+		<profile>
+			<id>prod</id>
+			<properties>
+				<server.config.props>filters/profiles/server-config-prod.properties</server.config.props>
+				<overrider.props>filters/overrider/empty.overrider.properties</overrider.props>
+			</properties>
+		</profile>
+	</profiles>
+
 	<build>
-		
 		<resources>
+			<!-- Normal resource processing -->
 			<resource>
-				<filtering>true</filtering>
 				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>filters/*</exclude>
+				</excludes>
+				<targetPath></targetPath> <!-- leave empty so filtered files go at jar root -->
+			</resource>
+			<!-- Extra processing: copy file server-config.yml file once is filtered to /target so we can debug with Eclipse -->
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
 				<includes>
 					<include>server-config.yml</include> <!-- we only filter this file -->
 				</includes>
-				<excludes>
-					<exclude>profiles/*</exclude>
-				</excludes>
-				<targetPath></targetPath> <!-- leave empty so filtered files go at jar root -->
+				<targetPath>${basedir}/target</targetPath>
 			</resource>
 		</resources>
 		<filters>
@@ -191,6 +197,7 @@
 				<artifactId>maven-shade-plugin</artifactId>
 				<version>2.4.3</version>
 				<configuration>
+					<!-- disable creation of reduced pom because can't handle tag <ac:if> from ant task declared in the maven ant plugin section -->
 					<createDependencyReducedPom>false</createDependencyReducedPom>
 					<filters>
 						<filter>
@@ -230,14 +237,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.5.0</version>
-				<configuration>
-					<mainClass>org.fabri1983.menuapp.api.app.MenuAppApplication</mainClass>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
+	
 </project>

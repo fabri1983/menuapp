@@ -1,6 +1,5 @@
 package org.fabri1983.menuapp.api.provider;
 
-import org.fabri1983.menuapp.api.config.MenuAppConfiguration;
 import org.fabri1983.menuapp.core.repository.LoginRepository;
 import org.fabri1983.menuapp.core.repository.implementation.InMemoryLoginRepository;
 
@@ -13,7 +12,7 @@ public class LoginRepositoryProvider {
 	private LoginRepository implementation;
 	
 	@Inject
-	public LoginRepositoryProvider (MenuAppConfiguration configuration) {
+	public LoginRepositoryProvider () {
 		this.implementation = new InMemoryLoginRepository();
 	}
 

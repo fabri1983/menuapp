@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.fabri1983.menuapp.api.config.hasfeature.HasMenuQueryFeature;
+import org.fabri1983.menuapp.api.config.hasfeature.impl.MenuQueryConfig;
 import org.fabri1983.menuapp.api.provider.MenuServiceProvider;
 import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.core.filtering.menu.strategy.MenuFilterStrategy;
@@ -37,12 +38,12 @@ import com.google.inject.Inject;
 public class MenuResource {
 
 	private MenuService menuService;
-	private int maxAllowedResults;
+	private MenuQueryConfig menuQueryConfig;
 	
 	@Inject
 	public MenuResource (MenuServiceProvider menuServiceProvider, HasMenuQueryFeature hasMenuQueryFeature) {
 		this.menuService = menuServiceProvider.getImplementation();
-		this.maxAllowedResults = hasMenuQueryFeature.getMenuQueryConfig().getMaxAllowedResults();
+		this.menuQueryConfig = hasMenuQueryFeature.getMenuQueryConfig();
 	}
 	
 	@GET
@@ -52,7 +53,7 @@ public class MenuResource {
 		Collection<Menu> allMenus = menuService.getAll();
 		
 		List<MenuView> menuViews = allMenus.stream()
-				.limit(maxAllowedResults)
+				.limit(menuQueryConfig.getMaxAllowedResults())
 				.map( menu -> MenuViewConverterResolver.convert(menu) )
 				.collect(Collectors.toList());
 		
@@ -80,7 +81,7 @@ public class MenuResource {
 		MenuFilterStrategy filterChain = MenuFilteringFactory.createFrom(menuFilteredView);
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
-		int limitSize = Math.min(menuFilteredView.getMaxResults(), maxAllowedResults);
+		int limitSize = Math.min(menuFilteredView.getMaxResults(), menuQueryConfig.getMaxAllowedResults());
 		
 		List<MenuView> menusView = filteredMenus.stream()
 				.limit(limitSize)
@@ -100,7 +101,7 @@ public class MenuResource {
 		MenuFilterStrategy filterChain = MenuGroupingFactory.createFrom(menuGroupView);
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
-		int limitSize = Math.min(menuGroupView.getMaxResults(), maxAllowedResults);
+		int limitSize = Math.min(menuGroupView.getMaxResults(), menuQueryConfig.getMaxAllowedResults());
 		
 		List<MenuView> menusPresentation = filteredMenus.stream()
 				.limit(limitSize)

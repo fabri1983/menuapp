@@ -1,6 +1,5 @@
 package org.fabri1983.menuapp.api.provider;
 
-import org.fabri1983.menuapp.api.config.MenuAppConfiguration;
 import org.fabri1983.menuapp.core.repository.MenuRepository;
 import org.fabri1983.menuapp.core.repository.implementation.InMemoryMenuRepository;
 
@@ -13,7 +12,7 @@ public class MenuRepositoryProvider {
 	private MenuRepository implementation;
 	
 	@Inject
-	public MenuRepositoryProvider (MenuDaoProvider menuDaoProvider, MenuAppConfiguration configuration) {
+	public MenuRepositoryProvider (MenuDaoProvider menuDaoProvider) {
 		this.implementation = new InMemoryMenuRepository(menuDaoProvider.getImplementation());
 	}
 

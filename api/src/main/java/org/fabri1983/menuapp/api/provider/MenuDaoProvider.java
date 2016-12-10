@@ -1,6 +1,5 @@
 package org.fabri1983.menuapp.api.provider;
 
-import org.fabri1983.menuapp.api.config.MenuAppConfiguration;
 import org.fabri1983.menuapp.core.dao.MenuDao;
 import org.fabri1983.menuapp.core.dao.implementation.PreloadedMenuDao;
 
@@ -13,7 +12,7 @@ public class MenuDaoProvider {
 	private MenuDao implementation;
 
 	@Inject
-	public MenuDaoProvider (MenuAppConfiguration configuration) {
+	public MenuDaoProvider () {
 		this.implementation = new PreloadedMenuDao();
 	}
 	
