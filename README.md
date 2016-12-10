@@ -10,7 +10,7 @@
 
 ## Introduction
 
-**Menu App** is a backend system which aims to provide a basic menu component to be consumed by any client using **REST** (or any other communication protocol).
+**Menu App** is a backend system which aims to provide a basic menu component to be consumed by any client using **REST** as a HTTP communication interface with the outside world.
 It's a prototype of a micro service web app using the **Dropwizard** framework and **Guice** for DI. And also it's a template for a better separation of concerns for a web app.
 
 The chosen arquitecture is a N-Tier layout from JavaEE apps: **Presentation** - **Business** - **ORM**, and is divided into the next modules:
