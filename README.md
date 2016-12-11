@@ -313,3 +313,7 @@ TODO list
 * Move Test utils to parent pom and generate a test-jar.
 
 * Revisit the list of `FIXMEs` and `TODOs`.
+
+* Checkout this complete parent `pom.xml` example: [https://github.com/jcabi/jcabi-parent/blob/master/pom.xml](https://github.com/jcabi/jcabi-parent/blob/master/pom.xml).
+
+* Checkout these interesting answers related to `JUnit` and `Mockito`: [http://stackoverflow.com/questions/15494926/initialising-mock-objects-mockito](http://stackoverflow.com/questions/15494926/initialising-mock-objects-mockito)
