@@ -230,11 +230,11 @@ Segregate configurations
 ------------------------
 Dropwizard expects one configuration file as program argument. MenuApp uses its own `server-config.yml` shipped within the generated jar if you pass argument `-`, or your own config file passing its location instead.
 
-This means that all configuration is declared in one file (may be small/med/big depending the size of the app) hence all kind of settings is exposed throughout the application. See [MenuAppConfiguration](api/src/main/java/org/fabri1983/menuapp/api/config/MenuAppConfiguration.java)
+This means that all configuration exists in one file, may be small/med/big depending the size of the app, hence all kind of settings are exposed throughout the application and so the configuration is a whitebox: anybody can see its content. The [MenuAppConfiguration](api/src/main/java/org/fabri1983/menuapp/api/config/MenuAppConfiguration.java) class, although exposing all the settings to whoever injects the `EmnuAppConfiguration`, is used by **Dropwizard**'s bootstrap phase to load the config file and also makes use of some neat feature that **guicey** provides. See next paragraph.
 
 So if you want to limit the visibility of those settings per resource/service/repository or any component then [dropwizard-guicey](https://github.com/xvik/dropwizard-guicey) gives you the pattern **Has Feature**.
-In which the `MenuAppConfiguration` class implements interfaces such as HasBuildInfoFeature and HasMenuQueryFeature, and guicey integration handles the binding with the injection points on those components using `@Inject`.
-This way the components only see the settings they matter, nothing more.
+In which the `MenuAppConfiguration` class implements interfaces such as **HasBuildInfoFeature** and **HasMenuQueryFeature**, and **guicey** integration handles the binding with the injection points on those components using `@Inject`.
+This way the components only see the settings they matter, nothing more. Of course is up to you to avoid inject the `MenuAppConfiguration` anymore.
 
 Example:
 ```java
