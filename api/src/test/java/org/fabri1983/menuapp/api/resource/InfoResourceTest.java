@@ -26,7 +26,13 @@ public class InfoResourceTest {
 	private BuildInfoConfig buildInfoConfig;
 	
 	@Rule
-	public MockitoRule rule = MockitoJUnit.rule();	
+	public MockitoRule rule = MockitoJUnit.rule();
+	
+//	@ClassRule
+//    public static final DropwizardAppRule<MenuAppTestConfiguration> DW_RULE =
+//            new DropwizardAppRule<MenuAppTestConfiguration>(MenuAppApplicationTest.class, "server-config-test.yml");
+	// See example from http://stackoverflow.com/questions/26381170/dropwizard-integrated-testing-with-testresource
+	// Para override de setings ver http://danofhisword.com/dev/dropwizard/2014/09/25/dropwizard-testing-config-overrides.html
 //	@Rule
 //	public ResourceTestRule resource = ResourceTestRule.builder()
 //										.addResource(infoResource)
