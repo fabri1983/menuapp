@@ -138,7 +138,7 @@ Note: if you don't have git in your %PATH% (or $PATH) environment variable then 
 cd api
 mvn clean compile
 ```
-Then open Eclipse and open the class `MenuAppApplication.java`. Go to Run -> Debug Configurations -> create a Java Application and in Arguments tab add `server target/server-config.yml`. Finally hit Apply and then Debug.
+Then open Eclipse and open the class `MenuAppApplication.java`. Go to Run -> Debug Configurations -> create a Java Application and in Arguments tab add `server -`. Finally hit Apply and then Debug.
 
 
 Build info for Continuous Integration
@@ -296,6 +296,17 @@ And finally your resource class only injects the settings which really matter, w
 		}
         ...
     }
+```
+
+JMH: Java Microbenchmarking Harness
+-----------------------------------
+By the moment only project **core** is using JMH on test phase. I'm not sure this is the correct approach since the guys from JMH explicitly recommend to create a separated jar with a main class executing the entire benchmark.
+In my approach every `...Benchmark` class extends from `JMHLauncherJUnit` and executes a JMH instance.
+
+#### Execution
+Run the benchmark as part of the phase test. This also runs the normal JUnit tests.
+```sh
+mvn test -Dbenchmark.suite="**/BenchmarkTestsSuite.class"
 ```
 
 
