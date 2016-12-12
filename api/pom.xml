@@ -113,19 +113,15 @@
 			<resource>
 				<directory>src/main/resources</directory>
 				<filtering>true</filtering>
+				<!-- exclude from being filtered -->
 				<excludes>
 					<exclude>filters/*</exclude>
 				</excludes>
-				<targetPath></targetPath> <!-- leave empty so filtered files go at jar root -->
-			</resource>
-			<!-- Extra processing: copy file server-config.yml file once is filtered to /target so we can debug with Eclipse -->
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
+				<!--  which folder/files we want to be filtered and copied to target -->
 				<includes>
-					<include>server-config.yml</include> <!-- we only filter this file -->
+					<include>server-config.yml</include>
 				</includes>
-				<targetPath>${basedir}/target</targetPath>
+				<targetPath></targetPath> <!-- leave empty so filtered files go at jar root -->
 			</resource>
 		</resources>
 		<filters>
