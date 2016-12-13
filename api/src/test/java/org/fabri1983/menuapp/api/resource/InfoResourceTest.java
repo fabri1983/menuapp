@@ -31,19 +31,21 @@ public class InfoResourceTest {
 	
 	@Test
 	public void whenRequestBuildinfoThenMessageExpected () {
-		when(buildInfoConfig.getBuildInfo()).thenReturn("ajhd239xbjsd9 dev. Build at xx:xx:xx xxxxx");
+		final String buildInfoString = "ajhd239xbjsd9 dev. Build at xx:xx:xx xxxxx";
+		when(buildInfoConfig.getBuildInfo()).thenReturn(buildInfoString);
 		
 		String response = resource.client().target("/buildinfo").request().get(String.class);
 
-		assertThat(response).isEqualTo("ajhd239xbjsd9 dev. Build at xx:xx:xx xxxxx");
+		assertThat(response).isEqualTo(buildInfoString);
 	}
 	
 	@Test
 	public void whenRequestProfileThenMessageExpected () {
-		when(buildInfoConfig.getBuildProfile()).thenReturn("testingProfile AA");
+		final String buildProfileString = "testingProfile AA";
+		when(buildInfoConfig.getBuildProfile()).thenReturn(buildProfileString);
 		
 		String response = resource.client().target("/profile").request().get(String.class);
 
-		assertThat(response).isEqualTo("testingProfile AA");
+		assertThat(response).isEqualTo(buildProfileString);
 	}
 }
