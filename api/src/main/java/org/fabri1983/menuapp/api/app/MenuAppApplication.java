@@ -2,6 +2,7 @@ package org.fabri1983.menuapp.api.app;
 
 import org.fabri1983.menuapp.api.config.CustomConfigurationSourceProvider;
 import org.fabri1983.menuapp.api.config.MenuAppConfiguration;
+import org.fabri1983.menuapp.api.config.MenuAppProvider;
 import org.fabri1983.menuapp.api.health.DummyHealthCheck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,6 +33,8 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 		GuiceBundle<MenuAppConfiguration> guiceBundle = GuiceBundle.<MenuAppConfiguration>builder()
 				// bind all direct interfaces implemented by configuration class of the style HasXXXFeature
 				.bindConfigurationInterfaces()
+                // add your module class with your own injections
+				.modules(new MenuAppProvider())
 				// this ensures that dependency injection in that package is set up automatically.
 				.enableAutoConfig("org.fabri1983.menuapp.api")
 				// force eager singletons creation (by default is Stage.PRODUCTION)

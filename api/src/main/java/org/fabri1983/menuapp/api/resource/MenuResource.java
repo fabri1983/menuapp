@@ -18,7 +18,6 @@ import javax.ws.rs.core.Response;
 
 import org.fabri1983.menuapp.api.config.hasfeature.HasMenuQueryFeature;
 import org.fabri1983.menuapp.api.config.hasfeature.impl.MenuQueryConfig;
-import org.fabri1983.menuapp.api.provider.MenuServiceProvider;
 import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.core.filtering.menu.strategy.MenuFilterStrategy;
 import org.fabri1983.menuapp.core.service.MenuService;
@@ -41,8 +40,8 @@ public class MenuResource {
 	private MenuQueryConfig menuQueryConfig;
 	
 	@Inject
-	public MenuResource (MenuServiceProvider menuServiceProvider, HasMenuQueryFeature hasMenuQueryFeature) {
-		this.menuService = menuServiceProvider.getImplementation();
+	public MenuResource (MenuService menuService, HasMenuQueryFeature hasMenuQueryFeature) {
+		this.menuService = menuService;
 		this.menuQueryConfig = hasMenuQueryFeature.getMenuQueryConfig();
 	}
 	

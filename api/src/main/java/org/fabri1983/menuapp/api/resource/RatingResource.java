@@ -9,7 +9,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.fabri1983.menuapp.api.provider.RatingServiceProvider;
 import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.core.service.RatingService;
 import org.fabri1983.menuapp.protocol.rating.RatingResponse;
@@ -25,8 +24,8 @@ public class RatingResource {
 	private RatingService ratingService;
 
 	@Inject
-	public RatingResource (RatingServiceProvider ratingServiceProvider) {
-		this.ratingService = ratingServiceProvider.getImplementation();
+	public RatingResource (RatingService ratingService) {
+		this.ratingService = ratingService;
 	}
 	
 	@POST

@@ -47,7 +47,7 @@ public class PreloadedMenuDao implements MenuDao {
 		
 		// FIXME ugly constructor with lots of null! Segregate better!
 		JsonMenuPresentation lunchNotTasty = new JsonMenuPresentation(
-				4L, "Not so tasty lunch", "It's not a taaaaasty lunch. You are warned.", "http://fabri1983.org/images/lunchNotTasty.png", 
+				4L, "Not so tasty lunch", "It's not a taaaaasty lunch. You're warned.", "http://fabri1983.org/images/lunchNotTasty.png", 
 				BigDecimal.valueOf(50), CurrencyType.DEFAULT_USD.name(), 3, 
 				null, null, null, null, null);
 		menusById.put(lunchNotTasty.getId(), lunchNotTasty);

@@ -8,7 +8,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.fabri1983.menuapp.api.provider.LoginServiceProvider;
 import org.fabri1983.menuapp.core.service.LoginService;
 import org.fabri1983.menuapp.protocol.login.LoginResponse;
 import org.fabri1983.menuapp.protocol.login.LoginView;
@@ -23,8 +22,8 @@ public class LoginResource {
 	private LoginService loginService;
 	
 	@Inject
-	public LoginResource (LoginServiceProvider loginServiceProvider) {
-		this.loginService = loginServiceProvider.getImplementation();
+	public LoginResource (LoginService loginService) {
+		this.loginService = loginService;
 	}
 	
 	@POST
