@@ -18,17 +18,16 @@ engines:
     enabled: true
   fixme:
     enabled: true
+
 ratings:
   paths:
   - "**.java"
-  - "**.inc"
-  - "**.js"
-  - "**.jsx"
-  - "**.module"
-  - "**.php"
-  - "**.py"
-  - "**.rb"
+
 exclude_paths:
+  - "**.png"
+  - "**.ttf"
+  - "**.ico"
+  - "**.js"
   - CouchbaseMock-master/
   - "**/target/"
   - .git/

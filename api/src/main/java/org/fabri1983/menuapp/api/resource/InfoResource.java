@@ -12,8 +12,13 @@ import org.fabri1983.menuapp.api.config.hasfeature.impl.BuildInfoConfig;
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 
-@Path("")
-@Produces(MediaType.TEXT_PLAIN)
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+@Path("info/")
+@Api(value = "InfoResource")
 public class InfoResource {
 
 	private BuildInfoConfig buildInfoConfig;
@@ -24,16 +29,30 @@ public class InfoResource {
 	}
 
 	@GET
+	@Produces(MediaType.TEXT_PLAIN)
     @Timed
-    @Path("/buildinfo")
-	public Response getBuildInfo () {
-		return Response.status(Response.Status.OK).entity(buildInfoConfig.getBuildInfo()).build();
+	@ApiOperation(value = "Returns build information details", response = String.class)
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Successful retrieval of build info", response = String.class)}
+	    )
+	@Path("/buildinfo")
+	public Response getBuildInfo ()
+	{
+		String buildInfo = buildInfoConfig.getBuildInfo();
+		return Response.status(Response.Status.OK).entity(buildInfo).build();
 	}
 	
 	@GET
+	@Produces(MediaType.TEXT_PLAIN)
     @Timed
-    @Path("/profile")
-	public Response getBuildProfile () {
-		return Response.status(Response.Status.OK).entity(buildInfoConfig.getBuildProfile()).build();
+	@ApiOperation(value = "Returns build profile name", response = String.class)
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Successful retrieval of profile name", response = String.class)}
+	    )
+	@Path("/profile")
+	public Response getBuildProfile ()
+	{
+		String buildProfile = buildInfoConfig.getBuildProfile();
+		return Response.status(Response.Status.OK).entity(buildProfile).build();
 	}
 }

@@ -10,6 +10,8 @@ import org.slf4j.LoggerFactory;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import io.federecio.dropwizard.swagger.SwaggerBundle;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import io.smartmachine.couchbase.CouchbaseBundle;
 import io.smartmachine.couchbase.CouchbaseClientFactory;
 import ru.vyarus.dropwizard.guice.GuiceBundle;
@@ -26,22 +28,38 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 	public void initialize(Bootstrap<MenuAppConfiguration> bootstrap) {
 		logger = LoggerFactory.getLogger(this.getClass());
 		
-		// we have our custom configuration provider
 		bootstrap.setConfigurationSourceProvider(new CustomConfigurationSourceProvider());
 
-		// create the bundle for dropwizard guice integration
+		addSwaggerBundle(bootstrap);
+		
+		addGuiceBundle(bootstrap);
+		
+		addCouchbaseBundle(bootstrap);
+	}
+
+	private void addSwaggerBundle(Bootstrap<MenuAppConfiguration> bootstrap) {
+		bootstrap.addBundle(new SwaggerBundle<MenuAppConfiguration>() {
+	        @Override
+	        protected SwaggerBundleConfiguration getSwaggerBundleConfiguration(MenuAppConfiguration configuration) {
+	            return configuration.getSwaggerBundleConfiguration();
+	        }
+	    });
+	}
+	
+	private void addGuiceBundle(Bootstrap<MenuAppConfiguration> bootstrap) {
 		GuiceBundle<MenuAppConfiguration> guiceBundle = GuiceBundle.<MenuAppConfiguration>builder()
 				// bind all direct interfaces implemented by configuration class of the style HasXXXFeature
 				.bindConfigurationInterfaces()
-                // add your module class with your own injections
+				// add your module class with your own injections
 				.modules(new MenuAppProvider())
 				// this ensures that dependency injection in that package is set up automatically.
 				.enableAutoConfig("org.fabri1983.menuapp.api")
 				// force eager singletons creation (by default is Stage.PRODUCTION)
 				.build();
 		bootstrap.addBundle(guiceBundle);
-		
-		// couchbase bundle
+	}
+	
+	private void addCouchbaseBundle(Bootstrap<MenuAppConfiguration> bootstrap) {
 		CouchbaseBundle<MenuAppConfiguration> couchbaseBundle = new CouchbaseBundle<MenuAppConfiguration>() {
 			@Override
 			public CouchbaseClientFactory getCouchbaseClientFactory(MenuAppConfiguration configuration) {
@@ -53,9 +71,9 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 
 	@Override
 	public void run (MenuAppConfiguration configuration, Environment environment) throws Exception {
-		logger.info("Starting Menu App application");
+		logger.info("---------> Starting Menu App application");
 		registerHealthChecks(environment);
-		logger.info("Menu App application started");
+		logger.info("---------> Menu App application started");
 	}
 
 	private void registerHealthChecks (Environment environment) {
@@ -66,6 +84,6 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 
 	@Override
     public String getName() {
-        return "MenuApp Application Server";
+        return "Menu App API Server";
     }
 }

@@ -9,14 +9,19 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.fabri1983.menuapp.core.service.LoginService;
-import org.fabri1983.menuapp.protocol.login.LoginResponse;
+import org.fabri1983.menuapp.protocol.login.LoginSuccessfulView;
 import org.fabri1983.menuapp.protocol.login.LoginView;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 @Path("user/login")
-@Produces(MediaType.APPLICATION_JSON)
+@Api(value = "LoginResource")
 public class LoginResource {
 
 	private LoginService loginService;
@@ -27,7 +32,13 @@ public class LoginResource {
 	}
 	
 	@POST
+	@Produces(MediaType.APPLICATION_JSON)
 	@Timed
+	@ApiOperation(value = "Logins the user with supplied credentials. Returns the current token", response = LoginSuccessfulView.class)
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Successful login. Returns current token", response = LoginSuccessfulView.class),
+	        @ApiResponse(code = 401, message = "User not authorized")}
+	    )
 	public Response login (
 			@NotNull @Valid LoginView loginView)
 	{
@@ -38,8 +49,7 @@ public class LoginResource {
 		// TODO use a Token Generator service
 		String token = "h0t6dSh8gR5mBpMF3EWWJospF6usI8RLGWIOGCe5Z2HtKu32BBviWrt9wbnO21JICFXKYddYotB79ckrCVRv2z71PFlavOkeDD2JyiueYupdx87DwVpCox58KkQ2kwPb";
 		
-		LoginResponse response = LoginResponse.create(loginView, token);
-		
+		LoginSuccessfulView response = LoginSuccessfulView.create(loginView, token);
 		return Response.status(Response.Status.OK).entity(response).build();
 	}
 }

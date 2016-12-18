@@ -37,13 +37,23 @@
         </dependency>
 
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
+			<groupId>io.smartmachine</groupId>
+			<artifactId>dropwizard-couchbase</artifactId>
 		</dependency>
 
 		<dependency>
-			<groupId>io.smartmachine</groupId>
-			<artifactId>dropwizard-couchbase</artifactId>
+			<groupId>com.smoketurner</groupId>
+			<artifactId>dropwizard-swagger</artifactId>
+		</dependency>
+		<!-- jersey media dependency needs to be added manually since it was excluded at parent from the same dropwizard-swagger dependency. See detail in parent pom -->
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-multipart</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
 		</dependency>
 
 		<dependency>

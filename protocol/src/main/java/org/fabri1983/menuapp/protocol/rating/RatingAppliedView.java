@@ -4,20 +4,20 @@ import org.fabri1983.menuapp.core.entity.menu.Menu;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class RatingResponse {
+public class RatingAppliedView {
 
 	@JsonProperty
 	private long menuId;
 	@JsonProperty
 	private int rating;
 
-	public RatingResponse(long menuId, int rating) {
+	public RatingAppliedView(long menuId, int rating) {
 		this.menuId = menuId;
 		this.rating = rating;
 	}
 	
-	public static RatingResponse create(Menu menuUpdated) {
-		return new RatingResponse(menuUpdated.getId(), menuUpdated.getRating());
+	public static RatingAppliedView create(Menu menuUpdated) {
+		return new RatingAppliedView(menuUpdated.getId(), menuUpdated.getRating());
 	}
 
 	public long getMenuId() {

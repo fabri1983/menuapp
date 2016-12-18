@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.protocol.converter;
+package org.fabri1983.menuapp.protocol.menu.converter;
 
 import org.fabri1983.menuapp.core.converter.menu.MenuTypeConverterRequester;
 import org.fabri1983.menuapp.core.converter.menu.TimeConstraintMenuTypeConverterRequester;
@@ -9,7 +9,7 @@ import org.fabri1983.menuapp.protocol.menu.MenuView;
 /**
  * State less, hence thread safe converter. Access it using {@link TimeConstraintMenuViewConverterStrategy#get()}.
  */
-public class TimeConstraintMenuViewConverterStrategy implements MenuViewConverterStrategy {
+class TimeConstraintMenuViewConverterStrategy implements MenuViewConverterStrategy {
 
 	private static TimeConstraintMenuViewConverterStrategy instance = new TimeConstraintMenuViewConverterStrategy();
 	

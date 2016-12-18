@@ -1,10 +1,11 @@
-package org.fabri1983.menuapp.protocol.menu;
+package org.fabri1983.menuapp.protocol.menu.filtering;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -22,6 +23,8 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 public class MenuFiltersView {
 
+	@Min(1) @Max(50)
+	private int maxResults;
 	@NotNull @Min(0)
 	private BigDecimal maxPrice;
 	@NotNull @StringEnumeration(enumClass = CurrencyType.class)
@@ -34,6 +37,7 @@ public class MenuFiltersView {
 
 	@JsonCreator
 	public MenuFiltersView(
+			@JsonProperty("maxResults") int maxResults,
 			@JsonProperty("maxPrice") BigDecimal maxPrice,
 			@JsonProperty("currency") String currency,
 			@JsonSerialize(using = CustomLocalTimeSerializer.class)
@@ -49,7 +53,8 @@ public class MenuFiltersView {
 			@JsonSerialize(using = LocalDateTimeSerializer.class)
 			@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 			@JsonProperty("availableDateTo") LocalDateTime availableDateTo)
-	{	
+	{
+		this.maxResults = maxResults;
 		this.maxPrice = maxPrice;
 		this.currency = currency;
 		this.hourFrom = hourFrom;
@@ -59,6 +64,10 @@ public class MenuFiltersView {
 		this.availableDateTo = availableDateTo;
 	}
 
+	public int getMaxResults() {
+		return maxResults;
+	}
+	
 	public BigDecimal getMaxPrice() {
 		return maxPrice;
 	}
@@ -85,22 +94,6 @@ public class MenuFiltersView {
 
 	public LocalDateTime getAvailableDateTo() {
 		return availableDateTo;
-	}
-
-	public boolean hasMaxPriceFilter() {
-		return maxPrice != null;
-	}
-
-	public boolean hasAvailableHoursFilter() {
-		return hourFrom != null && hourTo != null;
-	}
-
-	public boolean hasAvailableDaysFilter() {
-		return availableDays != null && !availableDays.isEmpty();
-	}
-
-	public boolean hasAvailableDateFilter() {
-		return availableDateFrom != null && availableDateTo != null;
 	}
 
 }

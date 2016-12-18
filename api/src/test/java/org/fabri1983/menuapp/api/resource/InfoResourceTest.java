@@ -34,7 +34,7 @@ public class InfoResourceTest {
 		final String buildInfoString = "ajhd239xbjsd9 dev. Build at xx:xx:xx xxxxx";
 		when(buildInfoConfig.getBuildInfo()).thenReturn(buildInfoString);
 		
-		String response = resource.client().target("/buildinfo").request().get(String.class);
+		String response = resource.client().target("/info/buildinfo").request().get(String.class);
 
 		assertThat(response).isEqualTo(buildInfoString);
 	}
@@ -44,7 +44,7 @@ public class InfoResourceTest {
 		final String buildProfileString = "testingProfile AA";
 		when(buildInfoConfig.getBuildProfile()).thenReturn(buildProfileString);
 		
-		String response = resource.client().target("/profile").request().get(String.class);
+		String response = resource.client().target("/info/profile").request().get(String.class);
 
 		assertThat(response).isEqualTo(buildProfileString);
 	}

@@ -52,3 +52,13 @@ logging:
       target: stdout
   loggers:
     org.fabri1983.menuapp: INFO
+
+swaggerConfig:
+  resourcePackage: org.fabri1983.menuapp.api.resource, org.fabri1983.menuapp.protocol
+  enabled: ${swagger.enabled}
+  title: Menu App API
+  version: v1
+  description: Menu App API
+  contact: fabri1983@gmail.com
+  license: GPL-3.0
+  licenseUrl: https://www.gnu.org/licenses/gpl-3.0.en.html

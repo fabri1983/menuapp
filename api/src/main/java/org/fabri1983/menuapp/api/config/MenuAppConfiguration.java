@@ -10,7 +10,10 @@ import org.fabri1983.menuapp.api.config.hasfeature.HasMenuQueryFeature;
 import org.fabri1983.menuapp.api.config.hasfeature.impl.BuildInfoConfig;
 import org.fabri1983.menuapp.api.config.hasfeature.impl.MenuQueryConfig;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.dropwizard.Configuration;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import io.smartmachine.couchbase.CouchbaseClientFactory;
 
 public class MenuAppConfiguration extends Configuration implements HasBuildInfoFeature, HasMenuQueryFeature {
@@ -21,6 +24,8 @@ public class MenuAppConfiguration extends Configuration implements HasBuildInfoF
 	private MenuQueryConfig menuQueryConfig;	
 	@Valid @NotNull
 	private CouchbaseClientFactory couchbaseClientFactory;
+	@JsonProperty("swaggerConfig")
+    private SwaggerBundleConfiguration swaggerBundleConfiguration;
 	
 	@Override
 	public BuildInfoConfig getBuildInfoConfig () {
@@ -32,8 +37,12 @@ public class MenuAppConfiguration extends Configuration implements HasBuildInfoF
 		return menuQueryConfig;
 	}
 
-	public CouchbaseClientFactory getCouchbaseClientFactory() {
+	public CouchbaseClientFactory getCouchbaseClientFactory () {
 		return couchbaseClientFactory;
+	}
+	
+	public SwaggerBundleConfiguration getSwaggerBundleConfiguration () {
+		return swaggerBundleConfiguration;
 	}
 	
 	@Override

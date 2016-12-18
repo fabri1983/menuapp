@@ -52,6 +52,7 @@ Technologies
 - [Dropwizard-Guicey 4.0.1](https://github.com/xvik/dropwizard-guicey) which comes with [Guice 4.1.0](https://github.com/google/guice)
 - [Dropwizard-Couchbase 0.2.3](https://github.com/smartmachine/dropwizard-couchbase)
 - [CouchbaseMock test server](https://github.com/couchbase/CouchbaseMock)
+- [Swagger v1.5.10](https://github.com/swagger-api) integrated by [Dropwizard-Swagger v1.0.0](https://github.com/smoketurner/dropwizard-swagger)
 - [Maven 3.3.9](https://maven.apache.org/)
 
 
@@ -153,12 +154,21 @@ mvn clean install -Dmaven.buildNumber.doCheck=true -Dmaven.buildNumber.doUpdate=
 ```
 
 
+Swagger for API Documentation
+-----------------------------
+#### Accessing REST API documentation
+Once the **Menu App** is deployed you can visit [http://localhost:8080/swagger](http://localhost:8080/swagger) to access API documentation.
+
+#### Disable Swagger on production
+On production environment you need to add `swagger.enabled=false` in your production server-config.yml file.
+
+
 Example URLs using GET method
 -----------------------------
 
-[http://localhost:8080/buildinfo](http://localhost:8080/buildinfo)
+[http://localhost:8080/buildinfo](http://localhost:8080/info/buildinfo)
 
-[http://localhost:8080/profile](http://localhost:8080/profile)
+[http://localhost:8080/profile](http://localhost:8080/info/profile)
 
 [http://localhost:8080/user/1/menu](http://localhost:8080/user/1/menu)
 
@@ -185,38 +195,32 @@ Note: add `Content-Type:application/json` and `Accept:application/json,text` in 
 	POST http://localhost:8080/user/1/menu/group
     {
       "maxResults": 10,
-      "groupData": {
-        "priceFrom": 150,
-        "priceTo":  850,
-        "currency": "DEFAULT_USD"
-      }
+      "priceFrom": 150,
+      "priceTo":  850,
+      "currency": "DEFAULT_USD"
     }
 	
 	POST http://localhost:8080/user/1/menu/filter
     {
       "maxResults": 10,
-      "filterData": {
-        "maxPrice": 100,
-        "currency": "DEFAULT_USD"
-      }
+      "maxPrice": 100,
+      "currency": "DEFAULT_USD"
     }
 	
 	POST http://localhost:8080/user/1/menu/filter
     {
       "maxResults": 10,
-      "filterData": {
-        "maxPrice": 100,
-        "currency": "DEFAULT_USD",
-        "hourFrom": "20:00:00",
-        "hourTo": "23:00:00",
-        "availableDays": [
-            "Friday",
-            "Saturday",
-            "Sunday"
-        ],
-        "availableDateFrom": "2016-03-01T00:00:00",
-        "availableDateTo": "2016-04-01T23:59:59"
-      }
+      "maxPrice": 100,
+      "currency": "DEFAULT_USD",
+      "hourFrom": "20:00:00",
+      "hourTo": "23:00:00",
+      "availableDays": [
+          "Friday",
+          "Saturday",
+          "Sunday"
+      ],
+      "availableDateFrom": "2016-03-01T00:00:00",
+      "availableDateTo": "2016-04-01T23:59:59"
     }
 	
 	POST http://localhost:8080/user/1/menu/1/rate
@@ -329,6 +333,8 @@ TODO list
 * Move Test utils to parent pom and generate a test-jar.
 
 * Revisit the list of `FIXMEs` and `TODOs`.
+
+* Complete Swagger documentation: add documentation in resource and protocol classes.
 
 * Checkout this complete parent `pom.xml` example: [https://github.com/jcabi/jcabi-parent/blob/master/pom.xml](https://github.com/jcabi/jcabi-parent/blob/master/pom.xml).
 

@@ -3,7 +3,9 @@ package org.fabri1983.menuapp.protocol.menu;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -11,7 +13,9 @@ import javax.validation.constraints.NotNull;
 
 import org.fabri1983.menuapp.core.entity.menu.CurrencyType;
 import org.fabri1983.menuapp.core.entity.menu.DefaultMenu;
+import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.core.entity.menu.TimeConstraintMenu;
+import org.fabri1983.menuapp.protocol.menu.converter.MenuViewConverterResolver;
 import org.fabri1983.menuapp.protocol.parserutil.CustomLocalTimeDeserializer;
 import org.fabri1983.menuapp.protocol.parserutil.CustomLocalTimeSerializer;
 import org.hibernate.validator.constraints.NotEmpty;
@@ -55,7 +59,18 @@ public class MenuView {
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime availableDateTo;
 	
-	public static MenuView from (DefaultMenu menu) {
+	public static MenuView convert (final Menu menu) {
+		return MenuViewConverterResolver.convert(menu);
+	}
+	
+	public static List<MenuView> convert(Collection<Menu> filteredMenus, int limitSize) {
+		return filteredMenus.stream()
+				.limit(limitSize)
+				.map( MenuView::convert )
+				.collect(Collectors.toList());
+	}
+	
+	public static MenuView from (final DefaultMenu menu) {
 		return new MenuView(menu.getId(), menu.getName(), menu.getDescription(), menu.getPictureUrl().toString(), menu.getPrice(), menu.getCurrency(), menu.getRating());
 	}
 	
@@ -70,7 +85,7 @@ public class MenuView {
 		this.rating = rating;
 	}
 	
-	public static MenuView from (TimeConstraintMenu menu) {
+	public static MenuView from (final TimeConstraintMenu menu) {
 		return new MenuView(menu.getId(), menu.getName(), menu.getDescription(), menu.getPictureUrl().toString(), menu.getPrice(), menu.getCurrency(), menu.getRating(),
 				menu.getHourFrom(), menu.getHourTo(), menu.getAvailableDays(), menu.getAvailableDateFrom(), menu.getAvailableDateTo());
 	}

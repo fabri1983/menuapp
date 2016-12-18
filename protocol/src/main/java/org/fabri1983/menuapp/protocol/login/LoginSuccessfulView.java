@@ -2,7 +2,7 @@ package org.fabri1983.menuapp.protocol.login;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class LoginResponse {
+public class LoginSuccessfulView {
 
 	@JsonProperty
 	private String userName;
@@ -11,14 +11,14 @@ public class LoginResponse {
 	@JsonProperty
 	private String token;
 	
-	public LoginResponse(String userName, LocationView location, String token) {
+	public LoginSuccessfulView(String userName, LocationView location, String token) {
 		this.userName = userName;
 		this.location = location;
 		this.token = token;
 	}
 	
-	public static LoginResponse create(LoginView loginRequest, String token) {
-		return new LoginResponse(loginRequest.getUserName(), loginRequest.getLocation(), token);
+	public static LoginSuccessfulView create(LoginView loginRequest, String token) {
+		return new LoginSuccessfulView(loginRequest.getUserName(), loginRequest.getLocation(), token);
 	}
 
 	public String getUserName () {

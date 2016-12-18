@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.protocol.converter;
+package org.fabri1983.menuapp.protocol.menu.converter;
 
 import org.fabri1983.menuapp.core.converter.menu.DefaultMenuTypeConverterRequester;
 import org.fabri1983.menuapp.core.converter.menu.MenuTypeConverterRequester;
@@ -9,7 +9,7 @@ import org.fabri1983.menuapp.protocol.menu.MenuView;
 /**
  * State less, hence thread safe converter. Access it using {@link DefaultMenuViewConverterStrategy#get()}.
  */
-public class DefaultMenuViewConverterStrategy implements MenuViewConverterStrategy {
+class DefaultMenuViewConverterStrategy implements MenuViewConverterStrategy {
 
 	private static DefaultMenuViewConverterStrategy instance = new DefaultMenuViewConverterStrategy();
 	

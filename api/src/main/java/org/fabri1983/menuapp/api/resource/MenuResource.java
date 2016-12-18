@@ -2,7 +2,6 @@ package org.fabri1983.menuapp.api.resource;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -21,19 +20,22 @@ import org.fabri1983.menuapp.api.config.hasfeature.impl.MenuQueryConfig;
 import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.core.filtering.menu.strategy.MenuFilterStrategy;
 import org.fabri1983.menuapp.core.service.MenuService;
-import org.fabri1983.menuapp.protocol.converter.MenuViewConverterResolver;
-import org.fabri1983.menuapp.protocol.factory.MenuFilteringFactory;
-import org.fabri1983.menuapp.protocol.factory.MenuGroupingFactory;
-import org.fabri1983.menuapp.protocol.filtering.MenuFilteredView;
-import org.fabri1983.menuapp.protocol.grouping.MenuGroupView;
-import org.fabri1983.menuapp.protocol.menu.MenuResponse;
 import org.fabri1983.menuapp.protocol.menu.MenuView;
+import org.fabri1983.menuapp.protocol.menu.filtering.MenuFiltersView;
+import org.fabri1983.menuapp.protocol.menu.filtering.MenuGroupView;
+import org.fabri1983.menuapp.protocol.menu.filtering.factory.MenuFiltersFactory;
+import org.fabri1983.menuapp.protocol.menu.filtering.factory.MenuGroupFactory;
 
 import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 
-@Path("user/{user_id}/menu")
-@Produces(MediaType.APPLICATION_JSON)
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
+@Path("/user/{user_id}/menu")
+@Api(value = "MenuResource")
 public class MenuResource {
 
 	private MenuService menuService;
@@ -44,83 +46,103 @@ public class MenuResource {
 		this.menuService = menuService;
 		this.menuQueryConfig = hasMenuQueryFeature.getMenuQueryConfig();
 	}
-	
+
 	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Timed
+	@ApiOperation(value = "Returns all existent menus. Capped to max # of results", response = MenuView.class, responseContainer = "List")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Successful retrieval of all menus", response = MenuView.class, responseContainer = "List")}
+	    )
 	public Response getAll ()
 	{
 		Collection<Menu> allMenus = menuService.getAll();
-		
-		List<MenuView> menuViews = allMenus.stream()
-				.limit(menuQueryConfig.getMaxAllowedResults())
-				.map( menu -> MenuViewConverterResolver.convert(menu) )
-				.collect(Collectors.toList());
-		
-		MenuResponse menuResponse = MenuResponse.create(menuViews);
-		return Response.status(Response.Status.OK).entity(menuResponse).build();
+		List<MenuView> menuViews = MenuView.convert(allMenus, menuQueryConfig.getMaxAllowedResults());
+		return Response.status(Response.Status.OK).entity(menuViews).build();
 	}
 	
 	@GET
+	@Produces(MediaType.APPLICATION_JSON)
 	@Timed
+	@ApiOperation(value = "Returns the requested menu", response = MenuView.class)
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Successful retrieval of menu", response = MenuView.class),
+	        @ApiResponse(code = 404, message = "Menu not found")}
+	    )
 	@Path("/{menu_id}")
-	public Response get (
+	public Response getSingle (
 			@PathParam("menu_id") long menuId) throws Exception 
 	{
 		Menu menu = menuService.getById(menuId);
-		MenuView menuPresentation = MenuViewConverterResolver.convert(menu);
+		MenuView menuPresentation = MenuView.convert(menu);
 		return Response.status(Response.Status.OK).entity(menuPresentation).build();
 	}
 	
 	@POST
+	@Produces(MediaType.APPLICATION_JSON)
 	@Timed
+	@ApiOperation(value = "Returns menus satisfying the filter supplied", response = MenuView.class, responseContainer = "List")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Successful retrieval of filtered menus", response = MenuView.class, responseContainer = "List"),
+	        @ApiResponse(code = 400, message = "Invalid filter format")}
+	    )
 	@Path("/filter")
 	public Response filter (
-			@NotNull @Valid MenuFilteredView menuFilteredView)
+			@NotNull @Valid MenuFiltersView menuFilteredView)
 	{
-		MenuFilterStrategy filterChain = MenuFilteringFactory.createFrom(menuFilteredView);
+		MenuFilterStrategy filterChain = MenuFiltersFactory.createFrom(menuFilteredView);
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
 		int limitSize = Math.min(menuFilteredView.getMaxResults(), menuQueryConfig.getMaxAllowedResults());
+		List<MenuView> menuViews = MenuView.convert(filteredMenus, limitSize);
 		
-		List<MenuView> menusView = filteredMenus.stream()
-				.limit(limitSize)
-				.map( menu -> MenuViewConverterResolver.convert(menu) )
-				.collect(Collectors.toList());
-		
-		MenuResponse menuResponse = MenuResponse.create(menusView);
-		return Response.status(Response.Status.OK).entity(menuResponse).build();
+		return Response.status(Response.Status.OK).entity(menuViews).build();
 	}
 	
 	@POST
+	@Produces(MediaType.APPLICATION_JSON)
 	@Timed
+	@ApiOperation(value = "Returns menus satisfying the group supplied", response = MenuView.class, responseContainer = "List")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Successful retrieval of grouped menus", response = MenuView.class, responseContainer = "List"),
+	        @ApiResponse(code = 400, message = "Invalid group format")}
+	    )
 	@Path("/group")
-	public MenuResponse group (
+	public Response group (
 			@NotNull @Valid MenuGroupView menuGroupView)
 	{
-		MenuFilterStrategy filterChain = MenuGroupingFactory.createFrom(menuGroupView);
+		MenuFilterStrategy filterChain = MenuGroupFactory.createFrom(menuGroupView);
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
 		int limitSize = Math.min(menuGroupView.getMaxResults(), menuQueryConfig.getMaxAllowedResults());
+		List<MenuView> menuViews = MenuView.convert(filteredMenus, limitSize);
 		
-		List<MenuView> menusPresentation = filteredMenus.stream()
-				.limit(limitSize)
-				.map( menu -> MenuViewConverterResolver.convert(menu) )
-				.collect(Collectors.toList());
-		
-		return new MenuResponse(menusPresentation);
+		return Response.status(Response.Status.OK).entity(menuViews).build();
 	}
 	
 	@DELETE
 	@Timed
+	@ApiOperation(value = "Deletes the requested menu")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Successful deletion of menu"),
+	        @ApiResponse(code = 404, message = "Menu not found")}
+	    )
 	@Path("/{menu_id}")
-	public void delete (
+	public Response delete (
 			@PathParam("menu_id") long menuId)
 	{
 		menuService.delete(menuId);
+		return Response.status(Response.Status.OK).build();
 	}
 	
 	@PUT
+	@Produces(MediaType.APPLICATION_JSON)
 	@Timed
+	@ApiOperation(value = "Updates a menu")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 200, message = "Successful update of menu"),
+	        @ApiResponse(code = 404, message = "Menu not found")}
+	    )
 	@Path("/{menu_id}")
 	public Response replace (
 			@PathParam("menu_id") long menuId,

@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.protocol.converter;
+package org.fabri1983.menuapp.protocol.menu.converter;
 
 import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.protocol.menu.MenuView;
