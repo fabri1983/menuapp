@@ -12,6 +12,9 @@ import org.fabri1983.menuapp.protocol.validation.StringEnumeration;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel(value="MenuGroupView", description="Presentation of a menu grouping request")
 public class MenuGroupView {
 
 	@Min(1) @Max(50)

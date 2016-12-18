@@ -26,7 +26,6 @@ import org.fabri1983.menuapp.protocol.menu.filtering.MenuGroupView;
 import org.fabri1983.menuapp.protocol.menu.filtering.factory.MenuFiltersFactory;
 import org.fabri1983.menuapp.protocol.menu.filtering.factory.MenuGroupFactory;
 
-import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 
 import io.swagger.annotations.Api;
@@ -49,7 +48,6 @@ public class MenuResource {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Timed
 	@ApiOperation(value = "Returns all existent menus. Capped to max # of results", response = MenuView.class, responseContainer = "List")
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful retrieval of all menus", response = MenuView.class, responseContainer = "List")}
@@ -63,7 +61,6 @@ public class MenuResource {
 	
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	@Timed
 	@ApiOperation(value = "Returns the requested menu", response = MenuView.class)
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful retrieval of menu", response = MenuView.class),
@@ -80,7 +77,6 @@ public class MenuResource {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Timed
 	@ApiOperation(value = "Returns menus satisfying the filter supplied", response = MenuView.class, responseContainer = "List")
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful retrieval of filtered menus", response = MenuView.class, responseContainer = "List"),
@@ -101,7 +97,6 @@ public class MenuResource {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Timed
 	@ApiOperation(value = "Returns menus satisfying the group supplied", response = MenuView.class, responseContainer = "List")
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful retrieval of grouped menus", response = MenuView.class, responseContainer = "List"),
@@ -121,7 +116,6 @@ public class MenuResource {
 	}
 	
 	@DELETE
-	@Timed
 	@ApiOperation(value = "Deletes the requested menu")
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful deletion of menu"),
@@ -137,7 +131,6 @@ public class MenuResource {
 	
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
-	@Timed
 	@ApiOperation(value = "Updates a menu")
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful update of menu"),

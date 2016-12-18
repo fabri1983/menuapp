@@ -18,6 +18,8 @@ import org.fabri1983.menuapp.core.entity.menu.TimeConstraintMenu;
 import org.fabri1983.menuapp.protocol.menu.converter.MenuViewConverterResolver;
 import org.fabri1983.menuapp.protocol.parserutil.CustomLocalTimeDeserializer;
 import org.fabri1983.menuapp.protocol.parserutil.CustomLocalTimeSerializer;
+import org.fabri1983.menuapp.protocol.validation.StringEnumeration;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -27,34 +29,56 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value="MenuView", description="Presentation of a menu request/response")
 @JsonInclude(value = JsonInclude.Include.NON_NULL) // use this in order to exclude those fields having null values when serializing
 public class MenuView {
 
+	@ApiModelProperty(value = "id value", dataType = "long", required = true)
 	@JsonProperty
 	private long id;
+	
+	@ApiModelProperty(value = "name value", dataType = "String", required = true)
 	@JsonProperty @NotEmpty
 	private String name;
-	@JsonProperty @NotEmpty
+	
+	@ApiModelProperty(value = "description value", dataType = "String", allowableValues = "Text with a max of 255 chars", required = true)
+	@JsonProperty @NotEmpty @Length(max = 255)
 	private String description;
+	
+	@ApiModelProperty(value = "pictureUrl value", dataType = "String", required = true)
 	@JsonProperty @NotEmpty
 	private String pictureUrl;
+	
+	@ApiModelProperty(value = "price value", dataType = "java.math.BigDecimal", required = true)
 	@JsonProperty @NotNull
 	private BigDecimal price;
-	@JsonProperty @NotNull
+	
+	@ApiModelProperty(value = "currency value", dataType = "org.fabri1983.menuapp.core.entity.menu.CurrencyType", required = true)
+	@JsonProperty @NotNull @StringEnumeration(enumClass = CurrencyType.class)
 	private CurrencyType currency;
+	
+	@ApiModelProperty(value = "rating value between 1 and 5", dataType = "int", allowableValues = "range[1, 5]", required = true)
 	@JsonProperty @Min(1) @Max(5)
 	private int rating;
+	
 	@JsonSerialize(using = CustomLocalTimeSerializer.class)
 	@JsonDeserialize(using = CustomLocalTimeDeserializer.class)
 	private LocalTime hourFrom;
+	
 	@JsonSerialize(using = CustomLocalTimeSerializer.class)
 	@JsonDeserialize(using = CustomLocalTimeDeserializer.class)
 	private LocalTime hourTo;
+	
 	@JsonProperty
 	private List<String> availableDays;
+	
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime availableDateFrom;
+	
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime availableDateTo;

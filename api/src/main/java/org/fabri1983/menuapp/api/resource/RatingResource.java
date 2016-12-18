@@ -14,7 +14,6 @@ import org.fabri1983.menuapp.core.service.RatingService;
 import org.fabri1983.menuapp.protocol.rating.RatingAppliedView;
 import org.fabri1983.menuapp.protocol.rating.RatingView;
 
-import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 
 import io.swagger.annotations.Api;
@@ -35,7 +34,6 @@ public class RatingResource {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Timed
 	@ApiOperation(value = "Rates the requested menu", response = RatingAppliedView.class)
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful rate of menu", response = RatingAppliedView.class),

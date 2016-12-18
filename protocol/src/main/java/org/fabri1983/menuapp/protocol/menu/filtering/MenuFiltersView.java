@@ -21,6 +21,9 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel(value="MenuFiltersView", description="Presentation of a menu filtering request")
 public class MenuFiltersView {
 
 	@Min(1) @Max(50)

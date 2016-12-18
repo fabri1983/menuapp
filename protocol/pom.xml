@@ -27,6 +27,18 @@
 		</dependency>
 
 		<dependency>
+			<groupId>com.smoketurner</groupId>
+			<artifactId>dropwizard-swagger</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!-- jersey media dependency needs to be added manually since it was excluded at parent from the same dropwizard-swagger dependency. See detail in parent pom -->
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-multipart</artifactId>
+			<optional>true</optional>
+		</dependency>
+
+		<dependency>
 			<groupId>javax.validation</groupId>
 			<artifactId>validation-api</artifactId>
 			<version>${javax.validation.version}</version>

@@ -12,7 +12,6 @@ import org.fabri1983.menuapp.core.service.LoginService;
 import org.fabri1983.menuapp.protocol.login.LoginSuccessfulView;
 import org.fabri1983.menuapp.protocol.login.LoginView;
 
-import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 
 import io.swagger.annotations.Api;
@@ -33,11 +32,10 @@ public class LoginResource {
 	
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
-	@Timed
-	@ApiOperation(value = "Logins the user with supplied credentials. Returns the current token", response = LoginSuccessfulView.class)
+	@ApiOperation(value = "Logins the user with supplied credentials. Returns generated token", response = LoginSuccessfulView.class)
 	@ApiResponses(value = {
-	        @ApiResponse(code = 200, message = "Successful login. Returns current token", response = LoginSuccessfulView.class),
-	        @ApiResponse(code = 401, message = "User not authorized")}
+	        @ApiResponse(code = 200, message = "Successful login info with generated token", response = LoginSuccessfulView.class),
+	        @ApiResponse(code = 401, message = "Authorization has been refused")}
 	    )
 	public Response login (
 			@NotNull @Valid LoginView loginView)

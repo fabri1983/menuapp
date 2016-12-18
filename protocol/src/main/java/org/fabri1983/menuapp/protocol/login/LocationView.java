@@ -7,10 +7,17 @@ import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value="LocationView", description="Presentation of a location request/response")
 public class LocationView {
 	
+	@ApiModelProperty(value = "latitude value", dataType = "int", required = true)
 	@NotNull
 	private BigInteger latitude;
+	
+	@ApiModelProperty(value = "longitude value", dataType = "int", required = true)
 	@NotNull
 	private BigInteger longitude;
 

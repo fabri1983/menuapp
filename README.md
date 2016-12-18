@@ -147,7 +147,9 @@ Build info for Continuous Integration
 By default when compiling any project there is a maven plugin named `buildnumber-maven-plugin` which gets revision number, current branch, build time, and use that info on filtering resources phase.
 Currently only the *api* projects use the build info provided by the plugin.
 So you can call http://localhost:8080/buildinfo and be responded with revision id and branch name information of the last change made in the project, as well as the build time.
+
 During development, some settings of this plugin are disabled in order to speed up compilation. Nevertheless you can completely turn it off using `-Dmaven.buildNumber.skip=true`
+
 Conversely, when using a CI software use the next command in order to always retrieve latest code and avoid compilation if local changes has been made:
 ```sh
 mvn clean install -Dmaven.buildNumber.doCheck=true -Dmaven.buildNumber.doUpdate=true
@@ -160,7 +162,7 @@ Swagger for API Documentation
 Once the **Menu App** is deployed you can visit [http://localhost:8080/swagger](http://localhost:8080/swagger) to access API documentation.
 
 #### Disable Swagger on production
-On production environment you need to add `swagger.enabled=false` in your production server-config.yml file.
+On production environment you need to add **swagger.enabled=false** in your production `server-config.yml` file.
 
 
 Example URLs using GET method

@@ -9,7 +9,6 @@ import javax.ws.rs.core.Response;
 import org.fabri1983.menuapp.api.config.hasfeature.HasBuildInfoFeature;
 import org.fabri1983.menuapp.api.config.hasfeature.impl.BuildInfoConfig;
 
-import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 
 import io.swagger.annotations.Api;
@@ -30,7 +29,6 @@ public class InfoResource {
 
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-    @Timed
 	@ApiOperation(value = "Returns build information details", response = String.class)
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful retrieval of build info", response = String.class)}
@@ -44,7 +42,6 @@ public class InfoResource {
 	
 	@GET
 	@Produces(MediaType.TEXT_PLAIN)
-    @Timed
 	@ApiOperation(value = "Returns build profile name", response = String.class)
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful retrieval of profile name", response = String.class)}

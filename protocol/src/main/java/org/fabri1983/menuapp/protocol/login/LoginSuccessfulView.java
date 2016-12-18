@@ -2,12 +2,21 @@ package org.fabri1983.menuapp.protocol.login;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value="LoginSuccessfulView", description="Presentation of a successful login")
 public class LoginSuccessfulView {
 
+	@ApiModelProperty(value = "userName value", dataType = "String")
 	@JsonProperty
 	private String userName;
+	
+	@ApiModelProperty(value = "location value", dataType = "org.fabri1983.menuapp.protocol.login.LocationView")
 	@JsonProperty
 	private LocationView location;
+	
+	@ApiModelProperty(value = "token value", dataType = "String")
 	@JsonProperty
 	private String token;
 	

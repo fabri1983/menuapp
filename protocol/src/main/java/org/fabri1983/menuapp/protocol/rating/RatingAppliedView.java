@@ -4,10 +4,17 @@ import org.fabri1983.menuapp.core.entity.menu.Menu;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value="RatingAppliedView", description="Presentation of a rating response")
 public class RatingAppliedView {
 
+	@ApiModelProperty(value = "menu id value", dataType = "long")
 	@JsonProperty
 	private long menuId;
+	
+	@ApiModelProperty(value = "rating value", dataType = "int")
 	@JsonProperty
 	private int rating;
 

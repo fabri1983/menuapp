@@ -3,15 +3,24 @@ package org.fabri1983.menuapp.protocol.rating;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel(value="RatingView", description="Presentation of a rating request")
 public class RatingView {
 
+	@ApiModelProperty(value = "rating value between 1 and 5", dataType = "int", allowableValues = "range[1, 5]", required = true)
 	@Min(1) @Max(5)
 	private int rating;
+	
+	@ApiModelProperty(value = "description value", dataType = "String", allowableValues = "Text between 5 and 255 chars", required = true)
+	@Length(min = 5, max = 255)
 	@NotEmpty
 	private String description;
 	
