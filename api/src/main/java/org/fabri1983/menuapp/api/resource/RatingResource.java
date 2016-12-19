@@ -2,6 +2,7 @@ package org.fabri1983.menuapp.api.resource;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -21,8 +22,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Path("user/{user_id}/menu/{menu_id}")
+@Path("/user/{user_id}/menu/{menu_id}")
 @Api(value = "RatingResource")
+@Consumes(MediaType.APPLICATION_JSON)
 public class RatingResource {
 
 	private RatingService ratingService;
@@ -37,7 +39,8 @@ public class RatingResource {
 	@ApiOperation(value = "Rates the requested menu", response = RatingAppliedView.class)
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful rate of menu", response = RatingAppliedView.class),
-	        @ApiResponse(code = 404, message = "Menu not found")}
+	        @ApiResponse(code = 404, message = "Menu not found"),
+			@ApiResponse(code = 422, message = "Unprocessable entity. Validation failed")}
 	    )
 	@Path("/rate")
 	public Response rate(

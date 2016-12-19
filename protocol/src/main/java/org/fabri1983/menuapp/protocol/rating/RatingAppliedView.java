@@ -2,12 +2,16 @@ package org.fabri1983.menuapp.protocol.rating;
 
 import org.fabri1983.menuapp.core.entity.menu.Menu;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value="RatingAppliedView", description="Presentation of a rating response")
+@JsonNaming(LowerCaseStrategy.class)
 public class RatingAppliedView {
 
 	@ApiModelProperty(value = "menu id value", dataType = "long")
@@ -18,7 +22,11 @@ public class RatingAppliedView {
 	@JsonProperty
 	private int rating;
 
-	public RatingAppliedView(long menuId, int rating) {
+	@JsonCreator // using @JsonCreator only for junit test
+	public RatingAppliedView(
+			@JsonProperty("menuId") long menuId,
+			@JsonProperty("rating") int rating)
+	{
 		this.menuId = menuId;
 		this.rating = rating;
 	}

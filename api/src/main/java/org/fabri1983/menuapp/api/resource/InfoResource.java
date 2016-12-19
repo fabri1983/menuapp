@@ -16,7 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Path("info/")
+@Path("/info")
 @Api(value = "InfoResource")
 public class InfoResource {
 

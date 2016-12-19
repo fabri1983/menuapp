@@ -8,11 +8,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value="RatingView", description="Presentation of a rating request")
+@JsonNaming(LowerCaseStrategy.class)
 public class RatingView {
 
 	@ApiModelProperty(value = "rating value between 1 and 5", dataType = "int", allowableValues = "range[1, 5]", required = true)

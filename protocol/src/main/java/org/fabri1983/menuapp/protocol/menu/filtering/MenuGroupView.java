@@ -11,10 +11,13 @@ import org.fabri1983.menuapp.protocol.validation.StringEnumeration;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import io.swagger.annotations.ApiModel;
 
 @ApiModel(value="MenuGroupView", description="Presentation of a menu grouping request")
+@JsonNaming(LowerCaseStrategy.class)
 public class MenuGroupView {
 
 	@Min(1) @Max(50)

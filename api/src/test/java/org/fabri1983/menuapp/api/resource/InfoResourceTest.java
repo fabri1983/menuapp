@@ -2,7 +2,11 @@ package org.fabri1983.menuapp.api.resource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.fabri1983.menuapp.api.config.hasfeature.HasBuildInfoFeature;
 import org.fabri1983.menuapp.api.config.hasfeature.impl.BuildInfoConfig;
@@ -30,22 +34,28 @@ public class InfoResourceTest {
     	.build();
 	
 	@Test
-	public void whenRequestBuildinfoThenMessageExpected () {
+	public void _1_whenRequestBuildinfoThenMessageExpected () {
 		final String buildInfoString = "ajhd239xbjsd9 dev. Build at xx:xx:xx xxxxx";
 		when(buildInfoConfig.getBuildInfo()).thenReturn(buildInfoString);
 		
-		String response = resource.client().target("/info/buildinfo").request().get(String.class);
+		Response response = resource.client().target("/info/buildinfo")
+				.request().accept(MediaType.TEXT_PLAIN_TYPE).get();
 
-		assertThat(response).isEqualTo(buildInfoString);
+		verify(buildInfoConfig).getBuildInfo();
+		assertThat(response.getStatusInfo()).isEqualTo(Response.Status.OK);
+		assertThat(response.readEntity(String.class)).isEqualTo(buildInfoString);
 	}
 	
 	@Test
-	public void whenRequestProfileThenMessageExpected () {
+	public void _2_whenRequestProfileThenMessageExpected () {
 		final String buildProfileString = "testingProfile AA";
 		when(buildInfoConfig.getBuildProfile()).thenReturn(buildProfileString);
 		
-		String response = resource.client().target("/info/profile").request().get(String.class);
+		Response response = resource.client().target("/info/profile")
+				.request().accept(MediaType.TEXT_PLAIN_TYPE).get();
 
-		assertThat(response).isEqualTo(buildProfileString);
+		verify(buildInfoConfig).getBuildProfile();
+		assertThat(response.getStatusInfo()).isEqualTo(Response.Status.OK);
+		assertThat(response.readEntity(String.class)).isEqualTo(buildProfileString);
 	}
 }

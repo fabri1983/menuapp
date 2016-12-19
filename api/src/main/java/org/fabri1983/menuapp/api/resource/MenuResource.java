@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -35,6 +36,7 @@ import io.swagger.annotations.ApiResponses;
 
 @Path("/user/{user_id}/menu")
 @Api(value = "MenuResource")
+@Consumes(MediaType.APPLICATION_JSON)
 public class MenuResource {
 
 	private MenuService menuService;
@@ -80,7 +82,7 @@ public class MenuResource {
 	@ApiOperation(value = "Returns menus satisfying the filter supplied", response = MenuView.class, responseContainer = "List")
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful retrieval of filtered menus", response = MenuView.class, responseContainer = "List"),
-	        @ApiResponse(code = 400, message = "Invalid filter format")}
+	        @ApiResponse(code = 422, message = "Unprocessable entity. Validation failed")}
 	    )
 	@Path("/filter")
 	public Response filter (
@@ -100,7 +102,7 @@ public class MenuResource {
 	@ApiOperation(value = "Returns menus satisfying the group supplied", response = MenuView.class, responseContainer = "List")
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful retrieval of grouped menus", response = MenuView.class, responseContainer = "List"),
-	        @ApiResponse(code = 400, message = "Invalid group format")}
+	        @ApiResponse(code = 422, message = "Unprocessable entity. Validation failed")}
 	    )
 	@Path("/group")
 	public Response group (
@@ -127,6 +129,21 @@ public class MenuResource {
 	{
 		menuService.delete(menuId);
 		return Response.status(Response.Status.OK).build();
+	}
+	
+	@POST
+	@Produces(MediaType.APPLICATION_JSON)
+	@ApiOperation(value = "Adds a new menu")
+	@ApiResponses(value = {
+	        @ApiResponse(code = 201, message = "Successful creation of menu"),
+	        @ApiResponse(code = 422, message = "Unprocessable entity. Validation failed")}
+	    )
+	public Response add (
+			@NotNull @Valid MenuView menu)
+	{
+		// FIXME call core api for adding a new menu
+		
+		return Response.status(Response.Status.CREATED).build();
 	}
 	
 	@PUT

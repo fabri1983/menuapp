@@ -7,11 +7,14 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value="LoginView", description="Presentation of a login request")
+@JsonNaming(LowerCaseStrategy.class)
 public class LoginView {
 	
 	@ApiModelProperty(value = "userName value", dataType = "String", required = true)

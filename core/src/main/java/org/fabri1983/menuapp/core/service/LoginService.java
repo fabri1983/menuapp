@@ -4,5 +4,5 @@ public interface LoginService {
 	
 	boolean existUser (long userId);
 
-	void loginUser(String userName, String userPassHashed);
+	String loginUser(String userName, String userPassHashed);
 }

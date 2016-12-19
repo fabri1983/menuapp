@@ -24,7 +24,9 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
@@ -34,6 +36,7 @@ import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value="MenuView", description="Presentation of a menu request/response")
 @JsonInclude(value = JsonInclude.Include.NON_NULL) // use this in order to exclude those fields having null values when serializing
+@JsonNaming(LowerCaseStrategy.class)
 public class MenuView {
 
 	@ApiModelProperty(value = "id value", dataType = "long", required = true)

@@ -17,8 +17,13 @@ public class SimpleLoginService implements LoginService {
 	}
 
 	@Override
-	public void loginUser(String userName, String userPassHashed) {
+	public String loginUser(String userName, String userPassHashed) {
 		loginRepository.loginUser(userName, userPassHashed);
+		
+		// TODO use a Token Generator service
+		String token = "h0t6dSh8gR5mBpMF3EWWJospF6usI8RLGWIOGCe5Z2HtKu32BBviWrt9wbnO21JICFXKYddYotB79ckrCVRv2z71PFlavOkeDD2JyiueYupdx87DwVpCox58KkQ2kwPb";
+		
+		return token;
 	}
 
 }

@@ -2,6 +2,7 @@ package org.fabri1983.menuapp.api.resource;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -19,8 +20,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
-@Path("user/login")
+@Path("/user/login")
 @Api(value = "LoginResource")
+@Consumes(MediaType.APPLICATION_JSON)
 public class LoginResource {
 
 	private LoginService loginService;
@@ -35,17 +37,15 @@ public class LoginResource {
 	@ApiOperation(value = "Logins the user with supplied credentials. Returns generated token", response = LoginSuccessfulView.class)
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful login info with generated token", response = LoginSuccessfulView.class),
-	        @ApiResponse(code = 401, message = "Authorization has been refused")}
+	        @ApiResponse(code = 401, message = "Authorization has been refused"),
+			@ApiResponse(code = 422, message = "Unprocessable entity. Validation failed")}
 	    )
 	public Response login (
 			@NotNull @Valid LoginView loginView)
 	{
-		loginService.loginUser(loginView.getUserName(), loginView.getUserPassHashed());
+		String token = loginService.loginUser(loginView.getUserName(), loginView.getUserPassHashed());
 
 		// TODO store user location with an UserService or similar service
-		
-		// TODO use a Token Generator service
-		String token = "h0t6dSh8gR5mBpMF3EWWJospF6usI8RLGWIOGCe5Z2HtKu32BBviWrt9wbnO21JICFXKYddYotB79ckrCVRv2z71PFlavOkeDD2JyiueYupdx87DwVpCox58KkQ2kwPb";
 		
 		LoginSuccessfulView response = LoginSuccessfulView.create(loginView, token);
 		return Response.status(Response.Status.OK).entity(response).build();
