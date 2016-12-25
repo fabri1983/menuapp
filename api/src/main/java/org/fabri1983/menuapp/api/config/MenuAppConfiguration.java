@@ -1,5 +1,11 @@
 package org.fabri1983.menuapp.api.config;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import io.dropwizard.Configuration;
+import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
+import io.smartmachine.couchbase.CouchbaseClientFactory;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
@@ -9,12 +15,6 @@ import org.fabri1983.menuapp.api.config.hasfeature.HasBuildInfoFeature;
 import org.fabri1983.menuapp.api.config.hasfeature.HasMenuQueryFeature;
 import org.fabri1983.menuapp.api.config.hasfeature.impl.BuildInfoConfig;
 import org.fabri1983.menuapp.api.config.hasfeature.impl.MenuQueryConfig;
-
-import com.fasterxml.jackson.annotation.JsonProperty;
-
-import io.dropwizard.Configuration;
-import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import io.smartmachine.couchbase.CouchbaseClientFactory;
 
 public class MenuAppConfiguration extends Configuration implements HasBuildInfoFeature, HasMenuQueryFeature {
 

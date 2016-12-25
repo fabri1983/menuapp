@@ -1,10 +1,5 @@
 package org.fabri1983.menuapp.core.dao.presentation;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.List;
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.SnakeCaseStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
@@ -14,6 +9,11 @@ import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalTimeSerializer;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.util.List;
 
 @JsonNaming(SnakeCaseStrategy.class)
 public class JsonMenuPresentation {

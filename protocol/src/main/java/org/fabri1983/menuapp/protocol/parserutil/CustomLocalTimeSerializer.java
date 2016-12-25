@@ -1,12 +1,12 @@
 package org.fabri1983.menuapp.protocol.parserutil;
 
-import java.io.IOException;
-import java.time.LocalTime;
-
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+
+import java.io.IOException;
+import java.time.LocalTime;
 
 public class CustomLocalTimeSerializer extends JsonSerializer<LocalTime> {
 	

@@ -1,5 +1,12 @@
 package org.fabri1983.menuapp.protocol.menu.filtering;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+import io.swagger.annotations.ApiModel;
+
 import java.math.BigDecimal;
 
 import javax.validation.constraints.Max;
@@ -8,13 +15,6 @@ import javax.validation.constraints.NotNull;
 
 import org.fabri1983.menuapp.core.entity.menu.CurrencyType;
 import org.fabri1983.menuapp.protocol.validation.StringEnumeration;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-
-import io.swagger.annotations.ApiModel;
 
 @ApiModel(value="MenuGroupView", description="Presentation of a menu grouping request")
 @JsonNaming(LowerCaseStrategy.class)

@@ -1,5 +1,12 @@
 package org.fabri1983.menuapp.api.config;
 
+import com.google.inject.Binder;
+import com.google.inject.Inject;
+import com.google.inject.Module;
+import com.google.inject.Provides;
+import com.google.inject.Singleton;
+import com.google.inject.name.Named;
+
 import org.fabri1983.menuapp.core.dao.MenuDao;
 import org.fabri1983.menuapp.core.dao.implementation.HDFSMenuDao;
 import org.fabri1983.menuapp.core.dao.implementation.PreloadedMenuDao;
@@ -14,13 +21,6 @@ import org.fabri1983.menuapp.core.service.RatingService;
 import org.fabri1983.menuapp.core.service.implementation.SimpleLoginService;
 import org.fabri1983.menuapp.core.service.implementation.SimpleMenuService;
 import org.fabri1983.menuapp.core.service.implementation.SimpleRatingService;
-
-import com.google.inject.Binder;
-import com.google.inject.Inject;
-import com.google.inject.Module;
-import com.google.inject.Provides;
-import com.google.inject.Singleton;
-import com.google.inject.name.Named;
 
 public class MenuAppProvider implements Module {
 

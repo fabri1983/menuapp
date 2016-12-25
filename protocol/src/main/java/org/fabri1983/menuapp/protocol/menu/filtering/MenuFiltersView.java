@@ -1,5 +1,16 @@
 package org.fabri1983.menuapp.protocol.menu.filtering;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+
+import io.swagger.annotations.ApiModel;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -13,17 +24,6 @@ import org.fabri1983.menuapp.core.entity.menu.CurrencyType;
 import org.fabri1983.menuapp.protocol.parserutil.CustomLocalTimeDeserializer;
 import org.fabri1983.menuapp.protocol.parserutil.CustomLocalTimeSerializer;
 import org.fabri1983.menuapp.protocol.validation.StringEnumeration;
-
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseStrategy;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
-import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
-
-import io.swagger.annotations.ApiModel;
 
 @ApiModel(value="MenuFiltersView", description="Presentation of a menu filtering request")
 @JsonNaming(LowerCaseStrategy.class)

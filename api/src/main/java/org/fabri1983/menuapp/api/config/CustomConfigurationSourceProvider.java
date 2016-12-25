@@ -1,14 +1,14 @@
 package org.fabri1983.menuapp.api.config;
 
+import io.dropwizard.configuration.ConfigurationSourceProvider;
+import io.dropwizard.configuration.FileConfigurationSourceProvider;
+import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
+
 import java.io.IOException;
 import java.io.InputStream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import io.dropwizard.configuration.ConfigurationSourceProvider;
-import io.dropwizard.configuration.FileConfigurationSourceProvider;
-import io.dropwizard.configuration.ResourceConfigurationSourceProvider;
 
 /**
  * Creates a custom configuration provider which first try to load a configuration file using {@link FileConfigurationSourceProvider},

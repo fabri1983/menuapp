@@ -1,9 +1,5 @@
 package org.fabri1983.menuapp.protocol.login;
 
-import java.math.BigInteger;
-
-import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseStrategy;
@@ -11,6 +7,10 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.math.BigInteger;
+
+import javax.validation.constraints.NotNull;
 
 @ApiModel(value="LocationView", description="Presentation of a location request/response")
 @JsonNaming(LowerCaseStrategy.class)

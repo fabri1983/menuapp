@@ -1,5 +1,12 @@
 package org.fabri1983.menuapp.api.resource;
 
+import com.google.inject.Inject;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -12,13 +19,6 @@ import javax.ws.rs.core.Response;
 import org.fabri1983.menuapp.core.service.LoginService;
 import org.fabri1983.menuapp.protocol.login.LoginSuccessfulView;
 import org.fabri1983.menuapp.protocol.login.LoginView;
-
-import com.google.inject.Inject;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 @Path("/user/login")
 @Api(value = "LoginResource")

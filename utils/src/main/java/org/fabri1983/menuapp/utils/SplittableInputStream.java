@@ -50,7 +50,7 @@ public class SplittableInputStream extends InputStream {
 			int newLength = Math.max((to - from) * 2, MIN_BUF);
 			int[] newBuf = new int[newLength];
 			System.arraycopy(buffer, from, newBuf, 0, to - from);
-			for (int i = 0; i < readPositions.size(); i++)
+			for (int i = 0, c = readPositions.size(); i < c; i++)
 				readPositions.set(i, readPositions.get(i) - from);
 			writePosition -= from;
 			buffer = newBuf;
@@ -79,8 +79,8 @@ public class SplittableInputStream extends InputStream {
 	}
 
 	
-	MultiplexedSource multiSource;
-	int myId;
+	private MultiplexedSource multiSource;
+	private int myId;
 
 	public SplittableInputStream(InputStream source) {
 		multiSource = new MultiplexedSource(source);

@@ -1,5 +1,12 @@
 package org.fabri1983.menuapp.api.resource;
 
+import com.google.inject.Inject;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -14,13 +21,6 @@ import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.core.service.RatingService;
 import org.fabri1983.menuapp.protocol.rating.RatingAppliedView;
 import org.fabri1983.menuapp.protocol.rating.RatingView;
-
-import com.google.inject.Inject;
-
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 @Path("/user/{user_id}/menu/{menu_id}")
 @Api(value = "RatingResource")

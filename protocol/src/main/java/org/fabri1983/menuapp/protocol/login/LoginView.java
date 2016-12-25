@@ -1,10 +1,5 @@
 package org.fabri1983.menuapp.protocol.login;
 
-import javax.validation.Valid;
-import javax.validation.constraints.NotNull;
-
-import org.hibernate.validator.constraints.NotEmpty;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy.LowerCaseStrategy;
@@ -12,6 +7,11 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 @ApiModel(value="LoginView", description="Presentation of a login request")
 @JsonNaming(LowerCaseStrategy.class)

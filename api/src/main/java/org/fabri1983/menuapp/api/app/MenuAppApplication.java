@@ -1,12 +1,5 @@
 package org.fabri1983.menuapp.api.app;
 
-import org.fabri1983.menuapp.api.config.CustomConfigurationSourceProvider;
-import org.fabri1983.menuapp.api.config.MenuAppConfiguration;
-import org.fabri1983.menuapp.api.config.MenuAppProvider;
-import org.fabri1983.menuapp.api.health.DummyHealthCheck;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -14,6 +7,14 @@ import io.federecio.dropwizard.swagger.SwaggerBundle;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import io.smartmachine.couchbase.CouchbaseBundle;
 import io.smartmachine.couchbase.CouchbaseClientFactory;
+
+import org.fabri1983.menuapp.api.config.CustomConfigurationSourceProvider;
+import org.fabri1983.menuapp.api.config.MenuAppConfiguration;
+import org.fabri1983.menuapp.api.config.MenuAppProvider;
+import org.fabri1983.menuapp.api.health.DummyHealthCheck;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import ru.vyarus.dropwizard.guice.GuiceBundle;
 
 public class MenuAppApplication extends Application<MenuAppConfiguration> {
