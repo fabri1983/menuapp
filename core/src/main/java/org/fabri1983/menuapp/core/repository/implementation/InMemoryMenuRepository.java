@@ -61,8 +61,9 @@ public class InMemoryMenuRepository implements MenuRepository {
 	@Override
 	public void delete(long menuId) {
 		Menu menu = getById(menuId);
-		if (menu == null)
+		if (menu == null) {
 			return;
+		}
 		menusById.remove(menu.getName());
 		// FIXME there is an implicit boxing of long parameter to Long. Better use Fast Util api or similar
 		menusById.remove(menuId);

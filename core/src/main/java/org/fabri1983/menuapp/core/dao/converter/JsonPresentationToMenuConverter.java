@@ -22,8 +22,9 @@ public class JsonPresentationToMenuConverter implements MenuDaoPresentationConve
 
 	@Override
 	public Menu convert(JsonMenuPresentation menuRepresentation) {
-		if (isTimeConstraintMenu(menuRepresentation))
+		if (isTimeConstraintMenu(menuRepresentation)) {
 			return convertToTimeConstraintMenu(menuRepresentation);
+		}
 		
 		return convertToDefaultMenu(menuRepresentation);
 	}

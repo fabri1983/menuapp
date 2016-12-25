@@ -8,8 +8,9 @@ public class MenuViewConverterResolver {
 	public static MenuView convert(final Menu menu) {
 		
 		// first try other menu type than the default one
-		if (menu.acceptsConverter(TimeConstraintMenuViewConverterStrategy.get().getStrategy()))
+		if (menu.acceptsConverter(TimeConstraintMenuViewConverterStrategy.get().getStrategy())) {
 			return TimeConstraintMenuViewConverterStrategy.get().convert(menu);
+		}
 		
 		// fall back to the default menu
 		return DefaultMenuViewConverterStrategy.get().convert(menu);

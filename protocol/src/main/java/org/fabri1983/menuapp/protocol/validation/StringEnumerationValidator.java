@@ -9,10 +9,10 @@ import javax.validation.ConstraintValidatorContext;
 
 public class StringEnumerationValidator implements ConstraintValidator<StringEnumeration, String> {
 
-	private Set<String> AVAILABLE_ENUM_NAMES;
+	private Set<String> availableEnumNames;
 
-	public static Set<String> getNamesSet(Class<? extends Enum<?>> e) {
-		Enum<?>[] enums = e.getEnumConstants();
+	public static Set<String> getNamesSet(Class<? extends Enum<?>> enumParam) {
+		Enum<?>[] enums = enumParam.getEnumConstants();
 		String[] names = new String[enums.length];
 		for (int i=0, c=enums.length; i < c; ++i) {
 			names[i] = enums[i].name();
@@ -24,14 +24,14 @@ public class StringEnumerationValidator implements ConstraintValidator<StringEnu
 	@Override
 	public void initialize(StringEnumeration stringEnumeration) {
 		Class<? extends Enum<?>> enumSelected = stringEnumeration.enumClass();
-		AVAILABLE_ENUM_NAMES = getNamesSet(enumSelected);
+		availableEnumNames = getNamesSet(enumSelected);
 	}
 
 	@Override
 	public boolean isValid(String value, ConstraintValidatorContext context) {
 		if (value == null) {
 			return true;
-		} else if (!AVAILABLE_ENUM_NAMES.contains(value)) {
+		} else if (!availableEnumNames.contains(value)) {
 			context.disableDefaultConstraintViolation();
 	        context
 	            .buildConstraintViolationWithTemplate("doesn't match with any of the enum values.")

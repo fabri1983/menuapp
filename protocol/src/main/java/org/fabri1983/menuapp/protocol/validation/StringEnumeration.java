@@ -20,7 +20,7 @@ import javax.validation.Payload;
 @Retention(RUNTIME)
 public @interface StringEnumeration {
 
-	String message() default "{com.xxx.bean.validation.constraints.StringEnumeration.message}";
+	String message() default "{org.fabri1983.menuapp.protocol.validation.StringEnumeration.message}";
 
 	Class<?>[] groups() default {};
 

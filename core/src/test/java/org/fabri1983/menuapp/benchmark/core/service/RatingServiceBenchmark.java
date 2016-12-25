@@ -23,8 +23,9 @@ public class RatingServiceBenchmark extends JMHLauncherJUnit {
 	
 	@BeforeClass
 	public static void launchBenchmark() throws RunnerException {
-		if (isJunitInitialized())
+		if (isJunitInitialized()) {
 			return;
+		}
 		
 		// use JMHLauncherJUnit.BenchmarkState to add lambdas action which will be executed according the @Setup level.
 		

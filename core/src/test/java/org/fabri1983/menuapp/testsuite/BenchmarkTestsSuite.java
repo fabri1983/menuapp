@@ -5,8 +5,8 @@ import org.junit.runners.Suite;
 
 /**
  * Test suite intended to force execution order:
- *   first run the {@link BenchmarkTestsClasses}
- *   then run the cleaning up test @{link BenchmarkJMHCleanupClass}
+ *   - first run the {@link BenchmarkTestsClasses}
+ *   - then run the cleaning up test @{link BenchmarkJMHCleanupClass}
  */
 @RunWith(Suite.class)
 @Suite.SuiteClasses({

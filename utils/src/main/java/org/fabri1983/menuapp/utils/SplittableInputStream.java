@@ -50,8 +50,9 @@ public class SplittableInputStream extends InputStream {
 			int newLength = Math.max((to - from) * 2, MIN_BUF);
 			int[] newBuf = new int[newLength];
 			System.arraycopy(buffer, from, newBuf, 0, to - from);
-			for (int i = 0, c = readPositions.size(); i < c; i++)
+			for (int i = 0, c = readPositions.size(); i < c; i++) {
 				readPositions.set(i, readPositions.get(i) - from);
+			}
 			writePosition -= from;
 			buffer = newBuf;
 		}
@@ -71,10 +72,11 @@ public class SplittableInputStream extends InputStream {
 			}
 
 			int pos = readPositions.get(readerId);
-			int b = buffer[pos];
-			if (b != -1)
+			int val = buffer[pos];
+			if (val != -1) {
 				readPositions.set(readerId, pos + 1);
-			return b;
+			}
+			return val;
 		}
 	}
 
