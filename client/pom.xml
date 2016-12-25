@@ -16,10 +16,13 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.buildNumber.skip>true</maven.buildNumber.skip>
 	</properties>
 	
 	<dependencies>
+
 		<!-- Add here dependencies with menu app api, protocol, etc -->
+
 	</dependencies>
 	
 	<build>

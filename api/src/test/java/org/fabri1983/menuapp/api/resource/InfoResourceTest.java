@@ -58,4 +58,5 @@ public class InfoResourceTest {
 		assertThat(response.getStatusInfo()).isEqualTo(Response.Status.OK);
 		assertThat(response.readEntity(String.class)).isEqualTo(buildProfileString);
 	}
+	
 }

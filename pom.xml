@@ -8,7 +8,45 @@
 	<version>1.0.0-SNAPSHOT</version>
 	<url>https://github.com/fabri1983/menuapp</url>
 
+	<developers>
+        <developer>
+            <id>fabri1983</id>
+            <email>fabri1983@gmail.com</email>
+            <name>Pablo Fabricio Lettieri</name>
+        </developer>
+    </developers>
+
+    <licenses>
+        <license>
+            <name>GPL 3.0</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+            <distribution>repo</distribution>
+        </license>
+	</licenses>
+
+ 	<scm>
+		<developerConnection>scm:git:ssh://git@github.com/fabri1983/menuapp.git</developerConnection>
+		<connection>scm:git:https://github.com/fabri1983/menuapp.git</connection>
+		<url>https://github.com/fabri1983/menuapp</url>
+	</scm>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>repo-snapshots</id>
+			<name>Repository for Snapshots</name>
+			<!-- dummy repo, doesn't exist -->
+			<url>http://repo.fabri1983.com/nexus/content/libs-snapshot-local</url>
+		</snapshotRepository>
+		<repository>
+			<id>repo-releases</id>
+			<name>Repository for Releases</name>
+			<!-- dummy repo, doesn't exist -->
+			<url>http://repo.fabri1983.com/nexus/content/libs-release-local</url>
+		</repository>
+	</distributionManagement>
+
 	<modules>
+		<module>utils</module>
 		<module>core</module>
 		<module>protocol</module>
 		<module>api</module>
@@ -294,27 +332,6 @@
 		
 		</dependencies>
 	</dependencyManagement>
- 
-	<distributionManagement>
-		<snapshotRepository>
-			<id>repo-snapshots</id>
-			<name>Repository for Snapshots</name>
-			<!-- dummy repo, doesn't exist -->
-			<url>http://repo.fabri1983.com/nexus/content/libs-snapshot-local</url>
-		</snapshotRepository>
-		<repository>
-			<id>repo-releases</id>
-			<name>Repository for Releases</name>
-			<!-- dummy repo, doesn't exist -->
-			<url>http://repo.fabri1983.com/nexus/content/libs-release-local</url>
-		</repository>
-	</distributionManagement>
-
-	<scm>
-		<developerConnection>scm:git:ssh://git@github.com/fabri1983/menuapp.git</developerConnection>
-		<connection>scm:git:https://github.com/fabri1983/menuapp.git</connection>
-		<url>https://github.com/fabri1983/menuapp</url>
-	</scm>
 
 	<build>
 		<plugins>

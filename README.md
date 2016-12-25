@@ -44,6 +44,7 @@ The Repository layer uses DAO components to interact with the underlying persist
 - The **client** project is aimed to be used by third party components. It communicates with the core system without dealing with a presentation layer. 
 It interacts directly with the business layer avoiding performance penalty due to conversion between presentational objects to business entities.
 
+- The **utils** project aims to collect common and handy functions. It runs its own test suite to keep everything healthy.
 
 Technologies
 ------------
