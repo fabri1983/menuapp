@@ -28,20 +28,20 @@ public class MenuAppConfiguration extends Configuration implements HasBuildInfoF
     private SwaggerBundleConfiguration swaggerBundleConfiguration;
 	
 	@Override
-	public BuildInfoConfig getBuildInfoConfig () {
+	public BuildInfoConfig getBuildInfoConfig() {
 		return buildInfoConfig;
 	}
 	
 	@Override
-	public MenuQueryConfig getMenuQueryConfig () {
+	public MenuQueryConfig getMenuQueryConfig() {
 		return menuQueryConfig;
 	}
 
-	public CouchbaseClientFactory getCouchbaseClientFactory () {
+	public CouchbaseClientFactory getCouchbaseClientFactory() {
 		return couchbaseClientFactory;
 	}
 	
-	public SwaggerBundleConfiguration getSwaggerBundleConfiguration () {
+	public SwaggerBundleConfiguration getSwaggerBundleConfiguration() {
 		return swaggerBundleConfiguration;
 	}
 	

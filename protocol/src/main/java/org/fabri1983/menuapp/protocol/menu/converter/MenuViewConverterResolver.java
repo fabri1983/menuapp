@@ -5,7 +5,7 @@ import org.fabri1983.menuapp.protocol.menu.MenuView;
 
 public class MenuViewConverterResolver {
 
-	public static MenuView convert (final Menu menu) {
+	public static MenuView convert(final Menu menu) {
 		
 		// first try other menu type than the default one
 		if (menu.acceptsConverter(TimeConstraintMenuViewConverterStrategy.get().getStrategy()))

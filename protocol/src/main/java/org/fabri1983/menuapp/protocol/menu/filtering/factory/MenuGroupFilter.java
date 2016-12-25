@@ -5,7 +5,7 @@ import org.fabri1983.menuapp.protocol.menu.filtering.MenuGroupView;
 
 public interface MenuGroupFilter {
 	
-	boolean isValid (MenuGroupView groupData);
+	boolean isValid(MenuGroupView groupData);
 	
-	void chain (ChainedMenuFilterBuilder filterChainBuilder, MenuGroupView groupData);
+	void chain(ChainedMenuFilterBuilder filterChainBuilder, MenuGroupView groupData);
 }

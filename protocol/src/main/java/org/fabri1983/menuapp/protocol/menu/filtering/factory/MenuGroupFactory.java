@@ -18,7 +18,7 @@ public class MenuGroupFactory {
 		return filterChain;
 	}
 
-	private static MenuFilterStrategy setupFilterChain (MenuGroupView groupData) {
+	private static MenuFilterStrategy setupFilterChain(MenuGroupView groupData) {
 		ChainedMenuFilterBuilder filterChainBuilder = ChainedMenuFilterBuilder.newOne();
 		
 		filters.stream().filter(f -> f.isValid(groupData)).forEach( f -> f.chain(filterChainBuilder, groupData));

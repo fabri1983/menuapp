@@ -8,7 +8,7 @@ public class DatesRangeFilterVisitor implements FilterVisitor {
 
 	private DatesRangeFilterStrategy filter;
 	
-	public DatesRangeFilterVisitor (DatesRangeFilterStrategy filter) {
+	public DatesRangeFilterVisitor(DatesRangeFilterStrategy filter) {
 		this.filter = filter;
 	}
 	

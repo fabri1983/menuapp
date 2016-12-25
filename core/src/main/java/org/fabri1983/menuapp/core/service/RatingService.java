@@ -4,7 +4,7 @@ import org.fabri1983.menuapp.core.entity.menu.Menu;
 
 public interface RatingService {
 
-	int getRatingFromMenu (long menuId);
+	int getRatingFromMenu(long menuId);
 	
-	Menu updateRating (long menuId, int rating);
+	Menu updateRating(long menuId, int rating);
 }

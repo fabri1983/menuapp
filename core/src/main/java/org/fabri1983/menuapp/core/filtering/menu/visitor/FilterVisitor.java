@@ -5,8 +5,8 @@ import org.fabri1983.menuapp.core.entity.menu.TimeConstraintMenu;
 
 public interface FilterVisitor {
 
-	boolean canFilterMenu (DefaultMenu menu);
+	boolean canFilterMenu(DefaultMenu menu);
 	
-	boolean filter (TimeConstraintMenu menu);
+	boolean filter(TimeConstraintMenu menu);
 	
 }

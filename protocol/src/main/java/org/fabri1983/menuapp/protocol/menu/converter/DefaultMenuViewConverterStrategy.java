@@ -15,11 +15,11 @@ class DefaultMenuViewConverterStrategy implements MenuViewConverterStrategy {
 	
 	private MenuTypeConverterRequester converterStrategy;
 	
-	private DefaultMenuViewConverterStrategy () {
+	private DefaultMenuViewConverterStrategy() {
 		converterStrategy = new DefaultMenuTypeConverterRequester();
 	}
 	
-	public static MenuViewConverterStrategy get () {
+	public static MenuViewConverterStrategy get() {
 		return instance;
 	}
 	
@@ -33,7 +33,7 @@ class DefaultMenuViewConverterStrategy implements MenuViewConverterStrategy {
 	}
 
 	@Override
-	public MenuTypeConverterRequester getStrategy () {
+	public MenuTypeConverterRequester getStrategy() {
 		return converterStrategy;
 	}
 

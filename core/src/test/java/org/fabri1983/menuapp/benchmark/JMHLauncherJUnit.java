@@ -14,7 +14,7 @@ public class JMHLauncherJUnit {
 	
 	static boolean junitInitializaed = false;
 	
-	public static boolean isJunitInitialized () {
+	public static boolean isJunitInitialized() {
 		return junitInitializaed;
 	}
 	

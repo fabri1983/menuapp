@@ -8,7 +8,7 @@ public class AvailableDaysMenuFilterVisitor implements FilterVisitor {
 
 	private AvailableDaysFilterStrategy filter;
 	
-	public AvailableDaysMenuFilterVisitor (AvailableDaysFilterStrategy filter) {
+	public AvailableDaysMenuFilterVisitor(AvailableDaysFilterStrategy filter) {
 		this.filter = filter;
 	}
 	

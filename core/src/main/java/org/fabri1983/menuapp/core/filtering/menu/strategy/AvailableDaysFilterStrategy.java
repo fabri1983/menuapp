@@ -10,7 +10,7 @@ public class AvailableDaysFilterStrategy implements MenuFilterStrategy {
 	private AvailableDaysMenuFilterVisitor filterVisitor;
 	private List<String> availableDays;
 	
-	public AvailableDaysFilterStrategy (List<String> availableDays) {
+	public AvailableDaysFilterStrategy(List<String> availableDays) {
 		this.availableDays = availableDays;
 		filterVisitor = new AvailableDaysMenuFilterVisitor(this);
 	}

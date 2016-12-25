@@ -12,7 +12,7 @@ public class SimpleMenuService implements MenuService {
 
 	MenuRepository repository;
 	
-	public SimpleMenuService (MenuRepository repository) {
+	public SimpleMenuService(MenuRepository repository) {
 		this.repository = repository;
 	}
 	

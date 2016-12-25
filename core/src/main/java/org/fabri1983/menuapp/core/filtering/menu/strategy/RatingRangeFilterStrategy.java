@@ -10,7 +10,7 @@ public class RatingRangeFilterStrategy implements MenuFilterStrategy {
 	private int ratingFrom;
 	private int ratingTo;
 	
-	public RatingRangeFilterStrategy (int ratingFrom, int ratingTo, CurrencyType currency) {
+	public RatingRangeFilterStrategy(int ratingFrom, int ratingTo, CurrencyType currency) {
 		this.ratingFrom = ratingFrom;
 		this.ratingTo = ratingTo;
 		filterVisitor = new RatingRangeFilterVisitor(this);

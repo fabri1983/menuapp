@@ -8,7 +8,7 @@ import com.google.inject.Singleton;
 import com.google.inject.name.Named;
 
 import org.fabri1983.menuapp.core.dao.MenuDao;
-import org.fabri1983.menuapp.core.dao.implementation.HDFSMenuDao;
+import org.fabri1983.menuapp.core.dao.implementation.HdfsMenuDao;
 import org.fabri1983.menuapp.core.dao.implementation.PreloadedMenuDao;
 import org.fabri1983.menuapp.core.dao.implementation.RedisMenuDao;
 import org.fabri1983.menuapp.core.repository.LoginRepository;
@@ -25,7 +25,7 @@ import org.fabri1983.menuapp.core.service.implementation.SimpleRatingService;
 public class MenuAppProvider implements Module {
 
     @Override
-    public void configure (Binder binder) {
+    public void configure(Binder binder) {
         // add manual bindings here and configure them
     }
     
@@ -83,7 +83,7 @@ public class MenuAppProvider implements Module {
     @Singleton
     @Named("HDFSMenuDao")
     public MenuDao provideHDFSMenuDao() {
-        return new HDFSMenuDao();
+        return new HdfsMenuDao();
     }
     
 }

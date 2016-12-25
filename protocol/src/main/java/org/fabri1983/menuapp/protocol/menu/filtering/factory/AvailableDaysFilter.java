@@ -7,12 +7,12 @@ import org.fabri1983.menuapp.protocol.menu.filtering.MenuFiltersView;
 public class AvailableDaysFilter implements MenuFilter {
 
 	@Override
-	public boolean isValid (MenuFiltersView filterData) {
+	public boolean isValid(MenuFiltersView filterData) {
 		return filterData.getAvailableDays() != null && !filterData.getAvailableDays().isEmpty();
 	}
 
 	@Override
-	public void chain (ChainedMenuFilterBuilder filterChainBuilder, MenuFiltersView filterData) {
+	public void chain(ChainedMenuFilterBuilder filterChainBuilder, MenuFiltersView filterData) {
 		filterChainBuilder.chain(new AvailableDaysFilterStrategy(filterData.getAvailableDays()));
 	}
 }

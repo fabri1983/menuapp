@@ -19,7 +19,7 @@ public class InMemoryMenuRepository implements MenuRepository {
 	private Map<String, Menu> menusByName;
 	private MenuDao dao;
 	
-	public InMemoryMenuRepository (MenuDao dao) {
+	public InMemoryMenuRepository(MenuDao dao) {
 		menusById = new HashMap<Long, Menu>();
 		menusByName = new HashMap<String, Menu>();
 		this.dao = dao;

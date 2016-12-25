@@ -27,10 +27,12 @@ public class CustomConfigurationSourceProvider implements ConfigurationSourcePro
 		try {
 			return new FileConfigurationSourceProvider().open(path);
 		} catch (IOException e){
-        	if ("-".equals(path))
+        	if ("-".equals(path)) {
         		path = "server-config.yml";
-        	else
-        		logger.warn(String.format("File %s not found. Fallback to %s", path, ResourceConfigurationSourceProvider.class.getName()));
+        	} else {
+        		String className = ResourceConfigurationSourceProvider.class.getName();
+				logger.warn(String.format("File %s not found. Fallback to %s", path, className));
+        	}
         	return new ResourceConfigurationSourceProvider().open(path);
         }
     }

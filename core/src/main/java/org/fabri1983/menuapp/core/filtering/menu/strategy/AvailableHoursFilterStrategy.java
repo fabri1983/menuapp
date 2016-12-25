@@ -11,7 +11,7 @@ public class AvailableHoursFilterStrategy implements MenuFilterStrategy {
 	private LocalTime hourFrom;
 	private LocalTime hourTo;
 	
-	public AvailableHoursFilterStrategy (LocalTime hourFrom, LocalTime hourTo) {
+	public AvailableHoursFilterStrategy(LocalTime hourFrom, LocalTime hourTo) {
 		this.hourFrom = hourFrom;
 		this.hourTo = hourTo;
 		filterVisitor = new AvailableHoursFilterVisitor(this);

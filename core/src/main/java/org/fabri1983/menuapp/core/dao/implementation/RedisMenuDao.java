@@ -33,7 +33,7 @@ public class RedisMenuDao implements MenuDao {
 	}
 
 	@Override
-	public MenuDaoPresentationConverter getConverter () {
+	public MenuDaoPresentationConverter getConverter() {
 		// we store data in Redis in Json format
 		return new JsonPresentationToMenuConverter();
 	}

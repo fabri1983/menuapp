@@ -103,12 +103,12 @@ public class TimeConstraintMenu implements Menu {
 	}
 	
 	@Override
-	public boolean applyFilter (FilterVisitor filterVisitor) {
+	public boolean applyFilter(FilterVisitor filterVisitor) {
 		return filterVisitor.filter(this);
 	}
 	
 	@Override
-	public boolean acceptsConverter (MenuTypeConverterRequester converter) {
+	public boolean acceptsConverter(MenuTypeConverterRequester converter) {
 		return converter.acceptsMenu(this);
 	}
 }

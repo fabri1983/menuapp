@@ -23,7 +23,7 @@ public class InfoResource {
 	private BuildInfoConfig buildInfoConfig;
 	
 	@Inject
-	public InfoResource (HasBuildInfoFeature hasBuildInfoFeature) {
+	public InfoResource(HasBuildInfoFeature hasBuildInfoFeature) {
 		this.buildInfoConfig = hasBuildInfoFeature.getBuildInfoConfig();
 	}
 
@@ -34,7 +34,7 @@ public class InfoResource {
 	        @ApiResponse(code = 200, message = "Successful retrieval of build info", response = String.class)}
 	    )
 	@Path("/buildinfo")
-	public Response getBuildInfo ()
+	public Response getBuildInfo()
 	{
 		String buildInfo = buildInfoConfig.getBuildInfo();
 		return Response.status(Response.Status.OK).entity(buildInfo).build();
@@ -47,7 +47,7 @@ public class InfoResource {
 	        @ApiResponse(code = 200, message = "Successful retrieval of profile name", response = String.class)}
 	    )
 	@Path("/profile")
-	public Response getBuildProfile ()
+	public Response getBuildProfile()
 	{
 		String buildProfile = buildInfoConfig.getBuildProfile();
 		return Response.status(Response.Status.OK).entity(buildProfile).build();

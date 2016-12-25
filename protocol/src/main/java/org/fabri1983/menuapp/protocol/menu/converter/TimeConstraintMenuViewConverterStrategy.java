@@ -15,11 +15,11 @@ class TimeConstraintMenuViewConverterStrategy implements MenuViewConverterStrate
 	
 	private MenuTypeConverterRequester converterStrategy;
 	
-	private TimeConstraintMenuViewConverterStrategy () {
+	private TimeConstraintMenuViewConverterStrategy() {
 		converterStrategy = new TimeConstraintMenuTypeConverterRequester();
 	}
 	
-	public static MenuViewConverterStrategy get () {
+	public static MenuViewConverterStrategy get() {
 		return instance;
 	}
 	
@@ -33,7 +33,7 @@ class TimeConstraintMenuViewConverterStrategy implements MenuViewConverterStrate
 	}
 
 	@Override
-	public MenuTypeConverterRequester getStrategy () {
+	public MenuTypeConverterRequester getStrategy() {
 		return converterStrategy;
 	}
 

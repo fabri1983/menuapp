@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
  *    public TestLogger logger = new TestLogger();
  *    
  *    &#64;Test
- *    public void someTest () {
+ *    public void someTest() {
  *       final Logger log = logger.getLogger();
  *       ...
  *    }

@@ -13,7 +13,7 @@ public class PriceRangeFilterStrategy implements MenuFilterStrategy {
 	private BigDecimal priceTo;
 	private CurrencyType currency;
 	
-	public PriceRangeFilterStrategy (BigDecimal priceFrom, BigDecimal priceTo, CurrencyType currency) {
+	public PriceRangeFilterStrategy(BigDecimal priceFrom, BigDecimal priceTo, CurrencyType currency) {
 		this.priceFrom = priceFrom;
 		this.priceTo = priceTo;
 		this.currency = currency;

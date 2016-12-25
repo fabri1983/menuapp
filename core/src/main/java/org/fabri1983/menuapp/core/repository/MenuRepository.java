@@ -12,7 +12,7 @@ public interface MenuRepository {
 	
 	Menu getByName(String menuName);
 	
-	Menu add (Menu newMenu);
+	Menu add(Menu newMenu);
 	
 	void delete(long menuId);
 	

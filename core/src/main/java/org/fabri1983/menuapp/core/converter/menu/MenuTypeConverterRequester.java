@@ -10,7 +10,7 @@ import org.fabri1983.menuapp.core.entity.menu.TimeConstraintMenu;
  */
 public interface MenuTypeConverterRequester {
 
-	boolean acceptsMenu (DefaultMenu menu);
+	boolean acceptsMenu(DefaultMenu menu);
 	
-	boolean acceptsMenu (TimeConstraintMenu menu);
+	boolean acceptsMenu(TimeConstraintMenu menu);
 }

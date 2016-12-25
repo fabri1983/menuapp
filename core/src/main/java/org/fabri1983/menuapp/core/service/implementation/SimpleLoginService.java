@@ -7,7 +7,7 @@ public class SimpleLoginService implements LoginService {
 
 	LoginRepository loginRepository;
 	
-	public SimpleLoginService (LoginRepository loginRepository) {
+	public SimpleLoginService(LoginRepository loginRepository) {
 		this.loginRepository = loginRepository;
 	}
 
@@ -21,7 +21,7 @@ public class SimpleLoginService implements LoginService {
 		loginRepository.loginUser(userName, userPassHashed);
 		
 		// TODO use a Token Generator service
-		String token = "h0t6dSh8gR5mBpMF3EWWJospF6usI8RLGWIOGCe5Z2HtKu32BBviWrt9wbnO21JICFXKYddYotB79ckrCVRv2z71PFlavOkeDD2JyiueYupdx87DwVpCox58KkQ2kwPb";
+		String token = "h0t6dSh8gR5mBpMF3EWWJospF6usI8RLGWIOGCe5Z2HtKu32BBviWrt9wbnO21JICFXKYddYot";
 		
 		return token;
 	}

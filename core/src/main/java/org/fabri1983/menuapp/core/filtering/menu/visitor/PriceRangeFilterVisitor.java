@@ -10,7 +10,7 @@ public class PriceRangeFilterVisitor implements FilterVisitor {
 
 	private PriceRangeFilterStrategy filter;
 	
-	public PriceRangeFilterVisitor (PriceRangeFilterStrategy filter) {
+	public PriceRangeFilterVisitor(PriceRangeFilterStrategy filter) {
 		this.filter = filter;
 	}
 	

@@ -11,7 +11,7 @@ public class DatesRangeFilterStrategy implements MenuFilterStrategy {
 	private LocalDateTime dateFrom;
 	private LocalDateTime dateTo;
 	
-	public DatesRangeFilterStrategy (LocalDateTime dateFrom, LocalDateTime dateTo) {
+	public DatesRangeFilterStrategy(LocalDateTime dateFrom, LocalDateTime dateTo) {
 		this.dateFrom = dateFrom;
 		this.dateTo = dateTo;
 		filterVisitor = new DatesRangeFilterVisitor(this);

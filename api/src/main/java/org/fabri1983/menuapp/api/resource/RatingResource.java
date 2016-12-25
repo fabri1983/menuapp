@@ -30,7 +30,7 @@ public class RatingResource {
 	private RatingService ratingService;
 
 	@Inject
-	public RatingResource (RatingService ratingService) {
+	public RatingResource(RatingService ratingService) {
 		this.ratingService = ratingService;
 	}
 	

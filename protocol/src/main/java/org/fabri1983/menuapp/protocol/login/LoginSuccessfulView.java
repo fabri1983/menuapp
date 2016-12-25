@@ -39,15 +39,15 @@ public class LoginSuccessfulView {
 		return new LoginSuccessfulView(loginRequest.getUserName(), loginRequest.getLocation(), token);
 	}
 
-	public String getUserName () {
+	public String getUserName() {
 		return userName;
 	}
 
-	public LocationView getLocation () {
+	public LocationView getLocation() {
 		return location;
 	}
 	
-	public String getToken () {
+	public String getToken() {
 		return token;
 	}
 }

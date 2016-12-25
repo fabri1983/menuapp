@@ -8,7 +8,7 @@ public class RatingRangeFilterVisitor implements FilterVisitor {
 
 	private RatingRangeFilterStrategy filter;
 	
-	public RatingRangeFilterVisitor (RatingRangeFilterStrategy filter) {
+	public RatingRangeFilterVisitor(RatingRangeFilterStrategy filter) {
 		this.filter = filter;
 	}
 	

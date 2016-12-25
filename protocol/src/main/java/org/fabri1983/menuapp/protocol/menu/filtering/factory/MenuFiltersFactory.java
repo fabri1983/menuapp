@@ -16,12 +16,12 @@ public class MenuFiltersFactory {
 										new DatesRangeFilter()
 									);
 	
-	public static MenuFilterStrategy createFrom (MenuFiltersView filterData) {
+	public static MenuFilterStrategy createFrom(MenuFiltersView filterData) {
 		MenuFilterStrategy filterChain = setupFilterChain(filterData);
 		return filterChain;
 	}
 
-	private static MenuFilterStrategy setupFilterChain (MenuFiltersView filterData) {
+	private static MenuFilterStrategy setupFilterChain(MenuFiltersView filterData) {
 		ChainedMenuFilterBuilder filterChainBuilder = ChainedMenuFilterBuilder.newOne();
 		
 		filters.stream().filter(f -> f.isValid(filterData)).forEach( f -> f.chain(filterChainBuilder, filterData));

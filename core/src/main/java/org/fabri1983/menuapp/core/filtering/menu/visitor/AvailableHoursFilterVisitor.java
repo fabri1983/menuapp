@@ -10,7 +10,7 @@ public class AvailableHoursFilterVisitor implements FilterVisitor {
 
 	private AvailableHoursFilterStrategy filter;
 	
-	public AvailableHoursFilterVisitor (AvailableHoursFilterStrategy filter) {
+	public AvailableHoursFilterVisitor(AvailableHoursFilterStrategy filter) {
 		this.filter = filter;
 	}
 	

@@ -4,5 +4,5 @@ import org.fabri1983.menuapp.api.config.hasfeature.impl.BuildInfoConfig;
 
 public interface HasBuildInfoFeature {
 
-	BuildInfoConfig getBuildInfoConfig ();
+	BuildInfoConfig getBuildInfoConfig();
 }

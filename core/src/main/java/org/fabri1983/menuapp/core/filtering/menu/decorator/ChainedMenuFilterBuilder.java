@@ -8,16 +8,16 @@ public class ChainedMenuFilterBuilder {
 	private ChainedMenuFilterDecorator first;
 	private ChainedMenuFilterDecorator current;
 	
-	ChainedMenuFilterBuilder () {
+	ChainedMenuFilterBuilder() {
 		current = new ChainedMenuFilterDecorator(new DummyFilterStrategy());
 		first = current;
 	}
 	
-	public static ChainedMenuFilterBuilder newOne () {
+	public static ChainedMenuFilterBuilder newOne() {
 		return new ChainedMenuFilterBuilder();
 	}
 	
-	public ChainedMenuFilterBuilder chain (MenuFilterStrategy menuFilter) {
+	public ChainedMenuFilterBuilder chain(MenuFilterStrategy menuFilter) {
 		
 		// decorate the filter so it can handle a next filter
 		ChainedMenuFilterDecorator next = new ChainedMenuFilterDecorator(menuFilter);
@@ -31,7 +31,7 @@ public class ChainedMenuFilterBuilder {
 		return this;
 	}
 	
-	public MenuFilterStrategy build () {
+	public MenuFilterStrategy build() {
 		// filter closure: make sure no null filter is left in the chain
 		current.setNextFilter(new DummyFilterStrategy());
 		

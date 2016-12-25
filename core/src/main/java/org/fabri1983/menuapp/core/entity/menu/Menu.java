@@ -17,6 +17,6 @@ public interface Menu {
 	int getRating();
 	void updateRating(int rating);
 	
-	boolean applyFilter (FilterVisitor filterVisitor);
-	boolean acceptsConverter (MenuTypeConverterRequester converter);
+	boolean applyFilter(FilterVisitor filterVisitor);
+	boolean acceptsConverter(MenuTypeConverterRequester converter);
 }

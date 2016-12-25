@@ -9,11 +9,11 @@ public class BuildInfoConfig {
 	@NotEmpty
 	private String buildProfile;
 	
-	public String getBuildInfo () {
+	public String getBuildInfo() {
 		return buildInfo;
 	}
 	
-	public String getBuildProfile () {
+	public String getBuildProfile() {
 		return buildProfile;
 	}
 }

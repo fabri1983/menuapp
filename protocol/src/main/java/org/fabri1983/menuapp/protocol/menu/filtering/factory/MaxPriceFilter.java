@@ -9,12 +9,12 @@ import org.fabri1983.menuapp.protocol.menu.filtering.MenuFiltersView;
 public class MaxPriceFilter implements MenuFilter {
 
 	@Override
-	public boolean isValid (MenuFiltersView filterData) {
+	public boolean isValid(MenuFiltersView filterData) {
 		return filterData.getMaxPrice() != null;
 	}
 
 	@Override
-	public void chain (ChainedMenuFilterBuilder filterChainBuilder, MenuFiltersView filterData) {
+	public void chain(ChainedMenuFilterBuilder filterChainBuilder, MenuFiltersView filterData) {
 		filterChainBuilder.chain(new PriceRangeFilterStrategy(BigDecimal.ZERO, filterData.getMaxPrice(), filterData.getCurrency()));
 	}
 }

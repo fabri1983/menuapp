@@ -28,7 +28,7 @@ public class LoginResource {
 	private LoginService loginService;
 	
 	@Inject
-	public LoginResource (LoginService loginService) {
+	public LoginResource(LoginService loginService) {
 		this.loginService = loginService;
 	}
 	
@@ -40,7 +40,7 @@ public class LoginResource {
 	        @ApiResponse(code = 401, message = "Authorization has been refused"),
 			@ApiResponse(code = 422, message = "Unprocessable entity. Validation failed")}
 	    )
-	public Response login (
+	public Response login(
 			@NotNull @Valid LoginView loginView)
 	{
 		String token = loginService.loginUser(loginView.getUserName(), loginView.getUserPassHashed());

@@ -11,7 +11,7 @@ import org.fabri1983.menuapp.core.dao.presentation.JsonMenuPresentation;
 /**
  * Menu entities are stored and retrieved from a Hadoop Distributed File System.
  */
-public class HDFSMenuDao implements MenuDao {
+public class HdfsMenuDao implements MenuDao {
 
 	// TODO add instance field for HDFS access. Inject it via constructor
 	
@@ -33,7 +33,7 @@ public class HDFSMenuDao implements MenuDao {
 	}
 
 	@Override
-	public MenuDaoPresentationConverter getConverter () {
+	public MenuDaoPresentationConverter getConverter() {
 		// we store data in HDFS as Json format documents
 		return new JsonPresentationToMenuConverter();
 	}

@@ -6,7 +6,7 @@ import org.fabri1983.menuapp.protocol.menu.MenuView;
 
 interface MenuViewConverterStrategy {
 
-	MenuView convert (Menu menu);
+	MenuView convert(Menu menu);
 	
-	MenuTypeConverterRequester getStrategy ();
+	MenuTypeConverterRequester getStrategy();
 }

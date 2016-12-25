@@ -43,7 +43,7 @@ public class MenuResource {
 	private MenuQueryConfig menuQueryConfig;
 	
 	@Inject
-	public MenuResource (MenuService menuService, HasMenuQueryFeature hasMenuQueryFeature) {
+	public MenuResource(MenuService menuService, HasMenuQueryFeature hasMenuQueryFeature) {
 		this.menuService = menuService;
 		this.menuQueryConfig = hasMenuQueryFeature.getMenuQueryConfig();
 	}
@@ -54,7 +54,7 @@ public class MenuResource {
 	@ApiResponses(value = {
 	        @ApiResponse(code = 200, message = "Successful retrieval of all menus", response = MenuView.class, responseContainer = "List")}
 	    )
-	public Response getAll ()
+	public Response getAll()
 	{
 		Collection<Menu> allMenus = menuService.getAll();
 		List<MenuView> menuViews = MenuView.convert(allMenus, menuQueryConfig.getMaxAllowedResults());
@@ -69,7 +69,7 @@ public class MenuResource {
 	        @ApiResponse(code = 404, message = "Menu not found")}
 	    )
 	@Path("/{menu_id}")
-	public Response getSingle (
+	public Response getSingle(
 			@PathParam("menu_id") long menuId) throws Exception 
 	{
 		Menu menu = menuService.getById(menuId);
@@ -85,7 +85,7 @@ public class MenuResource {
 	        @ApiResponse(code = 422, message = "Unprocessable entity. Validation failed")}
 	    )
 	@Path("/filter")
-	public Response filter (
+	public Response filter(
 			@NotNull @Valid MenuFiltersView menuFilteredView)
 	{
 		MenuFilterStrategy filterChain = MenuFiltersFactory.createFrom(menuFilteredView);
@@ -105,7 +105,7 @@ public class MenuResource {
 	        @ApiResponse(code = 422, message = "Unprocessable entity. Validation failed")}
 	    )
 	@Path("/group")
-	public Response group (
+	public Response group(
 			@NotNull @Valid MenuGroupView menuGroupView)
 	{
 		MenuFilterStrategy filterChain = MenuGroupFactory.createFrom(menuGroupView);
@@ -124,7 +124,7 @@ public class MenuResource {
 	        @ApiResponse(code = 404, message = "Menu not found")}
 	    )
 	@Path("/{menu_id}")
-	public Response delete (
+	public Response delete(
 			@PathParam("menu_id") long menuId)
 	{
 		menuService.delete(menuId);
@@ -138,7 +138,7 @@ public class MenuResource {
 	        @ApiResponse(code = 201, message = "Successful creation of menu"),
 	        @ApiResponse(code = 422, message = "Unprocessable entity. Validation failed")}
 	    )
-	public Response add (
+	public Response add(
 			@NotNull @Valid MenuView menu)
 	{
 		// FIXME call core api for adding a new menu
@@ -154,7 +154,7 @@ public class MenuResource {
 	        @ApiResponse(code = 404, message = "Menu not found")}
 	    )
 	@Path("/{menu_id}")
-	public Response replace (
+	public Response replace(
 			@PathParam("menu_id") long menuId,
 			@NotNull @Valid MenuView menuUpdated)
 	{

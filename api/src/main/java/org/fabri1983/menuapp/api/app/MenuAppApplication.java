@@ -71,13 +71,13 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 	}
 
 	@Override
-	public void run (MenuAppConfiguration configuration, Environment environment) throws Exception {
+	public void run(MenuAppConfiguration configuration, Environment environment) throws Exception {
 		logger.info("---------> Starting Menu App application");
 		registerHealthChecks(environment);
 		logger.info("---------> Menu App application started");
 	}
 
-	private void registerHealthChecks (Environment environment) {
+	private void registerHealthChecks(Environment environment) {
 		environment.healthChecks().register("dummy healthcheck", new DummyHealthCheck());
 		// if you defined the health check as a bean then add it this way  
 //		environment.lifecycle().manage(guiceBundle.getInjector().getInstance(DummyHealthCheck.class));
