@@ -1,14 +1,14 @@
 package org.fabri1983.menuapp.api.resource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import io.dropwizard.testing.junit.ResourceTestRule;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.fabri1983.menuapp.api.config.hasfeature.HasBuildInfoFeature;
 import org.fabri1983.menuapp.api.config.hasfeature.impl.BuildInfoConfig;

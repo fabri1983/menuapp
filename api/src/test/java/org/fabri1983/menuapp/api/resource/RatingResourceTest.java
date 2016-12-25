@@ -1,10 +1,5 @@
 package org.fabri1983.menuapp.api.resource;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
-
 import io.dropwizard.jersey.validation.ValidationErrorMessage;
 import io.dropwizard.testing.junit.ResourceTestRule;
 
@@ -16,6 +11,11 @@ import java.nio.CharBuffer;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.fabri1983.menuapp.core.entity.menu.CurrencyType;
 import org.fabri1983.menuapp.core.entity.menu.DefaultMenu;

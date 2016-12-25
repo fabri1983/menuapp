@@ -1,12 +1,12 @@
 package org.fabri1983.menuapp.utils;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.imageio.ImageIO;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.assertj.core.api.Fail;
 import org.junit.FixMethodOrder;
