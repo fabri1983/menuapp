@@ -18,7 +18,7 @@ public class JMHLauncherJUnit {
 		return junitInitializaed;
 	}
 	
-	public static void launchBenchmark (String targetClass) throws RunnerException {
+	public static void launchBenchmark(String targetClass) throws RunnerException {
 		
 		// this needed in order to avoid re running of @Test
 		junitInitializaed = true;

@@ -18,7 +18,7 @@ import org.junit.runners.MethodSorters;
 public class SplittableInputStreamTest {
 
 	@Test
-	public void _1_splitInputStreamInTwo_Test () throws UnsupportedEncodingException {
+	public void splitInputStreamInTwoTest() throws UnsupportedEncodingException {
 		
 		String str = "Lorem ipsum\ndolor sit\namet\n";
 		InputStream inputStream = new ByteArrayInputStream(str.getBytes("UTF-8"));

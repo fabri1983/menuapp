@@ -11,7 +11,7 @@ public class BenchmarkJMHCleanup {
 	public static JmhCleaner cleaner = new JmhCleaner(BenchmarkJMHCleanup.class);
 	
 	@Test
-	public void forceClassRuleExecution () {
+	public void forceClassRuleExecution() {
 		// we need at least one test to ensure the cleanup by JmhCleaner
 	}
 }

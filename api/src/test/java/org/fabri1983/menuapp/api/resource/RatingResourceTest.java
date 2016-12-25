@@ -44,7 +44,7 @@ public class RatingResourceTest {
     	.build();
 	
 	@Test
-	public void _1_whenRatingWithInvalidMinValueThenErrorExpected () throws MalformedURLException {
+	public void whenRatingWithInvalidMinValueThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(0, "dummy description");
 		
 		Response response = resource.client().target(String.format("/user/12345/menu/%s/rate", 1))
@@ -58,7 +58,7 @@ public class RatingResourceTest {
 	}
 	
 	@Test
-	public void _2_whenRatingWithInvalidMaxValueThenErrorExpected () throws MalformedURLException {
+	public void whenRatingWithInvalidMaxValueThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(6, "dummy description");
 		
 		Response response = resource.client().target(String.format("/user/12345/menu/%s/rate", 1))
@@ -72,7 +72,7 @@ public class RatingResourceTest {
 	}
 	
 	@Test
-	public void _3_whenRatingWithEmptyDescriptionThenErrorExpected () throws MalformedURLException {
+	public void whenRatingWithEmptyDescriptionThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(1, "");
 		
 		Response response = resource.client().target(String.format("/user/12345/menu/%s/rate", 1))
@@ -86,7 +86,7 @@ public class RatingResourceTest {
 	}
 	
 	@Test
-	public void _4_whenRatingWithInvalidMinLengthDescriptionThenErrorExpected () throws MalformedURLException {
+	public void whenRatingWithInvalidMinLengthDescriptionThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(1, "a");
 		
 		Response response = resource.client().target(String.format("/user/12345/menu/%s/rate", 1))
@@ -100,7 +100,7 @@ public class RatingResourceTest {
 	}
 	
 	@Test
-	public void _5_whenRatingWithInvalidMinLengthDescriptionThenErrorExpected () throws MalformedURLException {
+	public void whenRatingWithInvalidMaxLengthDescriptionThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(1, stringOfLength(256, 'a'));
 		
 		Response response = resource.client().target(String.format("/user/12345/menu/%s/rate", 1))
@@ -114,7 +114,7 @@ public class RatingResourceTest {
 	}
 	
 	@Test
-	public void _6_whenRatingAMenuThenRatingIsApplied () throws MalformedURLException {
+	public void whenRatingAMenuThenRatingIsApplied() throws MalformedURLException {
 		int rating = 3;
 		long menuId = 2L;
 		Menu menuUpdated = createDefaultMenu(menuId, rating);
@@ -133,8 +133,9 @@ public class RatingResourceTest {
 		assertThat(ratingAppliedView.getRating()).isEqualTo(rating);
 	}
 	
-	private Menu createDefaultMenu (long menuId, int rating) throws MalformedURLException {
-		return new DefaultMenu(menuId, "Cheapest Dinner", "Are you saving some dimes?", new URL("http://fabri1983.org/images/dinnerCheap.png"), 
+	private Menu createDefaultMenu(long menuId, int rating) throws MalformedURLException {
+		return new DefaultMenu(menuId, "Cheapest Dinner", "Are you saving some dimes?", 
+				new URL("http://fabri1983.org/images/dinnerCheap.png"), 
 				BigDecimal.valueOf(80), CurrencyType.DEFAULT_USD, rating);
 	}
 	
@@ -147,7 +148,7 @@ public class RatingResourceTest {
 	 * @param replacement
 	 *            Repeated character all along the string.
 	 */
-	public String stringOfLength (final int length, final char replacement) {
+	public String stringOfLength(final int length, final char replacement) {
 		return CharBuffer.allocate(length).toString().replace('\0', replacement);
 	}
 }

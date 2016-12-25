@@ -17,7 +17,7 @@ import org.junit.runners.MethodSorters;
 public class ImageIOTest {
 
 	@Test
-	public void _1_imageIOReadFromInputStreamNoCache_Test () {
+	public void imageIOReadFromInputStreamNoCacheTest() {
 		ImageIO.setUseCache(false);
 		assertThat(ImageIO.getUseCache()).isFalse();
 		assertThat(ImageIO.getCacheDirectory()).isNull();

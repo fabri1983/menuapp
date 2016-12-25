@@ -22,7 +22,7 @@ import org.openjdk.jmh.runner.RunnerException;
 public class RatingServiceBenchmark extends JMHLauncherJUnit {
 	
 	@BeforeClass
-	public static void launchBenchmark () throws RunnerException {
+	public static void launchBenchmark() throws RunnerException {
 		if (isJunitInitialized())
 			return;
 		
@@ -32,7 +32,7 @@ public class RatingServiceBenchmark extends JMHLauncherJUnit {
 	}
 	
 	@Setup(Level.Trial)
-	public void initialize () {
+	public void initialize() {
 	}
 	
 	@TearDown(Level.Trial)
@@ -40,12 +40,12 @@ public class RatingServiceBenchmark extends JMHLauncherJUnit {
     }
 	
 	@Test
-	public void forceLaunch () throws RunnerException {
+	public void forceLaunch() throws RunnerException {
 		// empty test to trigger the execution of the benchmark
 	}
 	
 	@Benchmark
-	public void getRatingFromMenu (Blackhole blackHole) {
+	public void getRatingFromMenu(Blackhole blackHole) {
 		MenuDao menuDao = new PreloadedMenuDao();
 		MenuRepository menuRepository = new InMemoryMenuRepository(menuDao);
 		RatingService ratingService = new SimpleRatingService(menuRepository);
@@ -54,7 +54,7 @@ public class RatingServiceBenchmark extends JMHLauncherJUnit {
 	}
 	
 	@Benchmark
-	public void updateRating (Blackhole blackHole) {
+	public void updateRating(Blackhole blackHole) {
 		MenuDao menuDao = new PreloadedMenuDao();
 		MenuRepository menuRepository = new InMemoryMenuRepository(menuDao);
 		RatingService ratingService = new SimpleRatingService(menuRepository);

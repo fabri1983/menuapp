@@ -32,7 +32,8 @@ public class TestLogger implements TestRule {
 		return new Statement() {
 			@Override
 			public void evaluate() throws Throwable {
-				logger = LoggerFactory.getLogger(description.getTestClass().getName() + '.' + description.getDisplayName());
+				String loggerName = description.getTestClass().getName() + '.' + description.getDisplayName();
+				logger = LoggerFactory.getLogger(loggerName);
 				base.evaluate();
 			}
 		};

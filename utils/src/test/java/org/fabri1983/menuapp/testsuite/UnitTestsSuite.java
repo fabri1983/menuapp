@@ -11,6 +11,5 @@ import org.junit.runners.Suite;
 		UtilsTestsSuite.class
 	})
 public class UnitTestsSuite {
-
 	
 }

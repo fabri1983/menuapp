@@ -34,7 +34,7 @@ public class InfoResourceTest {
     	.build();
 	
 	@Test
-	public void _1_whenRequestBuildinfoThenMessageExpected () {
+	public void whenRequestBuildinfoThenMessageExpected() {
 		final String buildInfoString = "ajhd239xbjsd9 dev. Build at xx:xx:xx xxxxx";
 		when(buildInfoConfig.getBuildInfo()).thenReturn(buildInfoString);
 		
@@ -47,7 +47,7 @@ public class InfoResourceTest {
 	}
 	
 	@Test
-	public void _2_whenRequestProfileThenMessageExpected () {
+	public void whenRequestProfileThenMessageExpected() {
 		final String buildProfileString = "testingProfile AA";
 		when(buildInfoConfig.getBuildProfile()).thenReturn(buildProfileString);
 		

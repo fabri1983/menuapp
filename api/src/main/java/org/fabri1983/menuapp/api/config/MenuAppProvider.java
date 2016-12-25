@@ -32,28 +32,28 @@ public class MenuAppProvider implements Module {
     @Provides
     @Singleton
     @Inject
-    public LoginService getLoggingService (@Named("InMemoryLoginRepository") LoginRepository loginRepository) {
+    public LoginService getLoggingService(@Named("InMemoryLoginRepository") LoginRepository loginRepository) {
     	return new SimpleLoginService(loginRepository);
     }
     
     @Provides
     @Singleton
     @Inject
-    public MenuService getMenuService (@Named("InMemoryMenuRepository") MenuRepository menuRepository) {
+    public MenuService getMenuService(@Named("InMemoryMenuRepository") MenuRepository menuRepository) {
     	return new SimpleMenuService(menuRepository);
     }
     
     @Provides
     @Singleton
     @Inject
-    public RatingService getRatingService (@Named("InMemoryMenuRepository") MenuRepository menuRepository) {
+    public RatingService getRatingService(@Named("InMemoryMenuRepository") MenuRepository menuRepository) {
     	return new SimpleRatingService(menuRepository);
     }
     
     @Provides
     @Singleton
     @Named("InMemoryLoginRepository")
-    public LoginRepository getInMemoryLoginRepository () {
+    public LoginRepository getInMemoryLoginRepository() {
     	return new InMemoryLoginRepository();
     }
     
@@ -61,28 +61,28 @@ public class MenuAppProvider implements Module {
     @Singleton
     @Named("InMemoryMenuRepository")
     @Inject
-	public MenuRepository getInMemoryMenuRepository (@Named("PreloadedMenuDao") MenuDao menuDao) {
+	public MenuRepository getInMemoryMenuRepository(@Named("PreloadedMenuDao") MenuDao menuDao) {
     	return new InMemoryMenuRepository(menuDao);
     }
     
     @Provides
     @Singleton
     @Named("RedisMenuDao")
-    public MenuDao provideRedisMenuDao () {
+    public MenuDao provideRedisMenuDao() {
         return new RedisMenuDao();
     }
     
     @Provides
     @Singleton
     @Named("PreloadedMenuDao")
-    public MenuDao providePreloadedMenuDao () {
+    public MenuDao providePreloadedMenuDao() {
         return new PreloadedMenuDao();
     }
     
     @Provides
     @Singleton
     @Named("HDFSMenuDao")
-    public MenuDao provideHDFSMenuDao () {
+    public MenuDao provideHDFSMenuDao() {
         return new HDFSMenuDao();
     }
     

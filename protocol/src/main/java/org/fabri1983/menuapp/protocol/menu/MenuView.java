@@ -35,7 +35,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 @ApiModel(value="MenuView", description="Presentation of a menu request/response")
-@JsonInclude(value = JsonInclude.Include.NON_NULL) // use this in order to exclude those fields having null values when serializing
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 @JsonNaming(LowerCaseStrategy.class)
 public class MenuView {
 
@@ -86,7 +86,7 @@ public class MenuView {
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime availableDateTo;
 	
-	public static MenuView convert (final Menu menu) {
+	public static MenuView convert(final Menu menu) {
 		return MenuViewConverterResolver.convert(menu);
 	}
 	
@@ -97,11 +97,13 @@ public class MenuView {
 				.collect(Collectors.toList());
 	}
 	
-	public static MenuView from (final DefaultMenu menu) {
-		return new MenuView(menu.getId(), menu.getName(), menu.getDescription(), menu.getPictureUrl().toString(), menu.getPrice(), menu.getCurrency(), menu.getRating());
+	public static MenuView from(final DefaultMenu menu) {
+		return new MenuView(menu.getId(), menu.getName(), menu.getDescription(), menu.getPictureUrl().toString(), 
+				menu.getPrice(), menu.getCurrency(), menu.getRating());
 	}
 	
-	private MenuView(long id, String name, String description, String pictureUrl, BigDecimal price, CurrencyType currency, int rating)
+	private MenuView(long id, String name, String description, String pictureUrl, 
+			BigDecimal price, CurrencyType currency, int rating)
 	{	
 		this.id = id;
 		this.name = name;
@@ -112,13 +114,15 @@ public class MenuView {
 		this.rating = rating;
 	}
 	
-	public static MenuView from (final TimeConstraintMenu menu) {
-		return new MenuView(menu.getId(), menu.getName(), menu.getDescription(), menu.getPictureUrl().toString(), menu.getPrice(), menu.getCurrency(), menu.getRating(),
-				menu.getHourFrom(), menu.getHourTo(), menu.getAvailableDays(), menu.getAvailableDateFrom(), menu.getAvailableDateTo());
+	public static MenuView from(final TimeConstraintMenu menu) {
+		return new MenuView(menu.getId(), menu.getName(), menu.getDescription(), menu.getPictureUrl().toString(), 
+				menu.getPrice(), menu.getCurrency(), menu.getRating(), menu.getHourFrom(), menu.getHourTo(), 
+				menu.getAvailableDays(), menu.getAvailableDateFrom(), menu.getAvailableDateTo());
 	}
 	
-	private MenuView(long id, String name, String description, String pictureUrl, BigDecimal price, CurrencyType currency, int rating, LocalTime hourFrom, 
-			LocalTime hourTo, List<String> availableDays, LocalDateTime availableDateFrom, LocalDateTime availableDateTo)
+	private MenuView(long id, String name, String description, String pictureUrl, BigDecimal price, 
+			CurrencyType currency, int rating, LocalTime hourFrom, LocalTime hourTo, List<String> availableDays, 
+			LocalDateTime availableDateFrom, LocalDateTime availableDateTo)
 	{	
 		this.id = id;
 		this.name = name;

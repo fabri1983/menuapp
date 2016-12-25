@@ -38,7 +38,7 @@ public class LoginResourceTest {
     	.build();
 	
 	@Test
-	public void _1_whenLoginInvalidUserNameThenErrorExpected () {
+	public void whenLoginInvalidUserNameThenErrorExpected() {
 		LoginView loginView = new LoginView("", "pass-hashed", new LocationView(BigInteger.ZERO, BigInteger.ZERO));
 		
 		Response response = resource.client().target("/user/login")
@@ -52,7 +52,7 @@ public class LoginResourceTest {
 	}
 	
 	@Test
-	public void _2_whenLoginInvalidUserPassHashedThenErrorExpected () {
+	public void whenLoginInvalidUserPassHashedThenErrorExpected() {
 		LoginView loginView = new LoginView("dummy name", "", new LocationView(BigInteger.ZERO, BigInteger.ZERO));
 		
 		Response response = resource.client().target("/user/login")
@@ -66,7 +66,7 @@ public class LoginResourceTest {
 	}
 	
 	@Test
-	public void _3_whenLoginValidUserThenTokenExpected () {
+	public void whenLoginValidUserThenTokenExpected() {
 		final String token = "aslkjd8ewrkjsd89ewarkljsd";
 		when(loginService.loginUser(any(), any())).thenReturn(token);
 		
