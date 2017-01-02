@@ -13,7 +13,7 @@ public class SplittableInputStream extends InputStream {
 	 */
 	static class MultiplexedSource {
 
-		static int MIN_BUF = 4096;
+		static int MIN_BUF = 2048;
 
 		// Underlying source
 		private InputStream source;
