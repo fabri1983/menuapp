@@ -13,24 +13,41 @@ public class SplittableInputStream extends InputStream {
 	 */
 	static class MultiplexedSource {
 
-		static int MIN_BUF = 2048;
+		static int MIN_BUF = 8192;
 
+		static int limitReadPosition = Integer.MAX_VALUE - 8; // Some VMs reserve some header words in an array
+		
 		// Underlying source
 		private InputStream source;
 
 		// Read positions of each SplittableInputStream
-		private List<Integer> readPositions = new ArrayList<>();
+		private List<Integer> readPositions;
 
 		// Data to be read by the SplittableInputStreams
-		int[] buffer = new int[MIN_BUF];
+		int[] resizableBuffer;
 
 		// Last valid position in buffer
-		int writePosition = 0;
+		int currentWritePosition;
+
+		int bufferLength;
+		
+		List<Integer> limitReadPositions;
 
 		public MultiplexedSource(InputStream source) {
 			this.source = source;
+			readPositions = new ArrayList<>(3);
+			limitReadPositions = new ArrayList<>(3);
+			resizableBuffer = new int[MIN_BUF];
 		}
 
+		public MultiplexedSource(InputStream source, int buffSize) {
+			this.source = source;
+			readPositions = new ArrayList<>(3);
+			limitReadPositions = new ArrayList<>(3);
+			resizableBuffer = new int[buffSize];
+			bufferLength = buffSize;
+		}
+		
 		/**
 		 * Add a multiplexed reader. Return new reader id.
 		 * @param splitId
@@ -38,23 +55,24 @@ public class SplittableInputStream extends InputStream {
 		 */
 		int addSource(int splitId) {
 			readPositions.add(splitId == -1 ? 0 : readPositions.get(splitId));
-			return readPositions.size() - 1;
+			limitReadPositions.add(limitReadPosition);
+			int readerId = readPositions.size() - 1;
+			return readerId;
 		}
 
+		void setLimitReadPosition(int readerId, int limit) {
+			limitReadPositions.set(readerId, limit);
+		}
+		
 		/**
 		 * Make room for more data (and drop data that has been read by all readers).
 		 */
 		private void readjustBuffer() {
-			int from = Collections.min(readPositions);
 			int to = Collections.max(readPositions);
-			int newLength = Math.max((to - from) * 2, MIN_BUF);
-			int[] newBuf = new int[newLength];
-			System.arraycopy(buffer, from, newBuf, 0, to - from);
-			for (int i = 0, c = readPositions.size(); i < c; i++) {
-				readPositions.set(i, readPositions.get(i) - from);
-			}
-			writePosition -= from;
-			buffer = newBuf;
+			bufferLength += MIN_BUF;
+			int[] newBuf = new int[bufferLength];
+			System.arraycopy(resizableBuffer, 0, newBuf, 0, to);
+			resizableBuffer = newBuf;
 		}
 
 		/**
@@ -64,33 +82,48 @@ public class SplittableInputStream extends InputStream {
 		 * @throws IOException
 		 */
 		public int read(int readerId) throws IOException {
-
-			// Enough data in buffer?
-			if (readPositions.get(readerId) >= writePosition) {
+			int readPosition = readPositions.get(readerId);
+			int limit = limitReadPositions.get(readerId);
+			
+			// avoids reading beyond a imposed limit
+			if (readPosition >= limit)
+				return -1; // EOF
+			
+			// enough data in buffer?
+			if (readPosition > currentWritePosition || currentWritePosition >= bufferLength) {
 				readjustBuffer();
-				buffer[writePosition++] = source.read();
+			}
+			if (readPosition >= currentWritePosition) {
+				resizableBuffer[currentWritePosition++] = source.read();
 			}
 
-			int pos = readPositions.get(readerId);
-			int val = buffer[pos];
+			int val = resizableBuffer[readPosition];
+			
+			// if not EOF then set next read position
 			if (val != -1) {
-				readPositions.set(readerId, pos + 1);
+				readPositions.set(readerId, readPosition + 1);
 			}
+			
 			return val;
 		}
 	}
 
 	
-	private MultiplexedSource multiSource;
+	private MultiplexedSource multiPlexedSource;
 	private int myId;
 
 	public SplittableInputStream(InputStream source) {
-		multiSource = new MultiplexedSource(source);
-		myId = multiSource.addSource(-1);
+		multiPlexedSource = new MultiplexedSource(source);
+		myId = multiPlexedSource.addSource(-1);
+	}
+	
+	public SplittableInputStream(InputStream source, int initialBufferSize) {
+		multiPlexedSource = new MultiplexedSource(source, initialBufferSize);
+		myId = multiPlexedSource.addSource(-1);
 	}
 
 	private SplittableInputStream(MultiplexedSource multiSource, int splitId) {
-		this.multiSource = multiSource;
+		this.multiPlexedSource = multiSource;
 		myId = multiSource.addSource(splitId);
 	}
 
@@ -99,12 +132,26 @@ public class SplittableInputStream extends InputStream {
 	 * @return
 	 */
 	public SplittableInputStream split() {
-		return new SplittableInputStream(multiSource, myId);
+		return new SplittableInputStream(multiPlexedSource, myId);
 	}
 
+	/**
+	 * Returns how many positions of the stream have been read.
+	 * Note: call this method once the stream has been consumed, not during consumption.
+	 * 
+	 * @return
+	 */
+	public int getStreamLength() {
+		return multiPlexedSource.readPositions.get(myId);
+	}
+	
 	@Override
 	public int read() throws IOException {
-		return multiSource.read(myId);
+		return multiPlexedSource.read(myId);
+	}
+
+	public void limitReadPositionTo(int limit) {
+		multiPlexedSource.setLimitReadPosition(myId, limit);
 	}
 	
 }

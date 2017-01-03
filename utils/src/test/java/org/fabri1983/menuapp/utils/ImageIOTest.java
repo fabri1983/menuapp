@@ -3,14 +3,12 @@ package org.fabri1983.menuapp.utils;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
+import java.net.URLConnection;
 
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReadParam;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.ImageInputStream;
 
 import org.assertj.core.api.Fail;
 import org.junit.Before;
@@ -83,21 +81,19 @@ public class ImageIOTest {
 	}
 	
 	private String getFormat(InputStream imageInputStream) throws IOException {
-		ImageInputStream iis = ImageIO.createImageInputStream(imageInputStream);
-		Iterator<ImageReader> iter = ImageIO.getImageReaders(iis);
-	    if (!iter.hasNext()) {
-	        return "UNKNOWN";
-	    }
-	    
-	    ImageReader reader = (ImageReader) iter.next();
-	    ImageReadParam param = reader.getDefaultReadParam();
-	    reader.setInput(iis, true, true);
-
-	    try {
-	    	reader.read(0, param);
-	        return reader.getFormatName().toUpperCase();
-	    } finally {
-	        reader.dispose();
-	    }
+		// URLConnection.guessContentTypeFromStream() only needs the first 12 bytes, but
+		// just to be safe from future java api enhancements, we'll use a larger number
+		final int readLimit = 100;
+		byte [] firstBytes = new byte[readLimit];
+		imageInputStream.read(firstBytes);
+		
+		// pass the initial bytes to URLConnection.guessContentTypeFromStream() in the form of a
+		// ByteArrayInputStream, which is mark supported.
+		ByteArrayInputStream bais = new ByteArrayInputStream(firstBytes);
+		String mimeType = URLConnection.guessContentTypeFromStream(bais);
+		if (mimeType.startsWith("image/")) {
+		    return mimeType.substring("image/".length()).toUpperCase();
+		}
+		return "UNKNOWN"; 
 	}
 }
