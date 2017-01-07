@@ -106,6 +106,7 @@ You need first to start the CouchbaseMock test server. See above.
 
 #### Execution
 Remember you can use maven profiles adding `-P<profile.name>`. The default one is `dev` profile.
+
 Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`.
 ```sh
 cd menuapp
@@ -119,6 +120,7 @@ Note: last argument `-` is expected by the custom implementation of `Configurati
 
 #### Production environment
 For production environment you must build with `-Pprod` profile and then provide your own production ready `server-config.yml` file. For example:
+
 Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`.
 ```sh
 cd menuapp
@@ -135,6 +137,7 @@ You need first to start the CouchbaseMock test server. See above.
 
 #### Debug
 First compile the `api` project so `target` folder is created with the filtered resources. This is important since dropwizard expects a config file.
+
 Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`.
 ```sh
 cd api
@@ -237,11 +240,11 @@ Segregate configurations
 ------------------------
 Dropwizard expects one configuration file as program argument. **MenuApp** uses its own `server-config.yml` shipped within the generated jar when you pass argument `-`, or your own config file when passing its location instead.
 
-This means that all configuration exists in one file, may be small/med/big depending the size of the app, hence all kind of settings are exposed throughout the application and so the configuration is a whitebox: anybody can see its content. The [MenuAppConfiguration](api/src/main/java/org/fabri1983/menuapp/api/config/MenuAppConfiguration.java) class, although exposes all the settings to whoever injects the `MenuAppConfiguration` class, is used by **Dropwizard**'s bootstrap phase to load the config file and also makes use of some neat feature that **guicey** provides. See next paragraph.
+This means that all configuration exists in one file, may be small/med/big depending the size of the app, hence all kind of settings are exposed throughout the application and so the configuration is a whitebox: anybody can see its content. The [MenuAppConfiguration](api/src/main/java/org/fabri1983/menuapp/api/config/MenuAppConfiguration.java) class, although it exposes all the settings to whoever injects the `MenuAppConfiguration` class, is used by **Dropwizard**'s bootstrap phase to load the config file and also makes use of some neat feature that **guicey** provides.
 
-So if you want to limit the visibility of those settings per resource/service/repository or any component then [dropwizard-guicey](https://github.com/xvik/dropwizard-guicey) gives you the pattern **Has Feature**.
-In that pattern the `MenuAppConfiguration` class implements interfaces such as **HasBuildInfoFeature** and **HasMenuQueryFeature**, and **guicey** integration handles the binding with the injection points on those components using `@Inject`.
-This way the components only see the settings they matter, nothing more. Of course is up to you to avoid inject the `MenuAppConfiguration` elsewhere.
+So if you want to limit the visibility of those settings per resource, service, repository, or any other component then [dropwizard-guicey](https://github.com/xvik/dropwizard-guicey) gives you the pattern **Has Feature**.
+In this pattern the `MenuAppConfiguration` class implements interfaces such as **HasBuildInfoFeature** and **HasMenuQueryFeature**, and **guicey** integration handles the binding with the injection points on those components using `@Inject`.
+This way the components only see the settings they matter, and nothing more. Of course is up to you to avoid inject the `MenuAppConfiguration` elsewhere :).
 
 Example:
 ```java
@@ -289,7 +292,7 @@ Example:
 		}
 	}
 ```
-And finally your resource class only injects the settings which really matter, which in this case is `BuildInfoFeature` instead of the entire `MenuAppConfiguration` object.
+And finally your resource class only injects the settings it really matters which in this case is `BuildInfoFeature`, instead of the entire `MenuAppConfiguration` object.
 ```java
 	@Path("")
 	@Produces(MediaType.TEXT_PLAIN)
@@ -311,7 +314,7 @@ By the moment only project **core** is using JMH on test phase. I'm not sure thi
 In my approach every `...Benchmark` class extends from `JMHLauncherJUnit` and executes a JMH instance.
 
 #### Execution
-Run the benchmark as part of the phase test. This also runs the normal JUnit tests.
+This also runs the normal JUnit tests.
 ```sh
 mvn test -Dbenchmark.suite="**/BenchmarkTestsSuite.class"
 ```
