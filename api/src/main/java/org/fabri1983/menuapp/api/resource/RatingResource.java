@@ -22,7 +22,7 @@ import org.fabri1983.menuapp.core.service.RatingService;
 import org.fabri1983.menuapp.protocol.rating.RatingAppliedView;
 import org.fabri1983.menuapp.protocol.rating.RatingView;
 
-@Path("/user/{user_id}/menu/{menu_id}")
+@Path("/user/{user_id}/rate/menu/{menu_id}")
 @Api(value = "RatingResource")
 @Consumes(MediaType.APPLICATION_JSON)
 public class RatingResource {
@@ -42,7 +42,6 @@ public class RatingResource {
 	        @ApiResponse(code = 404, message = "Menu not found"),
 			@ApiResponse(code = 422, message = "Unprocessable entity. Validation failed")}
 	    )
-	@Path("/rate")
 	public Response rate(
 			@PathParam("menu_id") long menuId,
 			@NotNull @Valid RatingView ratingView)

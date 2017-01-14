@@ -229,7 +229,7 @@ Note: add `Content-Type:application/json` and `Accept:application/json,text` in 
       "availableDateTo": "2016-04-01T23:59:59"
     }
 	
-	POST http://localhost:8080/user/1/menu/1/rate
+	POST http://localhost:8080/user/1/rate/menu/1
 	{
 	  "rating": 1,
 	  "description": "The description of the rating isn't stored yet"
