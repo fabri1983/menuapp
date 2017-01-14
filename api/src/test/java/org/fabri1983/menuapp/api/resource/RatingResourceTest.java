@@ -47,7 +47,7 @@ public class RatingResourceTest {
 	public void whenRatingWithInvalidMinValueThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(0, "dummy description");
 		
-		Response response = resource.client().target(String.format("/user/12345/menu/%s/rate", 1))
+		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
 				.request().accept(MediaType.APPLICATION_JSON_TYPE)
 				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
 		
@@ -61,7 +61,7 @@ public class RatingResourceTest {
 	public void whenRatingWithInvalidMaxValueThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(6, "dummy description");
 		
-		Response response = resource.client().target(String.format("/user/12345/menu/%s/rate", 1))
+		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
 				.request().accept(MediaType.APPLICATION_JSON_TYPE)
 				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
 		
@@ -75,7 +75,7 @@ public class RatingResourceTest {
 	public void whenRatingWithEmptyDescriptionThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(1, "");
 		
-		Response response = resource.client().target(String.format("/user/12345/menu/%s/rate", 1))
+		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
 				.request().accept(MediaType.APPLICATION_JSON_TYPE)
 				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
 		
@@ -89,7 +89,7 @@ public class RatingResourceTest {
 	public void whenRatingWithInvalidMinLengthDescriptionThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(1, "a");
 		
-		Response response = resource.client().target(String.format("/user/12345/menu/%s/rate", 1))
+		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
 				.request().accept(MediaType.APPLICATION_JSON_TYPE)
 				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
 		
@@ -103,7 +103,7 @@ public class RatingResourceTest {
 	public void whenRatingWithInvalidMaxLengthDescriptionThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(1, stringOfLength(256, 'a'));
 		
-		Response response = resource.client().target(String.format("/user/12345/menu/%s/rate", 1))
+		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
 				.request().accept(MediaType.APPLICATION_JSON_TYPE)
 				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
 		
@@ -122,7 +122,7 @@ public class RatingResourceTest {
 		
 		RatingView ratingView = new RatingView(rating, "dummy description");
 		
-		Response response = resource.client().target(String.format("/user/12345/menu/%s/rate", menuId))
+		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", menuId))
 				.request().accept(MediaType.APPLICATION_JSON_TYPE)
 				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
 		
