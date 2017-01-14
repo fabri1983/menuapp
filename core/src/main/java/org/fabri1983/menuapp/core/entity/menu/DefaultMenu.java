@@ -3,7 +3,7 @@ package org.fabri1983.menuapp.core.entity.menu;
 import java.math.BigDecimal;
 import java.net.URL;
 
-import org.fabri1983.menuapp.core.converter.menu.MenuTypeConverterRequester;
+import org.fabri1983.menuapp.core.converter.menu.visitor.MenuConverterVisitor;
 import org.fabri1983.menuapp.core.filtering.menu.visitor.FilterVisitor;
 
 public class DefaultMenu implements Menu {
@@ -70,11 +70,11 @@ public class DefaultMenu implements Menu {
 	
 	@Override
 	public boolean applyFilter(FilterVisitor filterVisitor) {
-		return filterVisitor.canFilterMenu(this);
+		return filterVisitor.filter(this);
 	}
 	
 	@Override
-	public boolean acceptsConverter(MenuTypeConverterRequester converter) {
-		return converter.acceptsMenu(this);
+	public boolean applyConverter(MenuConverterVisitor converter) {
+		return converter.accepts(this);
 	}
 }

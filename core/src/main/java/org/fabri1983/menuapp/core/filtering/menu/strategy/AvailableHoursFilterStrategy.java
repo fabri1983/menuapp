@@ -2,7 +2,7 @@ package org.fabri1983.menuapp.core.filtering.menu.strategy;
 
 import java.time.LocalTime;
 
-import org.fabri1983.menuapp.core.entity.menu.Menu;
+import org.fabri1983.menuapp.core.filtering.menu.MenuFilterable;
 import org.fabri1983.menuapp.core.filtering.menu.visitor.AvailableHoursFilterVisitor;
 
 public class AvailableHoursFilterStrategy implements MenuFilterStrategy {
@@ -18,7 +18,7 @@ public class AvailableHoursFilterStrategy implements MenuFilterStrategy {
 	}
 	
 	@Override
-	public boolean accepts(Menu menu) {
+	public boolean filter(MenuFilterable menu) {
 		return menu.applyFilter(filterVisitor);
 	}
 

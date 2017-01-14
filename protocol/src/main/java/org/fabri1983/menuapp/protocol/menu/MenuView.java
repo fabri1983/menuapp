@@ -15,19 +15,13 @@ import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.fabri1983.menuapp.core.entity.menu.CurrencyType;
-import org.fabri1983.menuapp.core.entity.menu.DefaultMenu;
-import org.fabri1983.menuapp.core.entity.menu.Menu;
-import org.fabri1983.menuapp.core.entity.menu.TimeConstraintMenu;
-import org.fabri1983.menuapp.protocol.menu.converter.MenuViewConverterResolver;
 import org.fabri1983.menuapp.protocol.parserutil.CustomLocalTimeDeserializer;
 import org.fabri1983.menuapp.protocol.parserutil.CustomLocalTimeSerializer;
 import org.fabri1983.menuapp.protocol.validation.StringEnumeration;
@@ -85,105 +79,101 @@ public class MenuView {
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
 	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime availableDateTo;
-	
-	public static MenuView convert(final Menu menu) {
-		return MenuViewConverterResolver.convert(menu);
-	}
-	
-	public static List<MenuView> convert(Collection<Menu> filteredMenus, int limitSize) {
-		return filteredMenus.stream()
-				.limit(limitSize)
-				.map( MenuView::convert )
-				.collect(Collectors.toList());
-	}
-	
-	public static MenuView from(final DefaultMenu menu) {
-		return new MenuView(menu.getId(), menu.getName(), menu.getDescription(), menu.getPictureUrl().toString(), 
-				menu.getPrice(), menu.getCurrency(), menu.getRating());
-	}
-	
-	private MenuView(long id, String name, String description, String pictureUrl, 
-			BigDecimal price, CurrencyType currency, int rating)
-	{	
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.pictureUrl = pictureUrl;
-		this.price = price;
-		this.currency = currency;
-		this.rating = rating;
-	}
-	
-	public static MenuView from(final TimeConstraintMenu menu) {
-		return new MenuView(menu.getId(), menu.getName(), menu.getDescription(), menu.getPictureUrl().toString(), 
-				menu.getPrice(), menu.getCurrency(), menu.getRating(), menu.getHourFrom(), menu.getHourTo(), 
-				menu.getAvailableDays(), menu.getAvailableDateFrom(), menu.getAvailableDateTo());
-	}
-	
-	private MenuView(long id, String name, String description, String pictureUrl, BigDecimal price, 
-			CurrencyType currency, int rating, LocalTime hourFrom, LocalTime hourTo, List<String> availableDays, 
-			LocalDateTime availableDateFrom, LocalDateTime availableDateTo)
-	{	
-		this.id = id;
-		this.name = name;
-		this.description = description;
-		this.pictureUrl = pictureUrl;
-		this.price = price;
-		this.currency = currency;
-		this.rating = rating;
-		this.hourFrom = hourFrom;
-		this.hourTo = hourTo;
-		this.availableDays = availableDays;
-		this.availableDateFrom = availableDateFrom;
-		this.availableDateTo = availableDateTo;
-	}
 
 	public long getId() {
 		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getDescription() {
 		return description;
 	}
-	
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public String getPictureUrl() {
 		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
 	}
 
 	public BigDecimal getPrice() {
 		return price;
 	}
-	
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
 	public CurrencyType getCurrency() {
 		return currency;
 	}
-	
+
+	public void setCurrency(CurrencyType currency) {
+		this.currency = currency;
+	}
+
 	public int getRating() {
 		return rating;
+	}
+
+	public void setRating(int rating) {
+		this.rating = rating;
 	}
 
 	public LocalTime getHourFrom() {
 		return hourFrom;
 	}
 
+	public void setHourFrom(LocalTime hourFrom) {
+		this.hourFrom = hourFrom;
+	}
+
 	public LocalTime getHourTo() {
 		return hourTo;
+	}
+
+	public void setHourTo(LocalTime hourTo) {
+		this.hourTo = hourTo;
 	}
 
 	public List<String> getAvailableDays() {
 		return availableDays;
 	}
 
+	public void setAvailableDays(List<String> availableDays) {
+		this.availableDays = availableDays;
+	}
+
 	public LocalDateTime getAvailableDateFrom() {
 		return availableDateFrom;
+	}
+
+	public void setAvailableDateFrom(LocalDateTime availableDateFrom) {
+		this.availableDateFrom = availableDateFrom;
 	}
 
 	public LocalDateTime getAvailableDateTo() {
 		return availableDateTo;
 	}
-	
+
+	public void setAvailableDateTo(LocalDateTime availableDateTo) {
+		this.availableDateTo = availableDateTo;
+	}
+
 }

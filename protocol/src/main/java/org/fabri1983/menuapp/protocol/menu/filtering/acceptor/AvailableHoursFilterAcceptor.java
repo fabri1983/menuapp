@@ -1,10 +1,10 @@
-package org.fabri1983.menuapp.protocol.menu.filtering.factory;
+package org.fabri1983.menuapp.protocol.menu.filtering.acceptor;
 
 import org.fabri1983.menuapp.core.filtering.menu.decorator.ChainedMenuFilterBuilder;
 import org.fabri1983.menuapp.core.filtering.menu.strategy.AvailableHoursFilterStrategy;
 import org.fabri1983.menuapp.protocol.menu.filtering.MenuFiltersView;
 
-public class AvailableHoursFilter implements MenuFilter {
+public class AvailableHoursFilterAcceptor implements MenuFilterAcceptor {
 
 	@Override
 	public boolean isValid(MenuFiltersView filterData) {

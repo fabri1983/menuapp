@@ -3,7 +3,7 @@ package org.fabri1983.menuapp.core.filtering.menu.strategy;
 import java.math.BigDecimal;
 
 import org.fabri1983.menuapp.core.entity.menu.CurrencyType;
-import org.fabri1983.menuapp.core.entity.menu.Menu;
+import org.fabri1983.menuapp.core.filtering.menu.MenuFilterable;
 import org.fabri1983.menuapp.core.filtering.menu.visitor.PriceRangeFilterVisitor;
 
 public class PriceRangeFilterStrategy implements MenuFilterStrategy {
@@ -21,7 +21,7 @@ public class PriceRangeFilterStrategy implements MenuFilterStrategy {
 	}
 
 	@Override
-	public boolean accepts(Menu menu) {
+	public boolean filter(MenuFilterable menu) {
 		return menu.applyFilter(filterVisitor);
 	}
 	

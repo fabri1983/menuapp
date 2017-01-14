@@ -15,7 +15,7 @@ public class PriceRangeFilterVisitor implements FilterVisitor {
 	}
 	
 	@Override
-	public boolean canFilterMenu(DefaultMenu menu) {
+	public boolean filter(DefaultMenu menu) {
 		// FIXME convert menu price to the filter currency type
 		BigDecimal priceMenu = menu.getPrice();
 		return isInRange(priceMenu);

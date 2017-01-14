@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.protocol.menu.filtering.factory;
+package org.fabri1983.menuapp.protocol.menu.filtering.acceptor;
 
 import java.math.BigDecimal;
 
@@ -6,7 +6,7 @@ import org.fabri1983.menuapp.core.filtering.menu.decorator.ChainedMenuFilterBuil
 import org.fabri1983.menuapp.core.filtering.menu.strategy.PriceRangeFilterStrategy;
 import org.fabri1983.menuapp.protocol.menu.filtering.MenuFiltersView;
 
-public class MaxPriceFilter implements MenuFilter {
+public class MaxPriceFilterAcceptor implements MenuFilterAcceptor {
 
 	@Override
 	public boolean isValid(MenuFiltersView filterData) {

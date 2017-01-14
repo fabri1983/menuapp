@@ -3,10 +3,10 @@ package org.fabri1983.menuapp.core.entity.menu;
 import java.math.BigDecimal;
 import java.net.URL;
 
-import org.fabri1983.menuapp.core.converter.menu.MenuTypeConverterRequester;
-import org.fabri1983.menuapp.core.filtering.menu.visitor.FilterVisitor;
+import org.fabri1983.menuapp.core.converter.menu.MenuConvertable;
+import org.fabri1983.menuapp.core.filtering.menu.MenuFilterable;
 
-public interface Menu {
+public interface Menu extends MenuFilterable, MenuConvertable {
 
 	long getId();
 	
@@ -24,7 +24,4 @@ public interface Menu {
 	
 	void updateRating(int rating);
 	
-	boolean applyFilter(FilterVisitor filterVisitor);
-	
-	boolean acceptsConverter(MenuTypeConverterRequester converter);
 }

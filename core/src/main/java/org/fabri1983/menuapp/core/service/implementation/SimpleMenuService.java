@@ -59,7 +59,7 @@ public class SimpleMenuService implements MenuService {
 		Collection<Menu> allMenus = repository.getAll();
 		
 	    // taking advantage of Java 8 streams and lambda expression
-		Collection<Menu> filteredMenus = allMenus.stream().filter( menu -> filter.accepts(menu) ).collect(Collectors.toList());
+		Collection<Menu> filteredMenus = allMenus.stream().filter( menu -> filter.filter(menu) ).collect(Collectors.toList());
 	    
 		// using apache commons collections 4
 //		Collection<Menu> filteredMenus = CollectionUtils.select(allMenus, new Predicate<Menu>() {

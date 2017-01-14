@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
 
-import org.fabri1983.menuapp.core.converter.menu.MenuTypeConverterRequester;
+import org.fabri1983.menuapp.core.converter.menu.visitor.MenuConverterVisitor;
 import org.fabri1983.menuapp.core.filtering.menu.visitor.FilterVisitor;
 
 public class TimeConstraintMenu implements Menu {
@@ -108,7 +108,7 @@ public class TimeConstraintMenu implements Menu {
 	}
 	
 	@Override
-	public boolean acceptsConverter(MenuTypeConverterRequester converter) {
-		return converter.acceptsMenu(this);
+	public boolean applyConverter(MenuConverterVisitor converter) {
+		return converter.accepts(this);
 	}
 }

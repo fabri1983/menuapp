@@ -53,7 +53,7 @@ public class MenuAppApplication extends Application<MenuAppConfiguration> {
 				.bindConfigurationInterfaces()
 				// add your module class with your own injections
 				.modules(new MenuAppProvider())
-				// this ensures that dependency injection in that package is set up automatically.
+				// this ensures that dependency injection in that package is set up automatically
 				.enableAutoConfig("org.fabri1983.menuapp.api")
 				// force eager singletons creation (by default is Stage.PRODUCTION)
 				.build();

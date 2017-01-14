@@ -2,7 +2,7 @@ package org.fabri1983.menuapp.core.filtering.menu.strategy;
 
 import java.util.List;
 
-import org.fabri1983.menuapp.core.entity.menu.Menu;
+import org.fabri1983.menuapp.core.filtering.menu.MenuFilterable;
 import org.fabri1983.menuapp.core.filtering.menu.visitor.AvailableDaysMenuFilterVisitor;
 
 public class AvailableDaysFilterStrategy implements MenuFilterStrategy {
@@ -16,7 +16,7 @@ public class AvailableDaysFilterStrategy implements MenuFilterStrategy {
 	}
 	
 	@Override
-	public boolean accepts(Menu menu) {
+	public boolean filter(MenuFilterable menu) {
 		return menu.applyFilter(filterVisitor);
 	}
 

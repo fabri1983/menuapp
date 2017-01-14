@@ -6,14 +6,19 @@ import java.util.List;
 import org.fabri1983.menuapp.core.filtering.menu.decorator.ChainedMenuFilterBuilder;
 import org.fabri1983.menuapp.core.filtering.menu.strategy.MenuFilterStrategy;
 import org.fabri1983.menuapp.protocol.menu.filtering.MenuFiltersView;
+import org.fabri1983.menuapp.protocol.menu.filtering.acceptor.AvailableDaysFilterAcceptor;
+import org.fabri1983.menuapp.protocol.menu.filtering.acceptor.AvailableHoursFilterAcceptor;
+import org.fabri1983.menuapp.protocol.menu.filtering.acceptor.DatesRangeFilterAcceptor;
+import org.fabri1983.menuapp.protocol.menu.filtering.acceptor.MaxPriceFilterAcceptor;
+import org.fabri1983.menuapp.protocol.menu.filtering.acceptor.MenuFilterAcceptor;
 
 public class MenuFiltersFactory {
 
-	static final List<MenuFilter> filters = Arrays.asList(
-										new MaxPriceFilter(),
-										new AvailableHoursFilter(),
-										new AvailableDaysFilter(),
-										new DatesRangeFilter()
+	static final List<MenuFilterAcceptor> filters = Arrays.asList(
+										new MaxPriceFilterAcceptor(),
+										new AvailableHoursFilterAcceptor(),
+										new AvailableDaysFilterAcceptor(),
+										new DatesRangeFilterAcceptor()
 									);
 	
 	public static MenuFilterStrategy createFrom(MenuFiltersView filterData) {

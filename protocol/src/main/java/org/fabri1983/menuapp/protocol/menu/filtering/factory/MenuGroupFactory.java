@@ -6,10 +6,12 @@ import java.util.List;
 import org.fabri1983.menuapp.core.filtering.menu.decorator.ChainedMenuFilterBuilder;
 import org.fabri1983.menuapp.core.filtering.menu.strategy.MenuFilterStrategy;
 import org.fabri1983.menuapp.protocol.menu.filtering.MenuGroupView;
+import org.fabri1983.menuapp.protocol.menu.filtering.acceptor.MenuGroupFilterAcceptor;
+import org.fabri1983.menuapp.protocol.menu.filtering.acceptor.RangePriceFilter;
 
 public class MenuGroupFactory {
 
-	static final List<MenuGroupFilter> filters = Arrays.asList(
+	static final List<MenuGroupFilterAcceptor> filters = Arrays.asList(
 			new RangePriceFilter()
 		);
 	

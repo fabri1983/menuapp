@@ -13,7 +13,7 @@ public class RatingRangeFilterVisitor implements FilterVisitor {
 	}
 	
 	@Override
-	public boolean canFilterMenu(DefaultMenu menu) {
+	public boolean filter(DefaultMenu menu) {
 		return isInRange(menu.getRating());
 	}
 

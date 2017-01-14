@@ -29,6 +29,7 @@ import org.fabri1983.menuapp.core.entity.menu.Menu;
 import org.fabri1983.menuapp.core.filtering.menu.strategy.MenuFilterStrategy;
 import org.fabri1983.menuapp.core.service.MenuService;
 import org.fabri1983.menuapp.protocol.menu.MenuView;
+import org.fabri1983.menuapp.protocol.menu.converter.MenuViewConverterResolver;
 import org.fabri1983.menuapp.protocol.menu.filtering.MenuFiltersView;
 import org.fabri1983.menuapp.protocol.menu.filtering.MenuGroupView;
 import org.fabri1983.menuapp.protocol.menu.filtering.factory.MenuFiltersFactory;
@@ -57,7 +58,7 @@ public class MenuResource {
 	public Response getAll()
 	{
 		Collection<Menu> allMenus = menuService.getAll();
-		List<MenuView> menuViews = MenuView.convert(allMenus, menuQueryConfig.getMaxAllowedResults());
+		List<MenuView> menuViews = MenuViewConverterResolver.convert(allMenus, menuQueryConfig.getMaxAllowedResults());
 		return Response.status(Response.Status.OK).entity(menuViews).build();
 	}
 	
@@ -73,7 +74,7 @@ public class MenuResource {
 			@PathParam("menu_id") long menuId) throws Exception 
 	{
 		Menu menu = menuService.getById(menuId);
-		MenuView menuPresentation = MenuView.convert(menu);
+		MenuView menuPresentation = MenuViewConverterResolver.convert(menu);
 		return Response.status(Response.Status.OK).entity(menuPresentation).build();
 	}
 	
@@ -92,7 +93,7 @@ public class MenuResource {
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
 		int limitSize = Math.min(menuFilteredView.getMaxResults(), menuQueryConfig.getMaxAllowedResults());
-		List<MenuView> menuViews = MenuView.convert(filteredMenus, limitSize);
+		List<MenuView> menuViews = MenuViewConverterResolver.convert(filteredMenus, limitSize);
 		
 		return Response.status(Response.Status.OK).entity(menuViews).build();
 	}
@@ -112,7 +113,7 @@ public class MenuResource {
 		Collection<Menu> filteredMenus = menuService.getAllFiltered(filterChain);
 		
 		int limitSize = Math.min(menuGroupView.getMaxResults(), menuQueryConfig.getMaxAllowedResults());
-		List<MenuView> menuViews = MenuView.convert(filteredMenus, limitSize);
+		List<MenuView> menuViews = MenuViewConverterResolver.convert(filteredMenus, limitSize);
 		
 		return Response.status(Response.Status.OK).entity(menuViews).build();
 	}

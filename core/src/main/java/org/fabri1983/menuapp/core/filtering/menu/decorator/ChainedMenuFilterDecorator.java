@@ -1,6 +1,6 @@
 package org.fabri1983.menuapp.core.filtering.menu.decorator;
 
-import org.fabri1983.menuapp.core.entity.menu.Menu;
+import org.fabri1983.menuapp.core.filtering.menu.MenuFilterable;
 import org.fabri1983.menuapp.core.filtering.menu.strategy.MenuFilterStrategy;
 
 public class ChainedMenuFilterDecorator implements MenuFilterStrategy {
@@ -13,10 +13,10 @@ public class ChainedMenuFilterDecorator implements MenuFilterStrategy {
 	}
 
 	@Override
-	public boolean accepts(Menu menu) {
-		if (!decoratedFilter.accepts(menu))
+	public boolean filter(MenuFilterable menu) {
+		if (!decoratedFilter.filter(menu))
 			return false;
-		return nextFilter.accepts(menu);
+		return nextFilter.filter(menu);
 	}
 
 	public void setNextFilter(MenuFilterStrategy nextFilter) {
