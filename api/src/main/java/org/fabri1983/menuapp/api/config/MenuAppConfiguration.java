@@ -4,7 +4,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import io.dropwizard.Configuration;
 import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
-import io.smartmachine.couchbase.CouchbaseClientFactory;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -23,7 +22,7 @@ public class MenuAppConfiguration extends Configuration implements HasBuildInfoF
 	@Valid @NotNull
 	private MenuQueryConfig menuQueryConfig;	
 	@Valid @NotNull
-	private CouchbaseClientFactory couchbaseClientFactory;
+	private CouchbaseClientFactoryAsyncStart couchbaseClientFactory;
 	@JsonProperty("swaggerConfig")
     private SwaggerBundleConfiguration swaggerBundleConfiguration;
 	
@@ -37,7 +36,7 @@ public class MenuAppConfiguration extends Configuration implements HasBuildInfoF
 		return menuQueryConfig;
 	}
 
-	public CouchbaseClientFactory getCouchbaseClientFactory() {
+	public CouchbaseClientFactoryAsyncStart getCouchbaseClientFactory() {
 		return couchbaseClientFactory;
 	}
 	

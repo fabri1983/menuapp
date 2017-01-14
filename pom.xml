@@ -66,6 +66,7 @@
 		<commons.collections4.version>4.0</commons.collections4.version>
 		<google.guice.version>4.1.0</google.guice.version> <!-- see dependency hierarchy to know who is using other version -->
 		<google.guava.version>20.0</google.guava.version> <!-- see dependency hierarchy to know who is using other version -->
+		<rxjava.version>1.2.5</rxjava.version>
 		<logback.classic.version>1.1.7</logback.classic.version> <!-- see dependency hierarchy to know who is using other version -->
 		<javax.validation.version>1.1.0.Final</javax.validation.version> <!-- see dependency hierarchy to know who is using other version -->
 		<hibernate.validator.version>5.3.3.Final</hibernate.validator.version> <!-- see dependency hierarchy to know who is using other version -->
@@ -78,7 +79,14 @@
 
 	<dependencyManagement>
 		<dependencies>
-		
+
+			<dependency>
+				<groupId>io.reactivex</groupId>
+				<artifactId>rxjava</artifactId>
+				<version>${rxjava.version}</version>
+				<optional>true</optional>
+			</dependency>
+
 			<dependency>
 				<groupId>ch.qos.logback</groupId>
 				<artifactId>logback-classic</artifactId>

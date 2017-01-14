@@ -136,12 +136,12 @@ Debug using Eclipse
 You need first to start the CouchbaseMock test server. See above.
 
 #### Debug
-First compile the `api` project so `target` folder is created with the filtered resources. This is important since dropwizard expects a config file.
+First compile/install the `api` project so `target` folder is created with the filtered resources. This is important since dropwizard expects a config file.
 
 Note: if you don't have git in your %PATH% (or $PATH) environment variable then use `-Dmaven.buildNumber.skip=true`.
 ```sh
 cd api
-mvn clean compile
+mvn clean install
 ```
 Then open Eclipse and open the class `MenuAppApplication.java`. Go to Run -> Debug Configurations -> create a Java Application and in Arguments tab add `server -`. Finally hit Apply and then Debug.
 
