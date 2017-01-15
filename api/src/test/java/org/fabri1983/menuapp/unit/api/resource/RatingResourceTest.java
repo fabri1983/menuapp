@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.api.resource;
+package org.fabri1983.menuapp.unit.api.resource;
 
 import io.dropwizard.jersey.validation.ValidationErrorMessage;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -17,6 +17,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.fabri1983.menuapp.api.resource.RatingResource;
 import org.fabri1983.menuapp.core.entity.menu.CurrencyType;
 import org.fabri1983.menuapp.core.entity.menu.DefaultMenu;
 import org.fabri1983.menuapp.core.entity.menu.Menu;
@@ -44,76 +45,6 @@ public class RatingResourceTest {
     	.build();
 	
 	@Test
-	public void whenRatingWithInvalidMinValueThenErrorExpected() throws MalformedURLException {
-		RatingView ratingView = new RatingView(0, "dummy description");
-		
-		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
-				.request().accept(MediaType.APPLICATION_JSON_TYPE)
-				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
-		
-		assertThat(response.getStatus()).isEqualTo(422);
-		
-		ValidationErrorMessage msg = response.readEntity(ValidationErrorMessage.class);
-	    assertThat(msg.getErrors()).containsOnly(msgInvalidMinRating);
-	}
-	
-	@Test
-	public void whenRatingWithInvalidMaxValueThenErrorExpected() throws MalformedURLException {
-		RatingView ratingView = new RatingView(6, "dummy description");
-		
-		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
-				.request().accept(MediaType.APPLICATION_JSON_TYPE)
-				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
-		
-		assertThat(response.getStatus()).isEqualTo(422);
-		
-		ValidationErrorMessage msg = response.readEntity(ValidationErrorMessage.class);
-	    assertThat(msg.getErrors()).containsOnly(msgInvalidMaxRating);
-	}
-	
-	@Test
-	public void whenRatingWithEmptyDescriptionThenErrorExpected() throws MalformedURLException {
-		RatingView ratingView = new RatingView(1, "");
-		
-		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
-				.request().accept(MediaType.APPLICATION_JSON_TYPE)
-				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
-		
-		assertThat(response.getStatus()).isEqualTo(422);
-		
-		ValidationErrorMessage msg = response.readEntity(ValidationErrorMessage.class);
-	    assertThat(msg.getErrors()).containsOnly(msgInvalidEmptyDescription, msgInvalidDescriptionLength);
-	}
-	
-	@Test
-	public void whenRatingWithInvalidMinLengthDescriptionThenErrorExpected() throws MalformedURLException {
-		RatingView ratingView = new RatingView(1, "a");
-		
-		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
-				.request().accept(MediaType.APPLICATION_JSON_TYPE)
-				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
-		
-		assertThat(response.getStatus()).isEqualTo(422);
-		
-		ValidationErrorMessage msg = response.readEntity(ValidationErrorMessage.class);
-	    assertThat(msg.getErrors()).containsOnly(msgInvalidDescriptionLength);
-	}
-	
-	@Test
-	public void whenRatingWithInvalidMaxLengthDescriptionThenErrorExpected() throws MalformedURLException {
-		RatingView ratingView = new RatingView(1, stringOfLength(256, 'a'));
-		
-		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
-				.request().accept(MediaType.APPLICATION_JSON_TYPE)
-				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
-		
-		assertThat(response.getStatus()).isEqualTo(422);
-		
-		ValidationErrorMessage msg = response.readEntity(ValidationErrorMessage.class);
-	    assertThat(msg.getErrors()).containsOnly(msgInvalidDescriptionLength);
-	}
-	
-	@Test
 	public void whenRatingAMenuThenRatingIsApplied() throws MalformedURLException {
 		int rating = 3;
 		long menuId = 2L;
@@ -132,6 +63,76 @@ public class RatingResourceTest {
 		RatingAppliedView ratingAppliedView = response.readEntity(RatingAppliedView.class);
 		assertThat(ratingAppliedView.getRating()).isEqualTo(rating);
 	}
+
+	@Test
+	public void whenRatingWithEmptyDescriptionThenErrorExpected() throws MalformedURLException {
+		RatingView ratingView = new RatingView(1, "");
+		
+		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
+				.request().accept(MediaType.APPLICATION_JSON_TYPE)
+				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
+		
+		assertThat(response.getStatus()).isEqualTo(422);
+		
+		ValidationErrorMessage msg = response.readEntity(ValidationErrorMessage.class);
+	    assertThat(msg.getErrors()).containsOnly(msgInvalidEmptyDescription, msgInvalidDescriptionLength);
+	}
+
+	@Test
+	public void whenRatingWithInvalidMaxLengthDescriptionThenErrorExpected() throws MalformedURLException {
+		RatingView ratingView = new RatingView(1, stringOfLength(256, 'a'));
+		
+		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
+				.request().accept(MediaType.APPLICATION_JSON_TYPE)
+				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
+		
+		assertThat(response.getStatus()).isEqualTo(422);
+		
+		ValidationErrorMessage msg = response.readEntity(ValidationErrorMessage.class);
+	    assertThat(msg.getErrors()).containsOnly(msgInvalidDescriptionLength);
+	}
+
+	@Test
+	public void whenRatingWithInvalidMaxValueThenErrorExpected() throws MalformedURLException {
+		RatingView ratingView = new RatingView(6, "dummy description");
+		
+		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
+				.request().accept(MediaType.APPLICATION_JSON_TYPE)
+				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
+		
+		assertThat(response.getStatus()).isEqualTo(422);
+		
+		ValidationErrorMessage msg = response.readEntity(ValidationErrorMessage.class);
+	    assertThat(msg.getErrors()).containsOnly(msgInvalidMaxRating);
+	}
+
+	@Test
+	public void whenRatingWithInvalidMinLengthDescriptionThenErrorExpected() throws MalformedURLException {
+		RatingView ratingView = new RatingView(1, "a");
+		
+		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
+				.request().accept(MediaType.APPLICATION_JSON_TYPE)
+				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
+		
+		assertThat(response.getStatus()).isEqualTo(422);
+		
+		ValidationErrorMessage msg = response.readEntity(ValidationErrorMessage.class);
+	    assertThat(msg.getErrors()).containsOnly(msgInvalidDescriptionLength);
+	}
+
+	@Test
+	public void whenRatingWithInvalidMinValueThenErrorExpected() throws MalformedURLException {
+		RatingView ratingView = new RatingView(0, "rating dummy description");
+	
+		Response response = resource.client().target(String.format("/user/12345/rate/menu/%s", 1))
+				.request().accept(MediaType.APPLICATION_JSON_TYPE)
+				.post(Entity.entity(ratingView, MediaType.APPLICATION_JSON_TYPE));
+		
+		assertThat(response.getStatus()).isEqualTo(422);
+		
+		ValidationErrorMessage msg = response.readEntity(ValidationErrorMessage.class);
+	    assertThat(msg.getErrors()).containsOnly(msgInvalidMinRating);
+	}
 	
 	private Menu createDefaultMenu(long menuId, int rating) throws MalformedURLException {
 		return new DefaultMenu(menuId, "Cheapest Dinner", "Are you saving some dimes?", 
@@ -148,7 +149,7 @@ public class RatingResourceTest {
 	 * @param replacement
 	 *            Repeated character all along the string.
 	 */
-	public String stringOfLength(final int length, final char replacement) {
+	private String stringOfLength(final int length, final char replacement) {
 		return CharBuffer.allocate(length).toString().replace('\0', replacement);
 	}
 }

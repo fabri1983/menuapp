@@ -5,8 +5,8 @@ import org.junit.extensions.cpsuite.ClasspathSuite.ClassnameFilters;
 import org.junit.runner.RunWith;
 
 @RunWith(ClasspathSuite.class)
-@ClassnameFilters({ ApiTestsSuite.TEST_PACKAGE })
-public class ApiTestsSuite {
+@ClassnameFilters({ IntegrationTestsSuite.TEST_PACKAGE })
+public class IntegrationTestsSuite {
 
-	public static final String TEST_PACKAGE = "org.fabri1983.menuapp.unit.api.*";
+	public static final String TEST_PACKAGE = "org.fabri1983.menuapp.integration.api.*";
 }

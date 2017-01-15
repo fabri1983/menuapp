@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.api.resource;
+package org.fabri1983.menuapp.unit.api.resource;
 
 import io.dropwizard.jersey.validation.ValidationErrorMessage;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -15,6 +15,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import org.fabri1983.menuapp.api.resource.LoginResource;
 import org.fabri1983.menuapp.core.service.LoginService;
 import org.fabri1983.menuapp.protocol.login.LocationView;
 import org.fabri1983.menuapp.protocol.login.LoginSuccessfulView;

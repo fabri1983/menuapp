@@ -1,4 +1,4 @@
-package org.fabri1983.menuapp.api.resource;
+package org.fabri1983.menuapp.unit.api.resource;
 
 import io.dropwizard.testing.junit.ResourceTestRule;
 
@@ -12,6 +12,7 @@ import static org.mockito.Mockito.when;
 
 import org.fabri1983.menuapp.api.config.hasfeature.HasBuildInfoFeature;
 import org.fabri1983.menuapp.api.config.hasfeature.impl.BuildInfoConfig;
+import org.fabri1983.menuapp.api.resource.InfoResource;
 import org.junit.ClassRule;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
