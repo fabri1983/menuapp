@@ -80,6 +80,14 @@ public class ImageIOTest {
 		}
 	}
 	
+	/**
+	 * Reads the first 100 bytes of the input stream to then analyze it via URLConnection.guessContentTypeFromStream().
+	 * Please consider using a {@link SplittableInputStream} so you can then use the input stream from the beginning.
+	 * 
+	 * @param imageInputStream
+	 * @return
+	 * @throws IOException
+	 */
 	private String getFormat(InputStream imageInputStream) throws IOException {
 		// URLConnection.guessContentTypeFromStream() only needs the first 12 bytes, but
 		// just to be safe from future java api enhancements, we'll use a larger number

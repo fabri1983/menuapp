@@ -3,7 +3,6 @@ package org.fabri1983.menuapp.utils;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class SplittableInputStream extends InputStream {
@@ -13,7 +12,7 @@ public class SplittableInputStream extends InputStream {
 	 */
 	static class MultiplexedSource {
 
-		static int MIN_BUF = 8192;
+		static int MIN_BUF = 8192; // this has sense only for small inputs streams
 
 		static int limitReadPosition = Integer.MAX_VALUE - 8; // Some VMs reserve some header words in an array
 		
@@ -68,10 +67,15 @@ public class SplittableInputStream extends InputStream {
 		 * Make room for more data (and drop data that has been read by all readers).
 		 */
 		private void readjustBuffer() {
-			int to = Collections.max(readPositions);
-			bufferLength += MIN_BUF;
+			// if buffer length is less than a 100Kb then resize using MIN_BUF
+			if (bufferLength < (1024 * 100))
+				bufferLength += MIN_BUF;
+			else
+				bufferLength *= 2; // double the size
+			
+			// TODO is possible to improve this using a custom linked list of buffers
 			int[] newBuf = new int[bufferLength];
-			System.arraycopy(resizableBuffer, 0, newBuf, 0, to);
+			System.arraycopy(resizableBuffer, 0, newBuf, 0, currentWritePosition);
 			resizableBuffer = newBuf;
 		}
 
@@ -117,8 +121,13 @@ public class SplittableInputStream extends InputStream {
 		myId = multiPlexedSource.addSource(-1);
 	}
 	
+	/**
+	 * Note: It adds +1 to the initialBufferSize parameter to avoid internal buffer relocation
+	 * @param source
+	 * @param initialBufferSize
+	 */
 	public SplittableInputStream(InputStream source, int initialBufferSize) {
-		multiPlexedSource = new MultiplexedSource(source, initialBufferSize);
+		multiPlexedSource = new MultiplexedSource(source, initialBufferSize + 1);
 		myId = multiPlexedSource.addSource(-1);
 	}
 
