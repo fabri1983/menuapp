@@ -24,13 +24,14 @@ import org.junit.runners.MethodSorters;
 @Ignore("Must run this test at integration test pahse. First you need to instantiate a dropwizard server.")
 public class RatingResourceRestAssuredTest {
 
-	private static final String msgInvalidMinRating = "rating must be greater than or equal to 1";
-	private static final String msgInvalidMaxRating = "rating must be less than or equal to 5";
-	private static final String msgInvalidEmptyDescription = "description may not be empty";
-	private static final String msgInvalidDescriptionLength = "description length must be between 5 and 255";
+	static final String msgInvalidMinRating = "rating must be greater than or equal to 1";
+	static final String msgInvalidMaxRating = "rating must be less than or equal to 5";
+	static final String msgInvalidEmptyDescription = "description may not be empty";
+	static final String msgInvalidDescriptionLength = "description length must be between 5 and 255";
 	
 	@BeforeClass
 	public static void setup() {
+		// TODO move this into a class Rule. Use dropwizard's configuration for connection settings
 		RestAssured.port = 8080;
 		RestAssured.basePath = "/";
 		RestAssured.baseURI = "http://localhost";
@@ -41,116 +42,116 @@ public class RatingResourceRestAssuredTest {
 		int menuId = 2;
 		int rating = 1;
 		
-		given().
-	        accept(ContentType.JSON).
-	        contentType(ContentType.JSON).
-	        pathParam("user_id", 12345).
-	        pathParam("menu_id", menuId).
-	        body(new RatingView(rating, "dummy description")).
-	    when().
-	        post("/user/{user_id}/rate/menu/{menu_id}").
-	    then().
-	        statusCode(Response.Status.OK.getStatusCode()).
-	        body(
-	        	"menuId", equalTo(menuId),
-	        	"rating", equalTo(rating)
-	    );
+		given()
+			.accept(ContentType.JSON)
+			.contentType(ContentType.JSON)
+			.pathParam("user_id", 12345)
+			.pathParam("menu_id", menuId)
+			.body(new RatingView(rating, "dummy description"))
+		.when()
+			.post("/user/{user_id}/rate/menu/{menu_id}")
+		.then()
+			.statusCode(Response.Status.OK.getStatusCode())
+			.body(
+				"menuId", equalTo(menuId),
+				"rating", equalTo(rating)
+		);
 	}
 	
 	@Test
 	public void whenRatingWithEmptyDescriptionThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(1, "");
 		
-		given().
-	        accept(ContentType.JSON).
-	        contentType(ContentType.JSON).
-	        pathParam("user_id", 12345).
-	        pathParam("menu_id", 1).
-	        body(ratingView).
-	    when().
-	        post("/user/{user_id}/rate/menu/{menu_id}").
-	    then().
-	        statusCode(422).
-	        body(
-	        	// warning: contains is order dependent
-	        	"errors", contains(msgInvalidDescriptionLength, msgInvalidEmptyDescription)
-	    );
+		given()
+			.accept(ContentType.JSON)
+			.contentType(ContentType.JSON)
+			.pathParam("user_id", 12345)
+			.pathParam("menu_id", 1)
+			.body(ratingView)
+		.when()
+			.post("/user/{user_id}/rate/menu/{menu_id}")
+		.then()
+			.statusCode(422)
+			.body(
+				// warning: contains is order dependent
+				"errors", contains(msgInvalidDescriptionLength, msgInvalidEmptyDescription)
+		);
 	}
 
 	@Test
 	public void whenRatingWithInvalidMaxLengthDescriptionThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(1, stringOfLength(256, 'a'));
 		
-		given().
-	        accept(ContentType.JSON).
-	        contentType(ContentType.JSON).
-	        pathParam("user_id", 12345).
-	        pathParam("menu_id", 1).
-	        body(ratingView).
-	    when().
-	        post("/user/{user_id}/rate/menu/{menu_id}").
-	    then().
-	        statusCode(422).
-	        body(
-	        	"errors", contains(msgInvalidDescriptionLength)
-	    );
+		given()
+			.accept(ContentType.JSON)
+			.contentType(ContentType.JSON)
+			.pathParam("user_id", 12345)
+			.pathParam("menu_id", 1)
+			.body(ratingView)
+		.when()
+			.post("/user/{user_id}/rate/menu/{menu_id}")
+		.then()
+			.statusCode(422)
+			.body(
+				"errors", contains(msgInvalidDescriptionLength)
+		);
 	}
 
 	@Test
 	public void whenRatingWithInvalidMaxValueThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(6, "rating dummy description");
 		
-		given().
-	        accept(ContentType.JSON).
-	        contentType(ContentType.JSON).
-	        pathParam("user_id", 12345).
-	        pathParam("menu_id", 1).
-	        body(ratingView).
-	    when().
-	        post("/user/{user_id}/rate/menu/{menu_id}").
-	    then().
-	        statusCode(422).
-	        body(
-	        	"errors", contains(msgInvalidMaxRating)
-	    );
+		given()
+			.accept(ContentType.JSON)
+			.contentType(ContentType.JSON)
+			.pathParam("user_id", 12345)
+			.pathParam("menu_id", 1)
+			.body(ratingView)
+		.when()
+			.post("/user/{user_id}/rate/menu/{menu_id}")
+		.then()
+			.statusCode(422)
+			.body(
+				"errors", contains(msgInvalidMaxRating)
+		);
 	}
 
 	@Test
 	public void whenRatingWithInvalidMinLengthDescriptionThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(1, "a");
 		
-		given().
-	        accept(ContentType.JSON).
-	        contentType(ContentType.JSON).
-	        pathParam("user_id", 12345).
-	        pathParam("menu_id", 1).
-	        body(ratingView).
-	    when().
-	        post("/user/{user_id}/rate/menu/{menu_id}").
-	    then().
-	        statusCode(422).
-	        body(
-	        	"errors", contains(msgInvalidDescriptionLength)
-        );
+		given()
+			.accept(ContentType.JSON)
+			.contentType(ContentType.JSON)
+			.pathParam("user_id", 12345)
+			.pathParam("menu_id", 1)
+			.body(ratingView)
+		.when()
+			.post("/user/{user_id}/rate/menu/{menu_id}")
+		.then()
+			.statusCode(422)
+			.body(
+				"errors", contains(msgInvalidDescriptionLength)
+		);
 	}
 
 	@Test
 	public void whenRatingWithInvalidMinValueThenErrorExpected() throws MalformedURLException {
 		RatingView ratingView = new RatingView(0, "rating dummy description");
 		
-		given().
-	        accept(ContentType.JSON).
-	        contentType(ContentType.JSON).
-	        pathParam("user_id", 12345).
-	        pathParam("menu_id", 1).
-	        body(ratingView).
-	    when().
-	        post("/user/{user_id}/rate/menu/{menu_id}").
-	    then().
-	        statusCode(422).
-	        body(
-	        	"errors", contains(msgInvalidMinRating)
-	        );
+		given()
+			.accept(ContentType.JSON)
+			.contentType(ContentType.JSON)
+			.pathParam("user_id", 12345)
+			.pathParam("menu_id", 1)
+			.body(ratingView)
+	    .when()
+	    	.post("/user/{user_id}/rate/menu/{menu_id}")
+	    .then()
+			.statusCode(422)
+			.body(
+				"errors", contains(msgInvalidMinRating)
+			);
 	}
 
 	/**

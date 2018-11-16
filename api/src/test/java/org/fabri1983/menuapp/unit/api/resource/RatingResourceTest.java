@@ -32,10 +32,10 @@ import org.junit.runners.MethodSorters;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class RatingResourceTest {
 
-	private static final String msgInvalidMinRating = "rating must be greater than or equal to 1";
-	private static final String msgInvalidMaxRating = "rating must be less than or equal to 5";
-	private static final String msgInvalidEmptyDescription = "description may not be empty";
-	private static final String msgInvalidDescriptionLength = "description length must be between 5 and 255";
+	static final String msgInvalidMinRating = "rating must be greater than or equal to 1";
+	static final String msgInvalidMaxRating = "rating must be less than or equal to 5";
+	static final String msgInvalidEmptyDescription = "description may not be empty";
+	static final String msgInvalidDescriptionLength = "description length must be between 5 and 255";
 	
 	private static RatingService ratingService = mock(RatingService.class);
 	
