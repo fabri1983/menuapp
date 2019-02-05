@@ -60,7 +60,7 @@
 		<dropwizard.couchbase.version>0.2.3</dropwizard.couchbase.version>
 		<dropwizard.swagger.version>1.0.0-1</dropwizard.swagger.version>
 		<jersey.media.version>2.23.2</jersey.media.version> <!-- used by dropwizard-swagger. The internal one was excluded due to incompatibilities with hk2 -->
-		<jackson.version>2.8.4</jackson.version> <!-- see dependency hierarchy to know who is using other version -->
+		<jackson.version>2.9.8</jackson.version> <!-- see dependency hierarchy to know who is using other version -->
 		<commons.lang.version>2.6</commons.lang.version>
 		<commons.lang3.version>3.5</commons.lang3.version>
 		<commons.collections4.version>4.0</commons.collections4.version>
@@ -464,7 +464,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<!-- project version embedded in the JAR’s manifest as the Implementation-Version -->
+							<!-- project version embedded in the JARÂ’s manifest as the Implementation-Version -->
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 						</manifest>
 					</archive>
