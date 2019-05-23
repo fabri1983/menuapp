@@ -6,7 +6,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;
 [![Code Climate](https://codeclimate.com/github/fabri1983/menuapp/badges/gpa.svg)](https://codeclimate.com/github/fabri1983/menuapp)
 &nbsp;&nbsp;&nbsp;&nbsp;
-[![Libraries.io for GitHub](https://img.shields.io/librariesio/github/fabri1983/menuapp.svg)](https://libraries.io/github/fabri1983/menuapp)
+[![Libraries.io for GitHub](https://badgen.net/badge/libraries.io/fabri1983/blue)](https://libraries.io/github/fabri1983/menuapp)
 
 ## Introduction
 
