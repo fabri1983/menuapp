@@ -21,7 +21,7 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-@Ignore("Must run this test at integration test pahse. First you need to instantiate a dropwizard server.")
+@Ignore("Must run this test at integration test phase. First you need to instantiate a dropwizard server.")
 public class RatingResourceRestAssuredTest {
 
 	static final String msgInvalidMinRating = "rating must be greater than or equal to 1";
