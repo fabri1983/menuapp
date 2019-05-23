@@ -1,8 +1,8 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.fabri1983.menuapp</groupId>
 	<artifactId>api</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
 	<name>Menu App Api</name>
 	<url>https://github.com/fabri1983/menuapp</url>
 
@@ -50,15 +50,10 @@
 			<groupId>com.smoketurner</groupId>
 			<artifactId>dropwizard-swagger</artifactId>
 		</dependency>
-		<!-- jersey media dependency needs to be added manually since it was excluded at parent from the same dropwizard-swagger dependency. See detail in parent pom -->
-		<dependency>
-			<groupId>org.glassfish.jersey.media</groupId>
-			<artifactId>jersey-media-multipart</artifactId>
-		</dependency>
 
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 		</dependency>
 
 		<dependency>
@@ -149,11 +144,44 @@
 			<filter>src/main/resources/${overrider.props}</filter>
 		</filters>
 		
+		<pluginManagement>
+			<plugins>
+				<!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+				<plugin>
+					<groupId>org.eclipse.m2e</groupId>
+					<artifactId>lifecycle-mapping</artifactId>
+					<version>1.0.0</version>
+					<configuration>
+						<lifecycleMappingMetadata>
+							<pluginExecutions>
+								<pluginExecution>
+									<pluginExecutionFilter>
+										<groupId>org.apache.maven.plugins</groupId>
+										<artifactId>maven-antrun-plugin</artifactId>
+										<versionRange>[1.7,)</versionRange>
+										<goals>
+											<goal>run</goal>
+										</goals>
+									</pluginExecutionFilter>
+									<action>
+										<execute>
+											<runOnIncremental>false</runOnIncremental>
+										</execute>
+									</action>
+								</pluginExecution>
+							</pluginExecutions>
+						</lifecycleMappingMetadata>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
 				<version>1.8</version>
+				<inherited>false</inherited>
 				<executions>
 					<execution>
 						<phase>validate</phase>
@@ -199,7 +227,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>2.19.1</version>
+				<version>${maven.surefire.plugin.version}</version>
 				<configuration>
 					<includes>
                         <include>**/UnitTestsSuite.class</include>
@@ -211,7 +239,7 @@
 				and to shade (i.e. rename) the packages of some of the dependencies if necessary -->
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.4.3</version>
+				<version>${mave.shade.plugin.version}</version>
 				<configuration>
 					<!-- disable creation of reduced pom because can't handle tag <ac:if> from ant task declared in the maven ant plugin section -->
 					<createDependencyReducedPom>false</createDependencyReducedPom>

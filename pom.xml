@@ -55,27 +55,27 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<dropwizard.version>1.0.5</dropwizard.version>
-		<dropwizard.guicey.version>4.0.1</dropwizard.guicey.version>
-		<dropwizard.couchbase.version>0.2.3</dropwizard.couchbase.version>
-		<dropwizard.swagger.version>1.0.0-1</dropwizard.swagger.version>
-		<jersey.media.version>2.23.2</jersey.media.version> <!-- used by dropwizard-swagger. The internal one was excluded due to incompatibilities with hk2 -->
-		<jackson.version>2.9.8</jackson.version> <!-- see dependency hierarchy to know who is using other version -->
-		<commons.lang.version>2.6</commons.lang.version>
-		<commons.lang3.version>3.5</commons.lang3.version>
-		<commons.collections4.version>4.0</commons.collections4.version>
-		<google.guice.version>4.1.0</google.guice.version> <!-- see dependency hierarchy to know who is using other version -->
-		<google.guava.version>20.0</google.guava.version> <!-- see dependency hierarchy to know who is using other version -->
-		<rxjava.version>1.2.5</rxjava.version>
-		<logback.classic.version>1.1.7</logback.classic.version> <!-- see dependency hierarchy to know who is using other version -->
-		<javax.validation.version>1.1.0.Final</javax.validation.version> <!-- see dependency hierarchy to know who is using other version -->
-		<hibernate.validator.version>5.3.3.Final</hibernate.validator.version> <!-- see dependency hierarchy to know who is using other version -->
+		<dropwizard.version>1.3.11</dropwizard.version>
+		<dropwizard.guicey.version>4.2.2</dropwizard.guicey.version>
+		<dropwizard.couchbase.version>0.9.1</dropwizard.couchbase.version>
+		<dropwizard.swagger.version>1.3.9-1</dropwizard.swagger.version>
+		<jackson.version>2.9.9</jackson.version> <!-- see dependency hierarchy to know who is using other version -->
+		<commons.lang3.version>3.9</commons.lang3.version>
+		<commons.collections4.version>4.3</commons.collections4.version>
+		<google.guice.version>4.2.2</google.guice.version> <!-- see dependency hierarchy to know who is using other version -->
+		<google.guava.version>27.1-jre</google.guava.version> <!-- see dependency hierarchy to know who is using other version -->
+		<rxjava.version>1.3.8</rxjava.version>
+		<logback.classic.version>1.2.3</logback.classic.version> <!-- see dependency hierarchy to know who is using other version -->
+		<javax.validation.version>2.0.1.Final</javax.validation.version> <!-- see dependency hierarchy to know who is using other version -->
+		<hibernate.validator.version>6.0.16.Final</hibernate.validator.version> <!-- see dependency hierarchy to know who is using other version -->
 		<junit.version>4.12</junit.version>
 		<takari.cpsuite.version>1.2.7</takari.cpsuite.version>
-		<assertj.core.version>3.2.0</assertj.core.version>
-		<mockito.core.version>2.2.11</mockito.core.version>
-		<rest.assured.version>3.0.1</rest.assured.version>
-		<jacoco.version>0.7.7.201606060606</jacoco.version>
+		<assertj.core.version>3.12.2</assertj.core.version>
+		<mockito.core.version>2.27.0</mockito.core.version>
+		<rest.assured.version>4.0.0</rest.assured.version>
+		<jacoco.version>0.8.4</jacoco.version>
+		<maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
+		<mave.shade.plugin.version>3.2.1</mave.shade.plugin.version>
 	</properties>
 
 	<dependencyManagement>
@@ -129,13 +129,6 @@
 				<version>${jackson.version}</version>
 				<optional>true</optional>
 			</dependency>
-
-			<dependency>
-				<groupId>commons-lang</groupId>
-				<artifactId>commons-lang</artifactId>
-				<version>${commons.lang.version}</version>
-				<optional>true</optional>
-			</dependency>
 			
 			<dependency>
 				<groupId>org.apache.commons</groupId>
@@ -170,18 +163,6 @@
 				<artifactId>dropwizard-guicey</artifactId>
 				<version>${dropwizard.guicey.version}</version>
 				<optional>true</optional>
-				<exclusions>
-					<!-- dropwizard-guicey contains javax.inject version 1, while dropwizard-core and dropwizard-test use version 2.5.0-b05 -->
-					<exclusion>
-						<groupId>javax.inject</groupId>
-						<artifactId>javax.inject</artifactId>
-					</exclusion>
-					<!-- dropwizard-guicey contains aopalliance version 1, while guice-bridge (comes with dropwizard-guicey too) and dropwizard-test use version 2.5.0-b05 -->
-					<exclusion>
-						<groupId>aopalliance</groupId>
-						<artifactId>aopalliance</artifactId>
-					</exclusion>
-				</exclusions>
 			</dependency>
 
 			<dependency>
@@ -209,20 +190,7 @@
 						<groupId>xml-apis</groupId>
 						<artifactId>xml-apis</artifactId>
 					</exclusion>
-					<!-- Exclude the entire dependency because it use hk2 which conflicts with the current version of dropwizard I'm using. -->
-					<!-- A new dependency is added as an external dependency -->
-					<exclusion>
-						<groupId>org.glassfish.jersey.media</groupId>
-						<artifactId>jersey-media-multipart</artifactId>
-					</exclusion>
 				</exclusions>
-			</dependency>
-
-			<!-- used by dropwizard-swagger. The internal one was excluded due to incompatibilities with hk2 -->
-			<dependency>
-				<groupId>org.glassfish.jersey.media</groupId>
-				<artifactId>jersey-media-multipart</artifactId>
-				<version>${jersey.media.version}</version>
 			</dependency>
 
 			<dependency>
@@ -326,7 +294,7 @@
 			<dependency>
 				<groupId>org.openjdk.jmh</groupId>
 				<artifactId>jmh-core</artifactId>
-				<version>1.17.1</version>
+				<version>1.21</version>
 				<scope>test</scope>
 				<optional>true</optional>
 			</dependency>
@@ -334,7 +302,7 @@
 			<dependency>
 				<groupId>org.openjdk.jmh</groupId>
 				<artifactId>jmh-generator-annprocess</artifactId>
-				<version>1.17.1</version>
+				<version>1.21</version>
 				<scope>test</scope>
 				<optional>true</optional>
 			</dependency>

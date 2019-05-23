@@ -49,12 +49,13 @@ It interacts directly with the business layer avoiding performance penalty due t
 Technologies
 ------------
 - [Java 8](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-- [Dropwizard 1.0.5](http://www.dropwizard.io/)
-- [Dropwizard-Guicey 4.0.1](https://github.com/xvik/dropwizard-guicey) which comes with [Guice 4.1.0](https://github.com/google/guice)
-- [Dropwizard-Couchbase 0.2.3](https://github.com/smartmachine/dropwizard-couchbase)
+- [Dropwizard 1.3.11](http://www.dropwizard.io/)
+- [Dropwizard-Guicey 4.2.2](https://github.com/xvik/dropwizard-guicey) which comes with [Guice 4.1.0](https://github.com/google/guice)
+- [Dropwizard-Couchbase 0.9.1](https://github.com/smartmachine/dropwizard-couchbase)
 - [CouchbaseMock test server](https://github.com/couchbase/CouchbaseMock)
-- [Swagger v1.5.10](https://github.com/swagger-api) integrated by [Dropwizard-Swagger v1.0.0](https://github.com/smoketurner/dropwizard-swagger)
-- [Maven 3.3.9](https://maven.apache.org/)
+- [Swagger v1.5.21](https://github.com/swagger-api) integrated by [Dropwizard-Swagger v1.3.9-1](https://github.com/smoketurner/dropwizard-swagger)
+- [Java Microbenchmark Harness](https://openjdk.java.net/projects/code-tools/jmh/)
+- [Maven 3.6.0](https://maven.apache.org/)
 
 
 Build the application and setup the Eclipse projects
@@ -69,6 +70,7 @@ cd menuapp
 mvn clean install
 mvn eclipse:eclipse -DdownloadSources=true -DdownloadJavadocs=true
 ```
+Or just import the project and its modules as Maven Projects in Eclipse.
 
 
 Overriding properties
