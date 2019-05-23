@@ -8,8 +8,8 @@ import io.federecio.dropwizard.swagger.SwaggerBundleConfiguration;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.fabri1983.menuapp.api.config.hasfeature.HasBuildInfoFeature;
 import org.fabri1983.menuapp.api.config.hasfeature.HasMenuQueryFeature;
 import org.fabri1983.menuapp.api.config.hasfeature.impl.BuildInfoConfig;

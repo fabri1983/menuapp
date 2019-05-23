@@ -24,67 +24,56 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-collections4</artifactId>
-			<optional>false</optional> <!-- if set to true then it seems is not added in the final jar by the uber-shade plugin on api project-->
 		</dependency>
 
 		<dependency>
 			<groupId>io.smartmachine</groupId>
 			<artifactId>dropwizard-couchbase</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-annotations</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-jsr310</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>io.takari.junit</groupId>
 			<artifactId>takari-cpsuite</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.openjdk.jmh</groupId>
 			<artifactId>jmh-core</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.openjdk.jmh</groupId>
 			<artifactId>jmh-generator-annprocess</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>pl.wavesoftware</groupId>
 			<artifactId>jmh-junit-utilities</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 	</dependencies>

@@ -1,6 +1,6 @@
 package org.fabri1983.menuapp.api.config.hasfeature.impl;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import javax.validation.constraints.NotEmpty;
 
 public class BuildInfoConfig {
 

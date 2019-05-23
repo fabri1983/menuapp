@@ -24,43 +24,36 @@
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>io.takari.junit</groupId>
 			<artifactId>takari-cpsuite</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.openjdk.jmh</groupId>
 			<artifactId>jmh-core</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>org.openjdk.jmh</groupId>
 			<artifactId>jmh-generator-annprocess</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 		<dependency>
 			<groupId>pl.wavesoftware</groupId>
 			<artifactId>jmh-junit-utilities</artifactId>
-			<optional>true</optional>
 		</dependency>
 
 	</dependencies>
