@@ -73,9 +73,10 @@
 		<assertj.core.version>3.12.2</assertj.core.version>
 		<mockito.core.version>2.27.0</mockito.core.version>
 		<rest.assured.version>4.0.0</rest.assured.version>
-		<jacoco.version>0.8.4</jacoco.version>
 		<maven.surefire.plugin.version>2.22.2</maven.surefire.plugin.version>
 		<mave.shade.plugin.version>3.2.1</mave.shade.plugin.version>
+		<hamcrest.version>2.1</hamcrest.version>
+		<openjdk.jmh.version>1.21</openjdk.jmh.version>
 	</properties>
 
 	<dependencyManagement>
@@ -294,7 +295,7 @@
 			<dependency>
 				<groupId>org.hamcrest</groupId>
 				<artifactId>hamcrest</artifactId>
-				<version>2.1</version>
+				<version>${hamcrest.version}</version>
 				<scope>test</scope>
 				<optional>true</optional>
 			</dependency>
@@ -302,7 +303,7 @@
 			<dependency>
 				<groupId>org.openjdk.jmh</groupId>
 				<artifactId>jmh-core</artifactId>
-				<version>1.21</version>
+				<version>${openjdk.jmh.version}</version>
 				<scope>test</scope>
 				<optional>true</optional>
 			</dependency>
@@ -310,7 +311,7 @@
 			<dependency>
 				<groupId>org.openjdk.jmh</groupId>
 				<artifactId>jmh-generator-annprocess</artifactId>
-				<version>1.21</version>
+				<version>${openjdk.jmh.version}</version>
 				<scope>test</scope>
 				<optional>true</optional>
 			</dependency>
@@ -328,15 +329,6 @@
 
 	<build>
 		<plugins>
-		
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<version>2.10</version>
-				<configuration>
-					<useProjectReferences>true</useProjectReferences>
-				</configuration>
-			</plugin>
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
@@ -395,7 +387,7 @@
 			<plugin>
 				<groupId>org.jacoco</groupId>
 				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>${jacoco.version}</version>
+				<version>0.8.4</version>
 				<executions>
 					<execution>
 						<id>prepare-agent</id>
@@ -409,20 +401,17 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.0</version>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
 					<encoding>UTF-8</encoding>
 					<downloadSources>true</downloadSources>
-					<downloadJavadocs>true</downloadJavadocs>
 				</configuration>
 			</plugin>
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
@@ -436,7 +425,6 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.0.2</version>
 				<configuration>
 					<archive>
 						<manifest>
