@@ -68,7 +68,7 @@
 		<logback.classic.version>1.2.3</logback.classic.version> <!-- see dependency hierarchy to know who is using other version -->
 		<javax.validation.version>2.0.1.Final</javax.validation.version> <!-- see dependency hierarchy to know who is using other version -->
 		<hibernate.validator.version>6.0.16.Final</hibernate.validator.version> <!-- see dependency hierarchy to know who is using other version -->
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 		<takari.cpsuite.version>1.2.7</takari.cpsuite.version>
 		<assertj.core.version>3.12.2</assertj.core.version>
 		<mockito.core.version>2.27.0</mockito.core.version>
